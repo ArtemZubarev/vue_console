@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
+    "build:dev": "nuxt build NODE_ENV=dev",
     "start": "nuxt start",
     "generate": "nuxt generate",
     "generate:messages": "node ./langs/strings.js",
