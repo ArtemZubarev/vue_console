@@ -1,0 +1,48 @@
+Key,RU,EN,DE,TR
+Addresses,Адреса,Addresses,Adressen,Adresler
+Transaction or Address,Транзакция или Адрес,Transaction or Address,Transaktion oder Adresse,İşlem veya adres
+Total Received,Всего получено,Total Received,Insgesamt erhalten,Toplam alınan
+Total Sent,Всего отправлено,Total Sent,Insgesamt gesendet,Toplam gönderilen
+Date and Time,Дата и время,Date and Time,Datum und Uhrzeit,Tarih ve saat
+Distribution,Распределение,Distribution,Verteilung,Dağılım
+Transaction Initiator,Инициатор транзакции,Transaction Initiator,Veranlasser der Transaktion,İşlemi başlatan
+"SORRY, We couldn’t find what you were looking for","Извините, мы не нашли то, что вы ищете","SORRY, We couldn’t find what you were looking for","Es tut uns leid, wir haben das von Ihnen Gesuchte nicht gefunden","Üzgünüz, aradığınızı bulamadık"
+Latest Transactions,Последние транзакции,Latest Transactions,Letzte Transaktionen,Son işlemler
+Transactions,Транзакции,Transactions,Transaktionen,İşlemler
+Date,Дата,Date,Datum,Tarih
+Time,Время,Time,Zeit,Saat
+Hash,Хэш,Hash,Hash,Doğramak
+Type,Тип,Type,Typ,Tümü
+Sum,Сумма,Sum,Betrag,Tutar
+Transfer,Перевод,Transfer,Überweisung,Aktar
+All Transactions,Все транзакции,All Transactions,Alle Transaktionen,Tüö İşlemler
+Terms of use,Правила использования,Terms of use,Nutzungsbedingungen,Kullanım Kuralları
+Cookie policy,Политика обработки cookie,Cookie policy,Cookie-Richtlinie,Çerez kullanma politikası
+Privacy notice,Политика конфиденциальности,Privacy notice,Datenschutz,Gizlilik Politikası
+Balance,Баланс,Balance,Guthaben,Hesap
+More,Еще,More,Mehr,Daha
+address,0 адресов | {n} адрес | {n} адреса | {n} адресов,0 address | {n} address | {n} addresses,0 adressen | {n} adresse | {n} adressen,0 adresler | {n} adres | {n} adresler
+Address,Адрес,Address,Adresse,"Adres"""
+All,Все,All,Alle,Tümü
+Received,Входящие,Received,Erhalten,Girişler
+Sent,Исходящие,Sent,Gesendet,Çıkanlar
+Transaction,Транзакция,Transaction,Transaktion,İşlem
+Sender,Отправитель,Sender,Absender,Gönderen
+Senders,Отправители,Senders,Versender,Gönderenler
+Recipient,Получатель,Recipient,Empfänger,Alıcı
+Recipients,Получатели,Recipients,Empfänger,Alıcılar
+Total,Всего,Total,Insgesamt,Toplam
+Balances,Балансы,Balances,Guthaben,Bakiye
+Sender/Recipient,Отправитель/Получатель,Sender/Recipient,Absender/Empfänger,Gönderen/Alıcı
+Included {fee} fee,Включая {fee} комиссии,Included {fee} fee,Einschließlich {fee} Gebühr,{fee} Komisyon dahil
+Copied,Скопировано,Copied,Kopiert,Kopyalanmış
+fee,комиссия,fee,Gebühr,komisyon
+Nodes live map,Карта нод в сети,Nodes live map,Nodes Live-Karte,Ağdaki Nodların canlı haritası
+Nodes,Ноды,Nodes,Nodes,Nodlar
+Block height,Высота блока,Block height,Blockhöhe,Blok yüksekliği
+"Uptime, days","Время в сети, дней","Uptime, days","Betriebszeit, Tage","Çalışma süresi, günler"
+Earned in total,"Прибыль, всего",Earned in total,Insgesamt verdient,Toplamda kazanılan
+Earned today,"Прибыль, сегодня",Earned today,Heute verdient,Bugün kazanılan
+Wallets,Кошельки,Wallets,Geldbörsen,Cüzdanlar
+Active wallets,Кошельки в сети,Active wallets,Aktive Geldbörsen,Aktif cüzdanlar
+Node queue,Очередь нод,Node queue,Nodes Warteschlange,Nod sırası

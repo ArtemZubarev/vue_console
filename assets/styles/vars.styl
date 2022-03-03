@@ -1,0 +1,179 @@
+
+:root {
+  --color-filler: #FFFFFF;
+  --color-font-base: #033354;
+  --color-bg: #F7F5EE;
+  --color-link: #028dc9;
+  --color-danger: #ef616a;
+  --color-success: #2aa414;
+}
+
+.dark-mode {
+  --color-filler: #033354;
+  --color-font-base: #FFFFFF;
+  --color-bg: #317B92;
+  --color-link: #ffffff;
+  --color-danger: #ef616a;
+  --color-success: #2aa414;
+}
+
+$colorFiller = var(--color-filler);
+$colorFontBase = var(--color-font-base);
+$colorBg = var(--color-bg);
+$colorLink = var(--color-link);
+$colorDanger = var(--color-danger);
+$colorSuccess = var(--color-success);
+
+transactionsGrid() {
+  grid-template-columns: auto 100px;
+
+  +mediaDesktop() {
+    grid-template-columns: 141px 320px 110px 366px 120px;
+  }
+}
+
+adressGrid() {
+  grid-template-columns: auto 100px;
+
+  +mediaTablet() {
+    grid-template-columns: auto 160px;
+  }
+
+  +mediaDesktop() {
+    grid-template-columns: 57px 83px 327px 92px 327px auto;
+  }
+}
+
+$mediaSizes = {
+  phoneS: 375px,
+  phone: 480px,
+  tablet: 768px,
+  desktop: 1200px,
+  large: 1025px,
+  extraLarge: 1280px,
+  giant: 1600px
+};
+
+getMedia(fromSize, toSize = false) {
+  if (toSize) {
+    @media (min-width: fromSize) and (max-width: toSize) {
+      {block};
+    }
+  } else {
+    @media (min-width: fromSize) {
+      {block};
+    }
+  }
+}
+
+mediaPhone() {
+  +getMedia($mediaSizes.phone) {
+    {block};
+  }
+}
+
+mediaPhoneS() {
+  +getMedia($mediaSizes.phoneS) {
+    {block};
+  }
+}
+
+mediaTablet() {
+  +getMedia($mediaSizes.tablet) {
+    {block};
+  }
+}
+
+mediaDesktop() {
+  +getMedia($mediaSizes.desktop) {
+    {block};
+  }
+}
+
+mediaLarge() {
+  +getMedia($mediaSizes.large) {
+    {block};
+  }
+}
+
+mediaExtraLarge() {
+  +getMedia($mediaSizes.extraLarge) {
+    {block};
+  }
+}
+
+mediaGiant() {
+  +getMedia($mediaSizes.giant) {
+    {block};
+  }
+}
+
+$fontSizes = {
+  desktop: {
+    h1: 40px,
+    h2: 24px,
+    h3: 20px,
+    text: 14px,
+    small: 10px,
+    subtitle: 12px,
+    button: 16px,
+    transactionButton: 14px
+  },
+  mobile: {
+    h1: 32px,
+    h2: 22px,
+    h3: 18px,
+    text: 12px,
+    small: 10px,
+    subtitle: 12px,
+    button: 16px,
+    transactionButton: 14px
+  }
+};
+
+getFont(name = 'text') {
+  font-size: $fontSizes.mobile[name];
+
+  +mediaTablet() {
+    font-size: $fontSizes.desktop[name];
+  }
+}
+
+getFontH1() {
+  getFont('h1');
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+getFontH2() {
+  getFont('h2');
+  font-weight: 700;
+  margin: 0;
+}
+
+getFontH3() {
+  getFont('h3');
+  font-weight: 700;
+  margin: 0;
+}
+
+getFontText() {
+  getFont('text');
+}
+
+getFontSmall() {
+  getFont('small');
+}
+
+getFontSubtitle() {
+  getFont('subtitle');
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.77px;
+}
+
+getFontButton() {
+  getFont('button');
+  font-weight: 700;
+}
