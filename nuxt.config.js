@@ -83,6 +83,8 @@ export default {
     transpile: ['vue-final-modal']
   },
   env: {
-    baseUrl: process.env.API_URL
+    baseUrl: process.env.API_URL,
+    ssoUrl: process.env.SSO_URL,
+    ssoHash: process.env.SSO_HASH
   }
 }
