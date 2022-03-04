@@ -6,7 +6,7 @@
     <p class="auth__text">
       {{ $t('Only for oton.org users.') }}
     </p>
-    <button class="auth__button">
+    <button class="auth__button" @click="handleClick">
       <slot name="logo" />
       {{ $t('Log in via OTON') }}
     </button>
