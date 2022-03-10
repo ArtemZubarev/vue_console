@@ -33,7 +33,12 @@
         <node-info-item :title="'IP'" :value="node.ip" :size="'sm'" />
         <node-info-item :title="'Uptime'" :value="'54 days 6:24:47'" :size="'sm'" />
         <node-info-item :title="'Version'" :value="node.version" :size="'sm'" />
-        <node-info-item :title="'Status'" :value="node.status ? `It's okay` : 'Pause'" :size="'sm'" :valueStatus="node.status ? 'ok' : ''" />
+        <node-info-item
+          :title="'Status'"
+          :value="node.status ? `It's okay` : 'Pause'"
+          :size="'sm'"
+          :valueStatus="node.status ? 'ok' : ''"
+        />
       </div>
     </div>
     <div class="node__footer">
@@ -84,7 +89,8 @@ export default {
     })
   },
   mounted () {
-    this.$store.dispatch('nodeStore/fetch', 'one')
+    const { id } = this.$route.params
+    this.$store.dispatch('nodeStore/fetch', id)
   },
   methods: {
     switchStatus () {

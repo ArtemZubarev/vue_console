@@ -23,7 +23,7 @@
     "nuxt-clipboard2": "^0.2.1",
     "nuxt-i18n": "^6.28.1",
     "oton-vue-components": "^0.1.12",
-    "rambda": "^7.0.2",
+    "rambda": "^7.0.3",
     "vue": "^2.6.14",
     "vue-final-modal": "^2.4.1",
     "vue-server-renderer": "^2.6.14",

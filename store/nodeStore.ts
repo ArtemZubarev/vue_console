@@ -38,13 +38,15 @@ export const actions = {
 
     commit('SET_STATE', PENDING)
     try {
-      console.log(`/node/${id}`)
-      const response = await this.$api.$post(`/node/${id}`)
+      const response = await this.$api.$post('/node/one', {
+        id
+      })
 
       if (response.code === 0) {
         commit('UPDATE_DATA', response.data)
         commit('SET_STATE', FULFILLED)
       } else {
+        commit('SET_STATE', REJECTED)
         return undefined
       }
     } catch (err) {

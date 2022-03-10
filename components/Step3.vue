@@ -12,12 +12,12 @@
       />
     </template>
     <template #title>
-      {{ $t('Step 1') }}
+      {{ $t('Step 3') }}
     </template>
     <template #main>
       <div class="main">
         <with-loader :active="fetchState === 'PENDING'" :withBackground="true">
-          <master-input :label="'DO Token'" :value="token" @change-value="handleToken" />
+          <master-input :label="'Node name'" :value="name" @change-value="handleName" />
           <common-button class="button" :filled="true" :text="$t('Ок, I did this')" @click="$emit('next')" />
         </with-loader>
       </div>
@@ -29,30 +29,27 @@
 import { mapGetters } from 'vuex'
 import CommonButton from './CommonButton.vue'
 import MasterLayout from './MasterLayout.vue'
-import MasterInput from './MasterInput.vue'
-import WithLoader from './WithLoader.vue'
 
 export default {
   components: {
     MasterLayout,
-    CommonButton,
-    MasterInput,
-    WithLoader
+    CommonButton
+  },
+  props: {
+
   },
   computed: {
     ...mapGetters({
       fetchState: 'masterStore/fetchState',
-      token: 'masterStore/token'
+      name: 'masterStore/name'
     })
   },
-  mounted () {
-    this.$store.dispatch('masterStore/checkToken')
-  },
   methods: {
-    handleToken (value) {
-      this.$store.commit('masterStore/UPDATE_TOKEN', value)
+    handleName (value) {
+      this.$store.commit('masterStore/UPDATE_NAME', value)
     }
   }
+
 }
 </script>
 
@@ -63,17 +60,6 @@ export default {
   margin: 0 auto;
   width: 100%;
   max-width: 353px;
-}
-.loader-box {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(255, 255, 255, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .button {
   margin: 0 auto;

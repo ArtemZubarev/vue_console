@@ -1,5 +1,10 @@
 <template>
-  <nuxt-link class="node" :to="'/node/1'" event="" @click.native.prevent="handleClick($event, '/node/1')">
+  <nuxt-link
+    class="node"
+    :to="localePath(`/node/${node.id}`)"
+    event=""
+    @click.native.prevent="handleClick($event, localePath(`/node/${node.id}`))"
+  >
     <div class="node__head">
       <span class="node__title">{{ node.name }}</span>
 

@@ -107,6 +107,10 @@ export default {
           code: 'en'
         }]
     }
+  },
+  mounted () {
+    const token = this.$cookies.get('auth')
+    this.$store.dispatch('userStore/fetchUser', token)
   }
 }
 </script>

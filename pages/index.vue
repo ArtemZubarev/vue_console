@@ -1,24 +1,19 @@
 <template>
   <div class="page">
-    <div v-if="fetchState === 'FULFILLED' && nodesList.length === 0" class="empty">
-      <CreateNode @create="startMaster" />
-    </div>
-    <div class="nodes">
-      <div class="nodes__list">
-        <NodeItem v-for="node in nodesList" :key="`node-list-${node.id}`" :node="node" />
-        <div class="nodes__hidden" />
+    <with-loader :active="fetchState === 'PENDING'">
+      <div v-if="fetchState === 'FULFILLED' && nodesList.length === 0" class="empty">
+        <CreateNode @create="startMaster" />
       </div>
-    </div>
-    <div v-if="fetchState === 'PENDING'" class="loader-box">
-      <common-loader :active="fetchState === 'PENDING'" />
-    </div>
-    <!-- <vue-final-modal v-model="showModal">
-      Modal Content Here
-    </vue-final-modal>
-    <button @click="showModal = true">
-      Open Modal
-    </button> -->
-    <master-modal />
+      <div class="nodes">
+        <div class="nodes__list">
+          <NodeItem v-for="node in nodesList" :key="`node-list-${node.id}`" :node="node" />
+          <CreateNode v-if="fetchState === 'FULFILLED' && nodesList.length !== 0" :inList="true" @create="startMaster" />
+          <div class="nodes__hidden" />
+        </div>
+      </div>
+    </with-loader>
+    <master-modal @next="nextStep" @done="showDone = true" />
+    <master-done v-if="showDone" :active="showDone" @close="showDone = false" />
   </div>
 </template>
 <script>
@@ -29,7 +24,8 @@ import { mapGetters } from 'vuex'
 import CreateNode from '@/components/CreateNode.vue'
 import NodeItem from '@/components/NodeItem.vue'
 import MasterModal from '~/components/MasterModal.vue'
-import CommonLoader from '@/components/CommonLoader.vue'
+import WithLoader from '@/components/WithLoader.vue'
+import MasterDone from '@/components/MasterDone.vue'
 
 export default {
   name: 'IndexPage',
@@ -37,14 +33,16 @@ export default {
     CreateNode,
     NodeItem,
     MasterModal,
-    CommonLoader
+    WithLoader,
+    MasterDone
   },
   layout: 'default',
   middleware: 'isAuth',
   data () {
     return {
       emptyState: true,
-      showModal: false
+      showModal: false,
+      showDone: false
     }
   },
   computed: {
@@ -61,6 +59,10 @@ export default {
       this.$store.commit('modalStore/changeCurrentModal', 'MasterModal')
       // console.log(this.$vfm)
       // this.$vfm.show('Step1')
+    },
+    nextStep () {
+      console.log(111)
+      this.$store.dispatch('masterStore/createNode')
     }
   }
 }
@@ -96,53 +98,6 @@ export default {
   }
 }
 
-::v-deep .modal-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-::v-deep .vfm__container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-::v-deep .modal-content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  max-height: 90%;
-  width: 100%;
-  max-width: 640px;
-  margin: 0 1rem;
-  // padding: 1rem;
-  border: none;
-  border-radius: 8px;
-  background: #fff;
-  overflow: hidden;
-}
-.modal__title {
-  margin: 0 2rem 0 0;
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-.modal__content {
-  flex-grow: 1;
-  overflow-y: auto;
-}
-.modal__action {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  padding: 1rem 0 0;
-}
-.modal__close {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-}
 .loader-box {
   position: absolute;
   top: 0;

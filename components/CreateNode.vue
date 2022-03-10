@@ -1,6 +1,9 @@
 <template>
-  <div class="card">
-    <div class="card__text">
+  <div :class="['card', {inList: inList}]">
+    <div v-if="inList" class="card__text">
+      {{ $t('Create a new node and enjoy it.') }}
+    </div>
+    <div v-else class="card__text">
       {{ $t('Create your first node and enjoy it') }}
     </div>
     <div class="card__buttons">
@@ -13,6 +16,12 @@
 
 <script>
 export default {
+  props: {
+    inList: {
+      type: Boolean,
+      required: false
+    }
+  },
   data () {
     return {
 
@@ -36,6 +45,12 @@ export default {
   border: 4px dashed #ffffff;
   padding: 50px 0;
   border-radius: 8px;
+  box-sizing: border-box;
+
+  &.inList {
+    max-width: 357px;
+    max-height: 200px;
+  }
 
   &__text {
     font-size: 18px;
