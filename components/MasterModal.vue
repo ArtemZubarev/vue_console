@@ -1,5 +1,5 @@
 <template>
-  <common-modal :name="name">
+  <common-modal :name="name" :clickToClose="currentStep !== 3 ? true : false">
     <step-1 v-if="currentStep === 1" @next="nextStep" />
     <step-2 v-if="currentStep === 2" @next="nextStep" />
     <step-3 v-if="currentStep === 3" @next="nextStep" />

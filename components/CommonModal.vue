@@ -37,6 +37,10 @@ export default {
     width: {
       type: Number,
       default: 600
+    },
+    clickToClose: {
+      type: Boolean,
+      reuired: false
     }
   },
   computed: {
@@ -55,7 +59,9 @@ export default {
   methods: {
     closeHandler () {
       if (typeof this.name === 'string') {
-        this.$store.commit('modalStore/closeModal')
+        if (this.clickToClose) {
+          this.$store.commit('modalStore/closeModal')
+        }
       }
     }
 

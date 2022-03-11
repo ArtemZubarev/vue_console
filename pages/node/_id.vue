@@ -112,6 +112,7 @@ export default {
   border-radius: 8px;
   padding: 19px 24px;
   width: 100%;
+  box-sizing: border-box;
 
   &__content {
     border-top: 2px solid #F7F5EE;
@@ -145,6 +146,11 @@ export default {
     border-radius: 4px;
     color: #033354;
     font-weight: bold;
+    margin-bottom: 10px;
+
+    +mediaTablet() {
+      margin-bottom: 0;
+    }
     &:not(:last-of-type) {
       margin-right: 16px;
     }
@@ -162,8 +168,13 @@ export default {
 
   &__info {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
+
+    +mediaTablet() {
+      flex-direction: row;
+    }
   }
 
   &__block {
@@ -174,8 +185,16 @@ export default {
     &.full {
       width: 100%;
 
+      +mediaTablet() {
+        flex-wrap: unset;
+      }
+
       & > div {
-        width: 160px;
+        width: 50%;
+
+        +mediaTablet() {
+          width: 160px;
+        }
       }
     }
   }
