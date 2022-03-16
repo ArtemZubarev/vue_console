@@ -60,8 +60,7 @@
           {{ $t('Uptime') }}
         </span>
         <span class="node__block-value">
-          <!-- 54 days 6:24:47 -->
-          -
+          {{ uptime }}
         </span>
       </div>
       <div class="node__block small">
@@ -76,12 +75,15 @@
         <span class="node__block-name">
           {{ $t('Status') }}
         </span>
-        <span v-if="node.status === 1" class="node__block-value success">
+        <span :class="['node__block-value', {danger: node.status === 6, success: node.status === '5'} ]">
+          {{ statuses[node.status] }}
+        </span>
+        <!-- <span v-if="node.status === 1" class="node__block-value success">
           {{ $t(`It's okay`) }}
         </span>
         <span v-else class="node__block-value danger">
           {{ $t(`Pause`) }}
-        </span>
+        </span> -->
       </div>
     </div>
     <div v-if="pending" class="loader-box">
@@ -91,8 +93,17 @@
 </template>
 
 <script>
+import duration from 'dayjs/plugin/duration'
+import relativeTime from 'dayjs/plugin/relativeTime'
+// import localizedFormat from 'dayjs/plugin/localizedFormat'
+import * as dayjs from 'dayjs'
 import Switcher from '@/components/Switcher.vue'
 import CommonLoader from '@/components/CommonLoader.vue'
+import nodeStatuses from '@/utils/nodeStatuses'
+
+dayjs.extend(duration)
+dayjs.extend(relativeTime)
+// dayjs.extend(localizedFormat)
 
 export default {
   components: {
@@ -108,7 +119,13 @@ export default {
   data () {
     return {
       status: true,
-      pending: false
+      pending: false,
+      statuses: nodeStatuses
+    }
+  },
+  computed: {
+    uptime () {
+      return dayjs.duration(this.node.uptime).humanize()
     }
   },
   methods: {

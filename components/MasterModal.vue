@@ -1,14 +1,15 @@
 <template>
   <common-modal :name="name" :clickToClose="currentStep !== 3 ? true : false">
-    <step-1 v-if="currentStep === 1" @next="nextStep" />
-    <step-2 v-if="currentStep === 2" @next="nextStep" />
-    <step-3 v-if="currentStep === 3" @next="nextStep" />
-    <step-progress v-if="currentStep === 4" :status="currentStatus" @next="nextStep" />
+    <step-1 v-if="currentStep == '1'" @next="nextStep" />
+    <step-2 v-if="currentStep == '2'" @next="nextStep" />
+    <step-3 v-if="currentStep == '3'" @next="nextStep" />
+    <step-progress v-if="currentStep == '4'" :status="currentStatus" @next="nextStep" />
     <div class="progress" :style="{width: progressWidth}" />
   </common-modal>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import CommonModal from '@/components/CommonModal.vue'
 import Step1 from '@/components/Step1.vue'
 import Step2 from '@/components/Step2.vue'
@@ -26,20 +27,22 @@ export default {
   data () {
     return {
       name: 'MasterModal',
-      currentStep: 1,
       steps: [1, 2, 3, 4],
       timeout: null,
       currentStatus: null
     }
   },
   computed: {
+    ...mapGetters({
+      currentStep: 'masterStore/step'
+    }),
     progressWidth () {
       return `${100 / this.steps.length * this.currentStep}%`
     }
   },
   methods: {
     nextStep () {
-      this.currentStep = ++this.currentStep
+      this.$store.commit('masterStore/SET_STEP', Number(this.currentStep) + 1)
 
       if (this.currentStep === this.steps.length) {
         Promise.all([this.$store.dispatch('masterStore/createNode')]).then((res) => {
@@ -58,12 +61,6 @@ export default {
           }
         })
       }
-      // if (this.currentStep === this.steps.length) {
-      //   this.currentStep = 3
-      //   this.$store.commit('modalStore/closeModal')
-      // } else {
-      //   this.currentStep = ++this.currentStep
-      // }
     }
   }
 

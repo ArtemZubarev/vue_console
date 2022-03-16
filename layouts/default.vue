@@ -40,6 +40,9 @@
             </template>
           </header-locale-picker>
         </template>
+        <template #userMenu>
+          <logged-menu />
+        </template>
       </oton-header>
       <!-- <HeaderSearch /> -->
       <div class="content">
@@ -64,6 +67,7 @@
 <script>
 import { OtonHeader, HeaderLocalePicker, HeaderMenu, OtonFooter } from 'oton-vue-components'
 import OtonLogo from '@/components/OtonLogo.vue'
+import LoggedMenu from '~/components/LoggedMenu.vue'
 
 export default {
   name: 'DefaultLayout',
@@ -72,7 +76,8 @@ export default {
     HeaderLocalePicker,
     OtonLogo,
     HeaderMenu,
-    OtonFooter
+    OtonFooter,
+    LoggedMenu
   },
   data () {
     return {

@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import {
   FULFILLED, INIT, PENDING, REJECTED
 } from '../utils/constants'
@@ -13,6 +14,9 @@ export const state = () => initState
 export const getters = {
   isAuth () {
     return this.$cookie.get('auth')
+  },
+  email (s) {
+    return s.data.email
   }
 
 }
@@ -87,5 +91,11 @@ export const actions = {
       console.error(err)
       return undefined
     }
+  },
+
+  logout ({ commit, state }) {
+    Cookies.remove('auth')
+    commit('CLEAR')
+    window.location.reload()
   }
 }

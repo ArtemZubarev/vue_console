@@ -1,10 +1,15 @@
+import { any } from 'rambda'
 import {
   FULFILLED, INIT, PENDING, REJECTED
 } from '../utils/constants'
 
+const hasInProgress = list => any((item: any) => item.status !== '5' && item.status !== '6')(list)
+
 const initState = {
   data: [],
-  fetchState: INIT
+  fetchState: INIT,
+  interval: null,
+  counter: 0
 }
 
 export const state = () => initState
@@ -27,11 +32,14 @@ export const mutations = {
   },
   SET_STATE (s, fetchState) {
     s.fetchState = fetchState
+  },
+  UPDATE_COUNTER (s) {
+    s.counter = s.counter + 1
   }
 }
 
 export const actions = {
-  async fetch ({ commit, state }) {
+  async fetch ({ commit, state, dispatch }) {
     if (state.fetchState === PENDING) {
       return
     }
@@ -43,11 +51,38 @@ export const actions = {
       if (response.code === 0) {
         commit('UPDATE_DATA', response.data)
         commit('SET_STATE', FULFILLED)
+
+        if (hasInProgress(response.data)) {
+          this.interval = setInterval(() => {
+            dispatch('silentFetch')
+          }, 10000)
+        }
       } else {
         return undefined
       }
     } catch (err) {
       commit('SET_STATE', REJECTED)
+      console.error(err)
+      return undefined
+    }
+  },
+
+  async silentFetch ({ commit, state }) {
+    try {
+      const response = await this.$api.$post('/node/all')
+
+      if (response.code === 0) {
+        commit('UPDATE_DATA', response.data)
+        commit('UPDATE_COUNTER')
+
+        if (!hasInProgress(response.data) || state.counter >= 180) {
+          clearInterval(this.interval)
+        }
+        commit('UPDATE_DATA', response.data)
+      } else {
+        return undefined
+      }
+    } catch (err) {
       console.error(err)
       return undefined
     }

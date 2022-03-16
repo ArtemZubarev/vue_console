@@ -20,7 +20,8 @@ export default {
     },
     value: {
       type: [String, Number],
-      required: true
+      required: false,
+      default: ''
     },
     size: {
       type: String,

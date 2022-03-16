@@ -10,6 +10,7 @@ const initState = {
     address: '',
     name: ''
   },
+  step: '1',
   fetchState: INIT
 }
 
@@ -21,6 +22,9 @@ export const getters = {
   },
   fetchState (s) {
     return s.fetchState
+  },
+  step (s) {
+    return pathOr('1', ['step'], s)
   },
   token (s) {
     return pathOr('', ['data', 'token'], s)
@@ -51,6 +55,9 @@ export const mutations = {
   },
   UPDATE_NAME (s, value) {
     s.data.name = value
+  },
+  SET_STEP (s, value) {
+    s.step = value
   }
 }
 

@@ -12,7 +12,7 @@
         <div class="node__block">
           <node-info-item :title="'LAST BLOCK'" :value="node.blocks" />
           <div class="node__inner">
-            <node-info-item :title="'Date & Time'" :value="'-'" :size="'sm'" :horizontal="true" />
+            <node-info-item :title="'Date & Time'" :value="started" :size="'sm'" :horizontal="true" />
             <!-- <node-info-item :title="'Something'" :value="'123123123'" :size="'sm'" :horizontal="true" /> -->
           </div>
         </div>
@@ -31,13 +31,13 @@
       </div>
       <div class="node__block full">
         <node-info-item :title="'IP'" :value="node.ip" :size="'sm'" />
-        <node-info-item :title="'Uptime'" :value="'54 days 6:24:47'" :size="'sm'" />
+        <node-info-item :title="'Uptime'" :value="uptime" :size="'sm'" />
         <node-info-item :title="'Version'" :value="node.version" :size="'sm'" />
         <node-info-item
           :title="'Status'"
-          :value="node.status ? `It's okay` : 'Pause'"
+          :value="statuses[node.status]"
           :size="'sm'"
-          :valueStatus="node.status ? 'ok' : ''"
+          :valueStatus="node.status === 6 ? '' : 'ok'"
         />
       </div>
     </div>
@@ -64,10 +64,17 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import duration from 'dayjs/plugin/duration'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import * as dayjs from 'dayjs'
 import Switcher from '@/components/Switcher.vue'
 import CommonLoader from '@/components/CommonLoader.vue'
 import NodeInfoItem from '@/components/NodeInfoItem.vue'
 import CopyWallet from '~/components/CopyWallet.vue'
+import nodeStatuses from '@/utils/nodeStatuses'
+
+dayjs.extend(duration)
+dayjs.extend(relativeTime)
 
 export default {
   components: {
@@ -76,17 +83,31 @@ export default {
     NodeInfoItem,
     CopyWallet
   },
+  middleware: 'isAuth',
   data () {
     return {
       status: false,
-      pending: false
+      pending: false,
+      statuses: nodeStatuses
     }
   },
   computed: {
     ...mapGetters({
       node: 'nodeStore/node',
       fetchState: 'nodeStore/fetchState'
-    })
+    }),
+    started () {
+      if (this.node.uptime) {
+        const now = dayjs().unix()
+        const start = now - Number(this.node.uptime)
+
+        return dayjs.unix(start).format('DD.MM.YYYY')
+      }
+      return ''
+    },
+    uptime () {
+      return dayjs.duration(this.node.uptime).humanize()
+    }
   },
   mounted () {
     const { id } = this.$route.params

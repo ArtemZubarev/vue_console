@@ -3,7 +3,7 @@ import allowedLangs from './langs/allowedLangs'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'oton-node-console',
+    title: 'Oton Node Console',
     htmlAttrs: {
       lang: 'en'
     },
@@ -11,10 +11,18 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
+      { name: 'msapplication-TileColor', content: '#ffc40d' },
+      { name: 'theme-color', content: '#ffffff' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon/favicon.ico' },
+      { rel: 'manifest', type: 'image/x-icon', href: '/favicon/site.webmanifest' },
+      { rel: 'icon', type: 'image/png', size: '32x32', href: '/favicon/favicon-32x32.png' },
+      { rel: 'icon', type: 'image/png', size: '16x16', href: '/favicon/favicon-16x16.png' },
+      { rel: 'mask-icon', href: '/favicon/safari-pinned-tab.svg', color: '#5bbad5' },
+      { rel: 'apple-touch-icon', size: '180x180', href: '/favicon/apple-touch-icon.png' }
+
     ]
   },
 

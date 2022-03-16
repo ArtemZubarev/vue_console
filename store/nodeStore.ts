@@ -2,9 +2,12 @@ import {
   FULFILLED, INIT, PENDING, REJECTED
 } from '../utils/constants'
 
+const inProgress = node => node.status !== '5' && node.status !== '6'
+
 const initState = {
   data: {},
-  fetchState: INIT
+  fetchState: INIT,
+  counter: 0
 }
 
 export const state = () => initState
@@ -27,11 +30,14 @@ export const mutations = {
   },
   SET_STATE (s, fetchState) {
     s.fetchState = fetchState
+  },
+  UPDATE_COUNTER (s) {
+    s.counter = s.counter + 1
   }
 }
 
 export const actions = {
-  async fetch ({ commit, state }, id) {
+  async fetch ({ commit, state, dispatch }, id) {
     if (state.fetchState === PENDING) {
       return
     }
@@ -45,12 +51,39 @@ export const actions = {
       if (response.code === 0) {
         commit('UPDATE_DATA', response.data)
         commit('SET_STATE', FULFILLED)
+        if (inProgress(response.data)) {
+          this.interval = setInterval(() => {
+            dispatch('silentFetch', id)
+          }, 10000)
+        }
       } else {
         commit('SET_STATE', REJECTED)
         return undefined
       }
     } catch (err) {
       commit('SET_STATE', REJECTED)
+      console.error(err)
+      return undefined
+    }
+  },
+
+  async silentFetch ({ commit, state }, id) {
+    try {
+      const response = await this.$api.$post('/node/one', {
+        id
+      })
+
+      if (response.code === 0) {
+        commit('UPDATE_DATA', response.data)
+        commit('UPDATE_COUNTER')
+
+        if (!inProgress(response.data) || state.counter >= 180) {
+          clearInterval(this.interval)
+        }
+      } else {
+        return undefined
+      }
+    } catch (err) {
       console.error(err)
       return undefined
     }

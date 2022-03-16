@@ -42,17 +42,24 @@ export default {
     return {
       emptyState: true,
       showModal: false,
-      showDone: false
+      showDone: false,
+      interval: null
     }
   },
   computed: {
     ...mapGetters({
       nodesList: 'nodesStore/nodesList',
-      fetchState: 'nodesStore/fetchState'
+      fetchState: 'nodesStore/fetchState',
+      nodesInProgress: 'installingStore/nodes'
     })
   },
   mounted () {
     this.$store.dispatch('nodesStore/fetch')
+
+    // this.$store.commit('masterStore/SET_STEP', '3')
+    // this.startMaster()
+
+    // this.$store.dispatch('installingStore/fetch')
   },
   methods: {
     startMaster () {
@@ -61,7 +68,6 @@ export default {
       // this.$vfm.show('Step1')
     },
     nextStep () {
-      console.log(111)
       this.$store.dispatch('masterStore/createNode')
     }
   }
