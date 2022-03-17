@@ -52,9 +52,7 @@ export const actions = {
       if (response.code === 0) {
         commit('UPDATE_DATA', response.data)
         commit('SET_STATE', FULFILLED)
-        return {
-          auth: '1.testAuth1'
-        }
+        return response.data
       } else {
         return undefined
       }
@@ -80,9 +78,7 @@ export const actions = {
       if (response.code === 0) {
         commit('UPDATE_DATA', response.data)
         commit('SET_STATE', FULFILLED)
-        return {
-          auth: '1.testAuth1'
-        }
+        return response.data
       } else {
         return undefined
       }

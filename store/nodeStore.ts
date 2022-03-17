@@ -7,7 +7,8 @@ const inProgress = node => node.status !== '5' && node.status !== '6'
 const initState = {
   data: {},
   fetchState: INIT,
-  counter: 0
+  counter: 0,
+  interval: null
 }
 
 export const state = () => initState
@@ -33,6 +34,9 @@ export const mutations = {
   },
   UPDATE_COUNTER (s) {
     s.counter = s.counter + 1
+  },
+  UPDATE_NAME (s, value) {
+    s.data.name = value
   }
 }
 
@@ -87,5 +91,65 @@ export const actions = {
       console.error(err)
       return undefined
     }
+  },
+
+  async saveData ({ commit, state }, name) {
+    if (state.fetchState === PENDING) {
+      return
+    }
+
+    commit('SET_STATE', PENDING)
+    try {
+      const response = await this.$api.$post('/node/setData', {
+        [name]: state.data[name],
+        id: state.data.id
+      })
+
+      if (response.code === 0) {
+        commit('UPDATE_DATA', response.data)
+        commit('SET_STATE', FULFILLED)
+        return response.data
+      } else {
+        commit('SET_STATE', REJECTED)
+        return undefined
+      }
+    } catch (err) {
+      commit('SET_STATE', REJECTED)
+      console.error(err)
+      return undefined
+    }
+  },
+
+  async deleteNode ({ commit, state }, id) {
+    if (state.fetchState === PENDING) {
+      return
+    }
+
+    commit('SET_STATE', PENDING)
+    try {
+      const response = await this.$api.$post('/node/one', {
+        id
+      })
+
+      if (response.code === 0) {
+        commit('UPDATE_DATA', response.data)
+        commit('SET_STATE', FULFILLED)
+      } else {
+        commit('SET_STATE', REJECTED)
+        return undefined
+      }
+    } catch (err) {
+      commit('SET_STATE', REJECTED)
+      console.error(err)
+      return undefined
+    }
+  },
+
+  async restartNode () {
+
+  },
+
+  async updateNode () {
+
   }
 }

@@ -1,6 +1,7 @@
 <template>
   <div class="copy">
     <node-info-item :title="'Wallet'" :value="address" :size="'sm'" />
+    <slot />
     <button class="copy__button" @click="copy">
       <svg-icon
         name="common/copy_alt"

@@ -1,8 +1,8 @@
 <template>
-  <common-modal :name="name" :clickToClose="currentStep !== 3 ? true : false">
-    <step-1 v-if="currentStep == '1'" @next="nextStep" />
-    <step-2 v-if="currentStep == '2'" @next="nextStep" />
-    <step-3 v-if="currentStep == '3'" @next="nextStep" />
+  <common-modal :name="name" :clickToClose="currentStep !== '4' ? true : false">
+    <step-token v-if="currentStep == '1'" @next="nextStep" />
+    <step-address v-if="currentStep == '2'" @next="nextStep" />
+    <step-name v-if="currentStep == '3'" @next="nextStep" />
     <step-progress v-if="currentStep == '4'" :status="currentStatus" @next="nextStep" />
     <div class="progress" :style="{width: progressWidth}" />
   </common-modal>
@@ -11,17 +11,17 @@
 <script>
 import { mapGetters } from 'vuex'
 import CommonModal from '@/components/CommonModal.vue'
-import Step1 from '@/components/Step1.vue'
-import Step2 from '@/components/Step2.vue'
-import Step3 from '@/components/Step3.vue'
+import StepToken from '~/components/StepToken.vue'
+import StepAddress from '~/components/StepAddress.vue'
+import StepName from '~/components/StepName.vue'
 import StepProgress from '~/components/StepProgress.vue'
 
 export default {
   components: {
     CommonModal,
-    Step1,
-    Step2,
-    Step3,
+    StepToken,
+    StepAddress,
+    StepName,
     StepProgress
   },
   data () {

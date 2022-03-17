@@ -1,7 +1,16 @@
 <template>
   <div class="node">
     <div class="node__head">
-      <span class="node__title">{{ node.name }}</span>
+      <div class="node__title">
+        <input v-if="editName" v-model="nodeName" class="node__input" type="text">
+        <span v-else>
+          {{ nodeName }}
+        </span>
+        <button v-if="editName" class="node__accept" @click="saveName">
+          {{ $t('Save') }}
+        </button>
+        <svg-icon v-else class="node__edit" name="common/edit" @click="editName = !editName" />
+      </div>
 
       <div class="node__switcher">
         <switcher :enabled="status" @switch="switchStatus" />
@@ -27,7 +36,8 @@
         </div>
       </div>
       <div class="node__block">
-        <copy-wallet :address="'G7JF6DJEI516FHNW6457F4553S584FGQ1BNJD'" />
+        <copy-wallet :address="nodeAddress || ''" />
+        <svg-icon v-if="!editAddress" class="node__edit" name="common/edit" @click="editAddress = !editAddress" />
       </div>
       <div class="node__block full">
         <node-info-item :title="'IP'" :value="node.ip" :size="'sm'" />
@@ -37,21 +47,21 @@
           :title="'Status'"
           :value="statuses[node.status]"
           :size="'sm'"
-          :valueStatus="node.status === 6 ? '' : 'ok'"
+          :valueStatus="node.status === '6' ? '' : 'ok'"
         />
       </div>
     </div>
     <div class="node__footer">
       <div>
-        <button class="node__button">
+        <button class="node__button" :disabled="nodeInProgress" @click="restartNode">
           {{ $t('Restart server') }}
         </button>
-        <button class="node__button">
+        <button class="node__button" :disabled="nodeInProgress" @click="updateNode">
           {{ $t('Update software') }}
         </button>
       </div>
       <div>
-        <button class="node__button filled">
+        <button class="node__button filled" :disabled="nodeInProgress" @click="deleteNode">
           {{ $t('Delete this node') }}
         </button>
       </div>
@@ -88,7 +98,9 @@ export default {
     return {
       status: false,
       pending: false,
-      statuses: nodeStatuses
+      statuses: nodeStatuses,
+      editName: false,
+      editAddress: false
     }
   },
   computed: {
@@ -107,6 +119,25 @@ export default {
     },
     uptime () {
       return dayjs.duration(this.node.uptime).humanize()
+    },
+    nodeInProgress () {
+      return this.node.status === '5' || this.node.status === '6'
+    },
+    nodeName: {
+      get () {
+        return this.node.name
+      },
+      set (value) {
+        return this.$store.commit('nodeStore/UPDATE_NAME', value)
+      }
+    },
+    nodeAddress: {
+      get () {
+        return this.node.address
+      },
+      set (value) {
+        return this.$store.commit('nodeStore/UPDATE_ADDRESS', value)
+      }
     }
   },
   mounted () {
@@ -120,6 +151,32 @@ export default {
       setTimeout(() => {
         this.pending = false
       }, 2000)
+    },
+    saveName () {
+      Promise.resolve(this.$store.dispatch('nodeStore/saveData', 'name')).then((res) => {
+        if (res) {
+          this.editName = false
+        }
+      })
+    },
+    saveAddress () {
+      Promise.resolve(this.$store.dispatch('nodeStore/saveData', 'address')).then((res) => {
+        if (res) {
+          this.editAddress = false
+        }
+      })
+    },
+    deleteNode () {
+      const { id } = this.$route.params
+      this.$store.dispatch('nodeStore/deleteNode', id)
+    },
+    restartNode () {
+      const { id } = this.$route.params
+      this.$store.dispatch('nodeStore/restartNode', id)
+    },
+    updateNode () {
+      const { id } = this.$route.params
+      this.$store.dispatch('nodeStore/updateNode', id)
     }
   }
 }
@@ -134,6 +191,39 @@ export default {
   padding: 19px 24px;
   width: 100%;
   box-sizing: border-box;
+
+  &__input {
+    border: none;
+    border-bottom: 2px solid $colorFontBase;
+    font-size: 20px;
+  }
+
+  &__edit {
+    width: 18px;
+    height: 19px;
+    margin-bottom: -3px;
+    display: inline-block;
+    opacity: $colorFontBase;
+    opacity: 0.6;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &__accept {
+    font-size: 12px;
+    background: $colorFontBase;
+    color: $colorFiller;
+    padding: 2px 4px;
+    border-radius: 2px;
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 
   &__content {
     border-top: 2px solid #F7F5EE;
@@ -154,6 +244,7 @@ export default {
   &__title {
     font-size: 20px;
     font-weight: bold;
+    color: $colorFontBase;
   }
 
   &__head {
@@ -184,6 +275,15 @@ export default {
       background: #EC5D6B;
       color: #fff;
       border-color: #EC5D6B;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+
+      &:hover {
+        opacity: 0.6;
+      }
     }
   }
 
