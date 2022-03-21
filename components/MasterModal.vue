@@ -1,10 +1,16 @@
 <template>
-  <common-modal :name="name" :clickToClose="currentStep !== '4' ? true : false">
-    <step-token v-if="currentStep == '1'" @next="nextStep" />
-    <step-address v-if="currentStep == '2'" @next="nextStep" />
-    <step-name v-if="currentStep == '3'" @next="nextStep" />
-    <step-progress v-if="currentStep == '4'" :status="currentStatus" @next="nextStep" />
+  <common-modal
+    :name="name"
+    :clickToClose="currentStep !== '5' ? true : false"
+    @next="nextStep"
+  >
     <div class="progress" :style="{width: progressWidth}" />
+    <step-contract v-if="currentStep == '1'" @next="nextStep" />
+    <step-token v-if="currentStep == '2'" @next="nextStep" @previous="previousStep" />
+    <step-address v-if="currentStep == '3'" @next="nextStep" @previous="previousStep" />
+    <step-name v-if="currentStep == '4'" @next="nextStep" @previous="previousStep" />
+    <step-done v-if="currentStep == '5'" @next="nextStep" />
+    <!-- <step-progress v-if="currentStep == '5'" :status="currentStatus" @next="nextStep" /> -->
   </common-modal>
 </template>
 
@@ -14,7 +20,8 @@ import CommonModal from '@/components/CommonModal.vue'
 import StepToken from '~/components/StepToken.vue'
 import StepAddress from '~/components/StepAddress.vue'
 import StepName from '~/components/StepName.vue'
-import StepProgress from '~/components/StepProgress.vue'
+import StepDone from '~/components/StepDone.vue'
+// import StepProgress from '~/components/StepProgress.vue'
 
 export default {
   components: {
@@ -22,12 +29,13 @@ export default {
     StepToken,
     StepAddress,
     StepName,
-    StepProgress
+    // StepProgress,
+    StepDone
   },
   data () {
     return {
       name: 'MasterModal',
-      steps: [1, 2, 3, 4],
+      steps: [1, 2, 3, 4, 5],
       timeout: null,
       currentStatus: null
     }
@@ -41,10 +49,11 @@ export default {
     }
   },
   methods: {
+    previousStep () {
+      this.$store.commit('masterStore/SET_STEP', Number(this.currentStep) - 1)
+    },
     nextStep () {
-      this.$store.commit('masterStore/SET_STEP', Number(this.currentStep) + 1)
-
-      if (this.currentStep === this.steps.length) {
+      if (Number(this.currentStep) === this.steps.length) {
         Promise.all([this.$store.dispatch('masterStore/createNode')]).then((res) => {
           if (res[0]) {
             this.timeout = setInterval(() => {
@@ -60,6 +69,8 @@ export default {
             }, 10000)
           }
         })
+      } else {
+        this.$store.commit('masterStore/SET_STEP', Number(this.currentStep) + 1)
       }
     }
   }
@@ -70,10 +81,13 @@ export default {
 .progress {
   position: absolute;
   left: 0;
-  bottom: 0;
+  top: 0;
   background: #7DC475;
   height: 8px;
   transition: 0.4s;
+}
+.back {
+  margin-bottom: 10px;
 }
 ::v-deep .modal-container {
   display: flex;

@@ -1,5 +1,9 @@
 <template>
-  <button :class="['button', {filled: filled}]" @click="$emit('click')">
+  <button
+    :class="['button', {filled: filled}]"
+    :disabled="disabled"
+    @click="$emit('click')"
+  >
     {{ text }}
   </button>
 </template>
@@ -11,6 +15,11 @@ export default {
       required: true
     },
     filled: {
+      required: false,
+      type: Boolean,
+      default: false
+    },
+    disabled: {
       required: false,
       type: Boolean,
       default: false
@@ -26,9 +35,9 @@ export default {
   border-radius: 4px;
   color: #033354;
   font-weight: bold;
-  &:not(:last-of-type) {
-    margin-right: 16px;
-  }
+  // &:not(:last-of-type) {
+  //   margin-right: 16px;
+  // }
 
   &:hover {
     opacity: 0.8;

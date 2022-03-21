@@ -1,27 +1,29 @@
 <template>
-  <master-layout>
-    <template #header>
-      <iframe
-        width="100%"
-        height="315"
-        src="https://www.youtube.com/embed/CUfGX90c39c?controls=0"
-        title=""
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      />
-    </template>
+  <master-layout
+    :nextText="'Next'"
+    :prev="false"
+    :pending="fetchState === 'PENDING'"
+    @next="$emit('next')"
+  >
     <template #title>
       {{ $t('Step 1') }}
     </template>
     <template #main>
       <div class="main">
+        <div class="main__text">
+          {{ $t('Select a contract') }}
+        </div>
         <with-loader :active="fetchState === 'PENDING'" :withBackground="true">
-          <master-input :label="'DO Token'" :value="token" @change-value="handleToken" />
-          <select id="" name="">
-            <option v-for="contract in contracts" :key="contract.id" value="" />
-          </select>
-          <common-button class="button" :filled="true" :text="$t('Ок, I did this')" @click="$emit('next')" />
+          <div class="contracts__list">
+            <div
+              v-for="contract in contracts"
+              :key="`contract-${contract.id}`"
+              :class="['contracts__item', { picked: contract.id === picked, disabled: contract.used }]"
+              @click="pickContract(contract)"
+            >
+              {{ `Contract ${contract.type}` }}
+            </div>
+          </div>
         </with-loader>
       </div>
     </template>
@@ -30,35 +32,33 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import CommonButton from './CommonButton.vue'
 import MasterLayout from './MasterLayout.vue'
-import MasterInput from './MasterInput.vue'
 import WithLoader from './WithLoader.vue'
 
 export default {
   components: {
     MasterLayout,
-    CommonButton,
-    MasterInput,
     WithLoader
   },
   data () {
     return {
-      contracts: []
     }
   },
   computed: {
     ...mapGetters({
       fetchState: 'masterStore/fetchState',
-      token: 'masterStore/token'
+      contracts: 'masterStore/contracts',
+      picked: 'masterStore/contract'
     })
   },
   mounted () {
     this.$store.dispatch('masterStore/checkToken')
   },
   methods: {
-    handleToken (value) {
-      this.$store.commit('masterStore/UPDATE_TOKEN', value)
+    pickContract (contract) {
+      if (!contract.used) {
+        this.$store.commit('masterStore/UPDATE_CONTRACT', contract.id)
+      }
     }
   }
 }
@@ -71,6 +71,12 @@ export default {
   margin: 0 auto;
   width: 100%;
   max-width: 353px;
+
+  &__text {
+    text-align: center;
+    margin-bottom: 30px;
+    color: $colorFontBase;
+  }
 }
 .loader-box {
   position: absolute;
@@ -83,9 +89,39 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.button {
-  margin: 0 auto;
-  margin-top: 18px;
-  display: block;
+.contracts{
+  &__list {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__item {
+    font-size: 14px;
+    padding: 8px;
+    border: 2px solid $colorBg;
+    color: $colorFontBase;
+
+    &:first-of-type {
+      border-radius: 4px 0px 0px 4px;
+    }
+    &:last-of-type {
+      border-radius:  0px 4px 4px 0px ;
+    }
+    &:not(:disabled) {
+      cursor: pointer;
+    }
+
+    &.picked {
+      background: #317B92;
+      color: #fff;
+      border-color: #317B92;
+    }
+
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
 }
+
 </style>

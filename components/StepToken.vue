@@ -1,24 +1,19 @@
 <template>
-  <master-layout>
-    <template #header>
-      <iframe
-        width="100%"
-        height="315"
-        src="https://www.youtube.com/embed/CUfGX90c39c?controls=0"
-        title=""
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      />
-    </template>
+  <master-layout
+    :nextText="'Next'"
+    @next="$emit('next')"
+    @previous="$emit('previous')"
+  >
     <template #title>
-      {{ $t('Step 1') }}
+      {{ $t('Step 2') }}
     </template>
     <template #main>
       <div class="main">
+        <div class="main__text">
+          {{ $t('Insert Digital Ocean token') }}
+        </div>
         <with-loader :active="fetchState === 'PENDING'" :withBackground="true">
-          <master-input :label="'DO Token'" :value="token" @change-value="handleToken" />
-          <common-button class="button" :filled="true" :text="$t('Ок, I did this')" @click="$emit('next')" />
+          <master-input :label="'Digital Ocean token'" :value="token" @change-value="handleToken" />
         </with-loader>
       </div>
     </template>
@@ -27,7 +22,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import CommonButton from './CommonButton.vue'
 import MasterLayout from './MasterLayout.vue'
 import MasterInput from './MasterInput.vue'
 import WithLoader from './WithLoader.vue'
@@ -35,7 +29,6 @@ import WithLoader from './WithLoader.vue'
 export default {
   components: {
     MasterLayout,
-    CommonButton,
     MasterInput,
     WithLoader
   },
@@ -46,7 +39,7 @@ export default {
     })
   },
   mounted () {
-    this.$store.dispatch('masterStore/checkToken')
+    // this.$store.dispatch('masterStore/checkToken')
   },
   methods: {
     handleToken (value) {
@@ -63,6 +56,12 @@ export default {
   margin: 0 auto;
   width: 100%;
   max-width: 353px;
+
+  &__text {
+    text-align: center;
+    margin-bottom: 8px;
+    color: $colorFontBase;
+  }
 }
 .loader-box {
   position: absolute;

@@ -7,7 +7,6 @@
       }"
     >
       {{ userEmail }}
-
       <div v-show="emailIsHidden" class="logoutButton__texture" />
     </span>
 
@@ -86,6 +85,7 @@ export default {
     padding: 10px 0;
     position: relative;
     left: 1px;
+    top: 0.5px;
   }
 
   +mediaDesktop() {
@@ -106,6 +106,7 @@ export default {
     white-space: nowrap;
     top: -3px;
     margin-right: 2px;
+    color: $colorFontBase;
 
     +mediaTablet() {
       max-width: 90px;

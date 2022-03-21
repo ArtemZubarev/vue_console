@@ -1,4 +1,4 @@
-import { pathOr } from 'rambda'
+import { pathOr, find, propEq } from 'rambda'
 import {
   FULFILLED, INIT, PENDING, REJECTED
 } from '../utils/constants'
@@ -8,7 +8,13 @@ const initState = {
   data: {
     token: '',
     address: '',
-    name: ''
+    contracts: []
+  },
+  userChoice: {
+    token: '',
+    address: '',
+    name: '',
+    contract: null
   },
   step: '1',
   fetchState: INIT
@@ -27,19 +33,31 @@ export const getters = {
     return pathOr('1', ['step'], s)
   },
   token (s) {
-    return pathOr('', ['data', 'token'], s)
+    return pathOr('', ['userChoice', 'token'], s)
   },
   address (s) {
-    return pathOr('', ['data', 'address'], s)
+    return pathOr('', ['userChoice', 'address'], s)
   },
   name (s) {
-    return pathOr('', ['data', 'name'], s)
+    return pathOr('', ['userChoice', 'name'], s)
+  },
+  contract (s) {
+    return pathOr('', ['userChoice', 'contract'], s)
+  },
+  contracts (s) {
+    return pathOr('', ['data', 'contracts'], s)
   }
 }
 
 export const mutations = {
   UPDATE_DATA (s, data) {
-    s.data = { ...s.data, ...data }
+    s.data = { ...data }
+    const contract: any = find(propEq('used', false))(data.contracts)
+    if (contract) {
+      s.userChoice.contract = contract.id
+    }
+
+    s.userChoice.token = data.token
   },
   CLEAR (s) {
     Object.assign(s, initState)
@@ -48,17 +66,21 @@ export const mutations = {
     s.fetchState = fetchState
   },
   UPDATE_TOKEN (s, value) {
-    s.data.token = value
+    s.userChoice.token = value
   },
   UPDATE_ADDRESS (s, value) {
-    s.data.address = value
+    s.userChoice.address = value
   },
   UPDATE_NAME (s, value) {
-    s.data.name = value
+    s.userChoice.name = value
+  },
+  UPDATE_CONTRACT (s, value) {
+    s.userChoice.contract = value
   },
   SET_STEP (s, value) {
     s.step = value
   }
+
 }
 
 export const actions = {
@@ -91,8 +113,8 @@ export const actions = {
 
     commit('SET_STATE', PENDING)
     try {
-      const payload = cleanObject(state.data)
-      console.log(payload)
+      const payload = cleanObject(state.userChoice)
+
       const response = await this.$api.$post('/node/buy', { ...payload })
 
       if (response.code === 0) {
