@@ -53,24 +53,31 @@ export default {
       this.$store.commit('masterStore/SET_STEP', Number(this.currentStep) - 1)
     },
     nextStep () {
-      if (Number(this.currentStep) === this.steps.length) {
-        Promise.all([this.$store.dispatch('masterStore/createNode')]).then((res) => {
-          if (res[0]) {
-            this.timeout = setInterval(() => {
-              Promise.all([this.$store.dispatch('masterStore/checkStatus', res[0])]).then((res) => {
-                this.currentStatus = res[0]
-                if (res[0] === '3') {
-                  this.$emit('done')
-                  clearInterval(this.timeout)
-                  this.$store.dispatch('nodesStore/fetch')
-                  this.$store.commit('modalStore/closeModal')
-                }
-              })
-            }, 10000)
+      const nextOne = Number(this.currentStep) + 1
+      if (Number(this.currentStep) === this.steps.length - 1) {
+        Promise.resolve(this.$store.dispatch('masterStore/createNode')).then((res) => {
+          if (res) {
+            console.log(res)
+            this.$store.commit('masterStore/SET_STEP', nextOne)
+            this.$store.dispatch('nodesStore/fetch')
+            // this.timeout = setInterval(() => {
+            //   Promise.resolve([this.$store.dispatch('masterStore/checkStatus', res)]).then((res) => {
+            //     this.currentStatus = res
+            //     if (res === '3') {
+            //       this.$emit('done')
+            //       clearInterval(this.timeout)
+            //       this.$store.dispatch('nodesStore/fetch')
+            //       this.$store.commit('modalStore/closeModal')
+            //     }
+            //   })
+            // }, 10000)
           }
         })
+      } else if (Number(this.currentStep) === this.steps.length) {
+        this.$store.commit('modalStore/closeModal')
+        this.$store.commit('masterStore/SET_STEP', 1)
       } else {
-        this.$store.commit('masterStore/SET_STEP', Number(this.currentStep) + 1)
+        this.$store.commit('masterStore/SET_STEP', nextOne)
       }
     }
   }

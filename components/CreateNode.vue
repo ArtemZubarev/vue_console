@@ -42,7 +42,7 @@ export default {
   align-items: center;
   width: 100%;
   max-width: 600px;
-  border: 4px dashed #ffffff;
+  border: 2px dashed #ffffff;
   padding: 50px 0;
   border-radius: 8px;
   box-sizing: border-box;

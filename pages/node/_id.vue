@@ -20,10 +20,9 @@
       <div class="node__info">
         <div class="node__block">
           <node-info-item :title="'LAST BLOCK'" :value="node.blocks" />
-          <div class="node__inner">
+          <!-- <div class="node__inner">
             <node-info-item :title="'Date & Time'" :value="started" :size="'sm'" :horizontal="true" />
-            <!-- <node-info-item :title="'Something'" :value="'123123123'" :size="'sm'" :horizontal="true" /> -->
-          </div>
+          </div> -->
         </div>
         <div class="node__block">
           <node-info-item :title="'VOTINGS'" :value="node.votings" />
@@ -226,19 +225,21 @@ export default {
   }
 
   &__content {
-    border-top: 2px solid #F7F5EE;
-    border-bottom: 2px solid #F7F5EE;
     margin-top: 8px;
     margin-bottom: 10px;
     padding-top: 12px;
     display: flex;
     flex-wrap: wrap;
+    max-width: 632px;
+    flex-direction: column;
   }
 
   &__footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    padding-top: 16px;
+    border-top: 2px solid #F7F5EE;
   }
 
   &__title {
@@ -250,6 +251,8 @@ export default {
   &__head {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #F7F5EE;
   }
 
   &__button {
@@ -299,23 +302,30 @@ export default {
   }
 
   &__block {
-    width: 50%;
+    width: 25%;
     margin-bottom: 16px;
     display: flex;
 
     &.full {
       width: 100%;
+      flex-wrap: wrap;
 
       +mediaTablet() {
-        flex-wrap: unset;
+        width: 50%;
+
       }
 
       & > div {
         width: 50%;
 
         +mediaTablet() {
-          width: 160px;
+          width: 50%;
+          flex-wrap: wrap;
         }
+
+        // +mediaTablet() {
+        //   width: 160px;
+        // }
       }
     }
   }

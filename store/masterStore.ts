@@ -17,7 +17,8 @@ const initState = {
     contract: null
   },
   step: '1',
-  fetchState: INIT
+  fetchState: INIT,
+  errors: []
 }
 
 export const state = () => initState
@@ -58,6 +59,9 @@ export const mutations = {
     }
 
     s.userChoice.token = data.token
+  },
+  SET_ERRORS (s, errors) {
+
   },
   CLEAR (s) {
     Object.assign(s, initState)

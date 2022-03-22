@@ -1,94 +1,104 @@
 <template>
   <nuxt-link
-    class="node"
+    :class="['node', {inProgress: nodeInProgress}]"
     :to="localePath(`/node/${node.id}`)"
     event=""
     @click.native.prevent="handleClick($event, localePath(`/node/${node.id}`))"
   >
-    <div class="node__head">
-      <span class="node__title">{{ node.name }}</span>
+    <template v-if="nodeInProgress">
+      <div class="node__head">
+        <span class="node__title">{{ node.name }}</span>
+      </div>
+      <div class="progressbar">
+        <div
+          :class="['progressbar__line']"
+          :style="{width: `${(100 / 12) * (node.status ? Number(node.status) + 2 : 1)}%`}"
+        />
+      </div>
+      <p class="step__status">
+        {{ statusText ? statusText : 'Preparing...' }}
+      </p>
+    </template>
+    <template v-else>
+      <div class="node__head">
+        <span class="node__title">{{ node.name }}</span>
 
-      <div class="node__switcher">
-        <switcher :enabled="status" @switch="status = !status" />
+        <div class="node__switcher">
+          <switcher :enabled="status" @switch="status = !status" />
+        </div>
       </div>
-    </div>
-    <div class="node__content">
-      <div class="node__block">
-        <span class="node__block-name">
-          {{ $t('EARNED IN TOTAL') }}
-        </span>
-        <span class="node__block-value">
-          {{ node.earned }}
-        </span>
+      <div class="node__content">
+        <div class="node__block">
+          <span class="node__block-name">
+            {{ $t('EARNED IN TOTAL') }}
+          </span>
+          <span class="node__block-value">
+            {{ node.earned }}
+          </span>
+        </div>
+        <div class="node__block">
+          <span class="node__block-name">
+            {{ $t('LAST BLOCK') }}
+          </span>
+          <span class="node__block-value">
+            {{ node.blocks }}
+          </span>
+        </div>
+        <div class="node__block">
+          <span class="node__block-name">
+            {{ $t('CONNECTED NODES') }}
+          </span>
+          <span class="node__block-value">
+            {{ node.connected }}
+          </span>
+        </div>
+        <div class="node__block">
+          <span class="node__block-name">
+            {{ $t('VOTINGS') }}
+          </span>
+          <span class="node__block-value">
+            {{ node.votings }}
+          </span>
+        </div>
       </div>
-      <div class="node__block">
-        <span class="node__block-name">
-          {{ $t('LAST BLOCK') }}
-        </span>
-        <span class="node__block-value">
-          {{ node.blocks }}
-        </span>
+      <div class="node__footer">
+        <div class="node__block small">
+          <span class="node__block-name">
+            {{ $t('IP') }}
+          </span>
+          <span class="node__block-value">
+            {{ node.ip }}
+          </span>
+        </div>
+        <div class="node__block small">
+          <span class="node__block-name">
+            {{ $t('Uptime') }}
+          </span>
+          <span class="node__block-value">
+            {{ uptime }}
+          </span>
+        </div>
+        <div class="node__block small">
+          <span class="node__block-name">
+            {{ $t('Version') }}
+          </span>
+          <span class="node__block-value">
+            {{ node.version }}
+          </span>
+        </div>
+        <div class="node__block small">
+          <span class="node__block-name">
+            {{ $t('Status') }}
+          </span>
+          <span :class="['node__block-value', {danger: node.status === 6, success: node.status === '5'} ]">
+            {{ statuses[node.status] }}
+          </span>
+        </div>
       </div>
-      <div class="node__block">
-        <span class="node__block-name">
-          {{ $t('CONNECTED NODES') }}
-        </span>
-        <span class="node__block-value">
-          {{ node.connected }}
-        </span>
+      <div v-if="pending" class="loader-box">
+        <common-loader :active="pending" />
       </div>
-      <div class="node__block">
-        <span class="node__block-name">
-          {{ $t('VOTINGS') }}
-        </span>
-        <span class="node__block-value">
-          {{ node.votings }}
-        </span>
-      </div>
-    </div>
-    <div class="node__footer">
-      <div class="node__block small">
-        <span class="node__block-name">
-          {{ $t('IP') }}
-        </span>
-        <span class="node__block-value">
-          {{ node.ip }}
-        </span>
-      </div>
-      <div class="node__block small">
-        <span class="node__block-name">
-          {{ $t('Uptime') }}
-        </span>
-        <span class="node__block-value">
-          {{ uptime }}
-        </span>
-      </div>
-      <div class="node__block small">
-        <span class="node__block-name">
-          {{ $t('Version') }}
-        </span>
-        <span class="node__block-value">
-          {{ node.version }}
-        </span>
-      </div>
-      <div class="node__block small">
-        <span class="node__block-name">
-          {{ $t('Status') }}
-        </span>
-        <span :class="['node__block-value', {danger: node.status === 6, success: node.status === '5'} ]">
-          {{ statuses[node.status] }}
-        </span>
-        <!-- <span v-if="node.status === 1" class="node__block-value success">
-          {{ $t(`It's okay`) }}
-        </span>
-        <span v-else class="node__block-value danger">
-          {{ $t(`Pause`) }}
-        </span> -->
-      </div>
-    </div>
-    <div v-if="pending" class="loader-box">
-      <common-loader :active="pending" />
-    </div>
+    </template>
   </nuxt-link>
 </template>
 
@@ -103,7 +113,10 @@ import nodeStatuses from '@/utils/nodeStatuses'
 
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
-// dayjs.extend(localizedFormat)
+
+const inProgress = (node) => {
+  return node.status !== '5' && node.status !== '6'
+}
 
 export default {
   components: {
@@ -126,12 +139,21 @@ export default {
   computed: {
     uptime () {
       return dayjs.duration(this.node.uptime).humanize()
+    },
+    nodeInProgress () {
+      return inProgress(this.node)
+    },
+    statusText () {
+      return this.statuses[`${this.node.status}`]
     }
   },
   methods: {
     handleClick (e, path) {
       const classNames = e.target.className.split(' ')
       const isSwitcher = classNames.includes('switcher')
+      if (this.nodeInProgress) {
+        e.preventDefault()
+      }
       if (isSwitcher || this.pending) {
         this.pending = true
         setTimeout(() => {
@@ -157,6 +179,11 @@ export default {
   max-width: 357px;
   box-sizing: border-box;
   margin-bottom: 24px;
+
+  &.inProgress {
+    background: transparent;
+    border: 2px solid #fff;
+  }
 
   &:hover {
     cursor: pointer;
@@ -244,5 +271,27 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.progressbar {
+  position: relative;
+  overflow: hidden;
+  background: #fff 0% 0% no-repeat padding-box;
+  height: 16px;
+  border-radius: 4px;
+
+  &__line {
+    position: absolute;
+    background: transparent linear-gradient(180deg, #7DC475 0%, #4E9A45 100%) 0% 0% no-repeat padding-box;
+    transition: 3s;
+    height: 100%;
+  }
+}
+.step {
+  &__status {
+    opacity: 0.4;
+    font-size: 14px;
+    margin: 4px 0 0 0;
+    margin-bottom: 100px;
+  }
 }
 </style>

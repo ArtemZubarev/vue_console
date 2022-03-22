@@ -75,7 +75,7 @@ export const actions = {
         commit('UPDATE_DATA', response.data)
         commit('UPDATE_COUNTER')
 
-        if (!hasInProgress(response.data) || state.counter >= 180) {
+        if (!hasInProgress(response.data) || state.counter >= 80) {
           clearInterval(this.interval)
         }
         commit('UPDATE_DATA', response.data)
