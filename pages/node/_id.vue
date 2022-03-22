@@ -34,6 +34,7 @@
           <node-info-item :title="'CONNECTED NODES'" :value="node.connected" />
         </div>
       </div>
+      <contract-info v-if="contractData" :contract="contractData" />
       <div class="node__block">
         <copy-wallet :address="nodeAddress || ''" />
         <svg-icon v-if="!editAddress" class="node__edit" name="common/edit" @click="editAddress = !editAddress" />
@@ -65,8 +66,11 @@
         </button>
       </div>
     </div>
-    <div v-if="fetchState === 'PENDING' || pending" class="loader-box">
-      <common-loader :active="fetchState === 'PENDING' || pending" />
+    <div
+      v-if="fetchState === 'PENDING' || contractsFetch === 'PENDING' || pending "
+      class="loader-box"
+    >
+      <common-loader :active="fetchState === 'PENDING' || contractsFetch === 'PENDING' || pending" />
     </div>
   </div>
 </template>
@@ -81,16 +85,19 @@ import CommonLoader from '@/components/CommonLoader.vue'
 import NodeInfoItem from '@/components/NodeInfoItem.vue'
 import CopyWallet from '~/components/CopyWallet.vue'
 import nodeStatuses from '@/utils/nodeStatuses'
+import ContractInfo from '~/components/ContractInfo.vue'
 
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
 
 export default {
+  name: 'NodePage',
   components: {
     Switcher,
     CommonLoader,
     NodeInfoItem,
-    CopyWallet
+    CopyWallet,
+    ContractInfo
   },
   middleware: 'isAuth',
   data () {
@@ -105,7 +112,9 @@ export default {
   computed: {
     ...mapGetters({
       node: 'nodeStore/node',
-      fetchState: 'nodeStore/fetchState'
+      fetchState: 'nodeStore/fetchState',
+      contractsFetch: 'masterStore/fetchState',
+      contracts: 'masterStore/contracts'
     }),
     started () {
       if (this.node.uptime) {
@@ -137,6 +146,9 @@ export default {
       set (value) {
         return this.$store.commit('nodeStore/UPDATE_ADDRESS', value)
       }
+    },
+    contractData () {
+      return this.node.contract
     }
   },
   mounted () {

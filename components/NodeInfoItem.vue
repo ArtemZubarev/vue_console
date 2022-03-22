@@ -51,7 +51,7 @@ export default {
   flex-direction: column;
 
   &__title {
-    color: #033354;
+    color: $colorFontBase;
     opacity: 0.4;
     font-size: 12px;
     font-weight: bold;
@@ -60,6 +60,7 @@ export default {
     font-size: 24px;
     font-weight: bold;
     margin-top: 4px;
+    color: $colorFontBase;
 
     &.danger {
       color: #EC5D6B;

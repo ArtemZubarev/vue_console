@@ -2,6 +2,7 @@
   <master-layout
     :nextText="'Next'"
     :prev="false"
+    :next="noAvailableContracts ? false : true"
     :pending="fetchState === 'PENDING'"
     @next="$emit('next')"
   >
@@ -24,6 +25,9 @@
               {{ `Contract ${contract.type}` }}
             </div>
           </div>
+          <div v-if="noAvailableContracts && fetchState !== 'PENDING'" class="contracts__availability">
+            {{ $t('No available contracts') }}
+          </div>
         </with-loader>
       </div>
     </template>
@@ -32,6 +36,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { all, propEq } from 'rambda'
 import MasterLayout from './MasterLayout.vue'
 import WithLoader from './WithLoader.vue'
 
@@ -49,7 +54,10 @@ export default {
       fetchState: 'masterStore/fetchState',
       contracts: 'masterStore/contracts',
       picked: 'masterStore/contract'
-    })
+    }),
+    noAvailableContracts () {
+      return all(propEq('used', true))(this.contracts)
+    }
   },
   mounted () {
     this.$store.dispatch('masterStore/checkToken')
@@ -121,6 +129,13 @@ export default {
       opacity: 0.5;
       cursor: not-allowed;
     }
+  }
+
+  &__availability {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+    color: $colorDanger;
   }
 }
 
