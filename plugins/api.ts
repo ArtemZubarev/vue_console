@@ -1,7 +1,6 @@
 import Cookies from 'js-cookie'
 
-export default function ({ $axios }: any, inject: any) {
-  // Create a custom axios instance
+export default function ({ $axios, $toast }: any, inject: any) {
   const api = $axios.create({
     baseURL: process.env.baseUrl,
     headers: {
@@ -17,6 +16,16 @@ export default function ({ $axios }: any, inject: any) {
         return JSON.stringify(payload)
       },
       ...$axios.defaults.transformRequest
+    ],
+    transformResponse: [
+      (res: any) => {
+        if (res.code !== 0) {
+          if (!process.server && res.message && res.message.text) {
+            $toast.error(res.message.text)
+          }
+        }
+        return res
+      }
     ]
   })
 

@@ -101,6 +101,7 @@ export const actions = {
         commit('UPDATE_DATA', response.data)
         commit('SET_STATE', FULFILLED)
       } else {
+        commit('SET_STATE', REJECTED)
         return undefined
       }
     } catch (err) {
@@ -117,7 +118,7 @@ export const actions = {
 
     commit('SET_STATE', PENDING)
     try {
-      const payload = cleanObject(state.userChoice)
+      const payload = { ...state.userChoice }
 
       const response = await this.$api.$post('/node/buy', { ...payload })
 
@@ -125,6 +126,7 @@ export const actions = {
         commit('SET_STATE', FULFILLED)
         return response.data
       } else {
+        commit('SET_STATE', REJECTED)
         return undefined
       }
     } catch (err) {
@@ -147,6 +149,7 @@ export const actions = {
         commit('SET_STATE', FULFILLED)
         return response.data
       } else {
+        commit('SET_STATE', REJECTED)
         return undefined
       }
     } catch (err) {

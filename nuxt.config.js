@@ -52,8 +52,14 @@ export default {
     '@nuxtjs/style-resources',
     '@nuxtjs/svg-sprite',
     'nuxt-clipboard2',
-    'cookie-universal-nuxt'
+    'cookie-universal-nuxt',
+    '@nuxtjs/toast'
   ],
+
+  toast: {
+    position: 'top-center',
+    duration: 3000
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
