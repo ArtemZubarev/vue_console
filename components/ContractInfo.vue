@@ -3,7 +3,7 @@
     <div class="contract__info">
       <div class="contract__box">
         <h3 class="contract__name">
-          Contract {{ contract.type }}
+          {{ $t('Contract') }} {{ contract.type }}
         </h3>
         <div class="contract__data">
           <div class="contract__duration">
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="contract__footnote">
-      <sup>*</sup>{{ $t('Approximate calculation based on ') }}
+      <sup>*</sup>{{ $t('Approximate calculation based on') }}{{ ' ' }}
       <a
         href=""
         target="_blank"

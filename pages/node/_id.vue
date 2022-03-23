@@ -19,19 +19,19 @@
     <div class="node__content">
       <div class="node__info">
         <div class="node__block">
-          <node-info-item :title="'LAST BLOCK'" :value="node.blocks" />
+          <node-info-item :title="'Last block'" :value="node.blocks" />
           <!-- <div class="node__inner">
             <node-info-item :title="'Date & Time'" :value="started" :size="'sm'" :horizontal="true" />
           </div> -->
         </div>
         <div class="node__block">
-          <node-info-item :title="'VOTINGS'" :value="node.votings" />
+          <node-info-item :title="'Votings'" :value="node.votings" />
         </div>
         <div class="node__block">
-          <node-info-item :title="'EARNED IN TOTAL'" :value="node.earned" />
+          <node-info-item :title="'Earned in total'" :value="node.earned" />
         </div>
         <div class="node__block">
-          <node-info-item :title="'CONNECTED NODES'" :value="node.connected" />
+          <node-info-item :title="'Connected nodes'" :value="node.connected" />
         </div>
       </div>
       <contract-info v-if="contractData" :contract="contractData" />

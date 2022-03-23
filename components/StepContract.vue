@@ -7,7 +7,7 @@
     @next="$emit('next')"
   >
     <template #title>
-      {{ $t('Step 1') }}
+      {{ $t('Step') }} 1
     </template>
     <template #main>
       <div class="main">
@@ -25,6 +25,9 @@
               {{ `Contract ${contract.type}` }}
             </div>
           </div>
+          <div class="main__info-box">
+            <contract-info v-if="contractData" :contract="contractData" />
+          </div>
           <div v-if="noAvailableContracts && fetchState !== 'PENDING'" class="contracts__availability">
             {{ $t('No available contracts') }}
           </div>
@@ -36,14 +39,16 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { all, propEq } from 'rambda'
+import { all, propEq, find } from 'rambda'
 import MasterLayout from './MasterLayout.vue'
 import WithLoader from './WithLoader.vue'
+import ContractInfo from '@/components/ContractInfo.vue'
 
 export default {
   components: {
     MasterLayout,
-    WithLoader
+    WithLoader,
+    ContractInfo
   },
   data () {
     return {
@@ -57,6 +62,10 @@ export default {
     }),
     noAvailableContracts () {
       return all(propEq('used', true))(this.contracts)
+    },
+    contractData () {
+      const contract = find(propEq('id', this.picked))(this.contracts)
+      return contract
     }
   },
   mounted () {
@@ -79,6 +88,10 @@ export default {
   margin: 0 auto;
   width: 100%;
   max-width: 353px;
+
+  &__info-box {
+    margin-top: 10px;
+  }
 
   &__text {
     text-align: center;

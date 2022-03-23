@@ -30,7 +30,7 @@
       <div class="node__content">
         <div class="node__block">
           <span class="node__block-name">
-            {{ $t('EARNED IN TOTAL') }}
+            {{ $t('Earned in total') }}
           </span>
           <span class="node__block-value">
             {{ node.earned }}
@@ -38,7 +38,7 @@
         </div>
         <div class="node__block">
           <span class="node__block-name">
-            {{ $t('LAST BLOCK') }}
+            {{ $t('Last block') }}
           </span>
           <span class="node__block-value">
             {{ node.blocks }}
@@ -46,7 +46,7 @@
         </div>
         <div class="node__block">
           <span class="node__block-name">
-            {{ $t('CONNECTED NODES') }}
+            {{ $t('Connected nodes') }}
           </span>
           <span class="node__block-value">
             {{ node.connected }}
@@ -54,7 +54,7 @@
         </div>
         <div class="node__block">
           <span class="node__block-name">
-            {{ $t('VOTINGS') }}
+            {{ $t('Votings') }}
           </span>
           <span class="node__block-value">
             {{ node.votings }}
@@ -204,6 +204,7 @@ export default {
     opacity: 0.4;
     font-size: 12px;
     font-weight: bold;
+    text-transform: uppercase;
   }
 
   &__block-value {
@@ -233,6 +234,7 @@ export default {
       .node__block-name {
         font-size: 14px;
         font-weight: normal;
+        text-transform: unset;
       }
       .node__block-value {
         font-size: 14px;
