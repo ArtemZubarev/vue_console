@@ -127,7 +127,7 @@ export const actions = {
 
     commit('SET_STATE', PENDING)
     try {
-      const response = await this.$api.$post('/node/one', {
+      const response = await this.$api.$post('/node/delete', {
         id
       })
 

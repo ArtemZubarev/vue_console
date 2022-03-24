@@ -61,7 +61,7 @@
         </button>
       </div>
       <div>
-        <button class="node__button filled" :disabled="nodeInProgress" @click="deleteNode">
+        <button class="node__button filled" @click="deleteNode">
           {{ $t('Delete this node') }}
         </button>
       </div>
