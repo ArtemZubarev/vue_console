@@ -110,7 +110,11 @@ export default {
           code: 'ru'
         }, {
           code: 'en'
-        }]
+        },
+        {
+          code: 'tr'
+        }
+      ]
     }
   },
   mounted () {

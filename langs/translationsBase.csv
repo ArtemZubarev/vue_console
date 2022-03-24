@@ -1,45 +1,45 @@
 Key,RU,EN,DE,TR
-Log in via OTON,Вход через OTON,Log in via OTON,,
-Login,Вход,Login,,
-Only for oton.org users.,Только для пользователей oton.org,Only for oton.org users.,,
-Log in via OTON,Вход через OTON,Log in via OTON,,
-months,месяцев,months,,
-Contract,Контракт,Contract,,
-month,месяц,month,,
-Sum,Сумма,Sum,,
-Approximate calculation based on,Ориентировочный расчет на основе,Approximate calculation based on,,
-the table,таблицы,the table,,
-Create a new node and enjoy it.,Создайте новую ноду и получайте доход,Create a new node and enjoy it.,,
-Create your first node and enjoy it,Создайте свою первую ноду и получайте доход,Create your first node and enjoy it,,
-Create,Создать,Create,,
-Node is created!,Нода создана,Node is created!,,
-Back,Назад,Back,,
-Next,Далее,Next,,
-Earned in total,Заработано всего,Earned in total,,
-Last block,Последний блок,Last block,,
-Connected nodes,Подключенные ноды,Connected nodes,,
-Votings,Голосований,Votings,,
+Log in via OTON,Вход через OTON,Log in via OTON,,Oton üzerinden giriş
+Login,Вход,Login,,Giriş
+Only for oton.org users.,Только для пользователей oton.org,Only for oton.org users.,,Sadece oton kullanıcıları için
+Log in via OTON,Вход через OTON,Log in via OTON,,Oton üzerinden giriş
+months,месяцев,months,,Ay
+Contract,Контракт,Contract,,Sözleşme
+month,месяц,month,,Ay
+Sum,Сумма,Sum,,Total
+Approximate calculation based on,Ориентировочный расчет на основе,Approximate calculation based on,,Tahmini hesaplama
+the table,таблицы,the table,,Grafik
+Create a new node and enjoy it.,Создайте новую ноду и получайте доход,Create a new node and enjoy it.,,Yeni Nod oluşturarak kazanmaya başlayın
+Create your first node and enjoy it,Создайте свою первую ноду и получайте доход,Create your first node and enjoy it,,İlk Nodunuzu oluşturun ve kazanmaya başlayın
+Create,Создать,Create,,Oluştur
+Node is created!,Нода создана,Node is created!,,Nod oluşturuldu
+Back,Назад,Back,,Geri
+Next,Далее,Next,,Devam
+Earned in total,Заработано всего,Earned in total,,Toplam kazanç
+Last block,Последний блок,Last block,,Sonuncu Blök
+Connected nodes,Подключенные ноды,Connected nodes,,Bağlanmış Nodlar
+Votings,Голосований,Votings,,Oylama
 IP,IP,IP,IP,IP
-Uptime,Время работы,Uptime,,
-Version,Версия,Version,,
-Status,Статус,Status,,
-Step,Шаг,Step,,
-Insert wallet address for reward,Укажите адрес кошелька для зачисления дохода,Insert wallet address for reward,,
-Wallet address,Адрес кошелька ,Wallet address,,
-Select a contract,Выберите контракт,Select a contract,,
-No available contracts,Нет доступных контрактов,No available contracts,,
-Congratulations!,Поздравляем!,Congratulations!,,
-Node will be created in a few minutes.,Нода будет создана через несколько минут.,Node will be created in a few minutes.,,
+Uptime,Время работы,Uptime,,çalışma süresi
+Version,Версия,Version,,Sürüm
+Status,Статус,Status,,Durum
+Step,Шаг,Step,,Adım
+Insert wallet address for reward,Укажите адрес кошелька для зачисления дохода,Insert wallet address for reward,,Kazançlarınızı almak icin cüzdanınızı ekleyin
+Wallet address,Адрес кошелька ,Wallet address,,Cüzdan adresi
+Select a contract,Выберите контракт,Select a contract,,Sözleşmelerden birini seçin
+No available contracts,Нет доступных контрактов,No available contracts,,Mevcut sözleşme yok
+Congratulations!,Поздравляем!,Congratulations!,,Tebrikler!
+Node will be created in a few minutes.,Нода будет создана через несколько минут.,Node will be created in a few minutes.,,Nod birkaç dakika içinde oluşturulacaktır.
 Ok,Ok,Ok,Ok,Ok
-Name the node,Укажите имя ноды,Name the node,,
-Node name,Имя ноды,Node name,,
-Insert Digital Ocean token,Укажите DigitalOcean token,Insert DigitalOcean token,,
+Name the node,Укажите имя ноды,Name the node,,Nod ismini belirtin
+Node name,Имя ноды,Node name,,Nod adı
+Insert Digital Ocean token,Укажите DigitalOcean token,Insert DigitalOcean token,,DigitalOcean tokeni ekle
 Digital Ocean token,DigitalOcean token,DigitalOcean token,DigitalOcean token,DigitalOcean token
-Save,Сохранить,Save,,
-Delete this node,Удалить ноду,Delete this node,,
-Update software,Обновить ПО,Update software,,
-Restart server,Перезапустить сервер,Restart server,,
-Terms of use,Правила использования,Terms of use,,
-Cookies policy,Политика обработки cookie,Cookies policy,,
-Privacy notice,Политика конфиденциальности,Privacy notice,,
-Log out,Выход,Log out,,
+Save,Сохранить,Save,,Kaydet
+Delete this node,Удалить ноду,Delete this node,,Nodu kaldır
+Update software,Обновить ПО,Update software,,Programı güncelle
+Restart server,Перезапустить сервер,Restart server,,Sunucuyu yeniden başlat
+Terms of use,Правила использования,Terms of use,,Kullanım şartları
+Cookies policy,Политика обработки cookie,Cookies policy,,Çerez politikası
+Privacy notice,Политика конфиденциальности,Privacy notice,,Gizlilik Politikası
+Log out,Выход,Log out,,Çıkış

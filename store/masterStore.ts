@@ -2,7 +2,6 @@ import { pathOr, find, propEq } from 'rambda'
 import {
   FULFILLED, INIT, PENDING, REJECTED
 } from '../utils/constants'
-import cleanObject from '@/utils/cleanObject'
 
 const initState = {
   data: {
