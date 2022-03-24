@@ -115,7 +115,7 @@ dayjs.extend(duration)
 dayjs.extend(relativeTime)
 
 const inProgress = (node) => {
-  return node.status !== '5' && node.status !== '6'
+  return node.status !== 5 && node.status !== 6
 }
 
 export default {

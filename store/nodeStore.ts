@@ -134,6 +134,7 @@ export const actions = {
       if (response.code === 0) {
         commit('UPDATE_DATA', response.data)
         commit('SET_STATE', FULFILLED)
+        return true
       } else {
         commit('SET_STATE', REJECTED)
         return undefined

@@ -129,7 +129,7 @@ export default {
       return dayjs.duration(this.node.uptime).humanize()
     },
     nodeInProgress () {
-      return this.node.status === '5' || this.node.status === '6'
+      return this.node.status !== 5 || this.node.status !== 6
     },
     nodeName: {
       get () {
@@ -179,7 +179,11 @@ export default {
     },
     deleteNode () {
       const { id } = this.$route.params
-      this.$store.dispatch('nodeStore/deleteNode', id)
+      Promise.resolve(this.$store.dispatch('nodeStore/deleteNode', id)).then((res) => {
+        if (res) {
+          this.$router.push('/')
+        }
+      })
     },
     restartNode () {
       const { id } = this.$route.params
