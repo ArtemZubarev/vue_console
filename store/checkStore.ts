@@ -35,10 +35,6 @@ export const mutations = {
 
 export const actions = {
   async checkAddress ({ commit, state }, address) {
-    if (state.fetchState === PENDING) {
-      return
-    }
-
     commit('SET_STATE', PENDING)
     try {
       const response = await this.$api.$post('/node/validAddress', {
@@ -47,7 +43,7 @@ export const actions = {
 
       if (response.code === 0) {
         commit('SET_STATE', FULFILLED)
-        commit('UPDATE_DATA', FULFILLED)
+        commit('UPDATE_DATA', response.data)
         return response.data
       } else {
         return false

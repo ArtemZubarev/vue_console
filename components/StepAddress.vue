@@ -68,7 +68,7 @@ export default {
     },
     nextStep () {
       if (this.address.trim()) {
-        if (this.addressValid) {
+        if (this.isValid) {
           this.$emit('next')
         }
       } else {

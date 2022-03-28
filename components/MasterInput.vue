@@ -4,6 +4,7 @@
     <input
       v-model="inputModel"
       type="text"
+      :maxlength="maxlength"
       :class="['input__element', {danger: errors && errors.length, success: success}]"
     >
     <div v-if="errors && errors.length" class="input__errors">
@@ -39,6 +40,11 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    maxlength: {
+      type: Number,
+      required: false,
+      default: () => 200
     }
   },
   computed: {
