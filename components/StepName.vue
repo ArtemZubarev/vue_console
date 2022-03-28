@@ -13,7 +13,7 @@
           {{ $t('Name the node') }}
         </div>
         <with-loader :active="fetchState === 'PENDING'" :withBackground="true">
-          <master-input :label="'Node name'" :value="name" @change-value="handleName" />
+          <master-input :label="$t('Node name')" :value="name" @change-value="handleName" />
         </with-loader>
       </div>
     </template>

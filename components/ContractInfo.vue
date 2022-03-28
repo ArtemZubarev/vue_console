@@ -7,7 +7,7 @@
         </h3>
         <div class="contract__data">
           <div class="contract__duration">
-            {{ contract.period }} {{ $t('months') }}
+            {{ contract.period !== 'Perpetual' ? contract.period : $t('Perpetual') }} <span v-if="contract.period !== 'Perpetual'">{{ $t('months') }}</span>
           </div>
           <div class="contract__explanation">
             <span>{{ contract.percent }}%</span> <sup>*</sup> <span>/ {{ $t('month') }}</span>

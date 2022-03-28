@@ -1,7 +1,8 @@
 <template>
   <master-layout
     :nextText="'Next'"
-    @next="$emit('next')"
+    :pending="fetchState === 'PENDING' || checkAddressState === 'PENDING'"
+    @next="nextStep"
     @previous="$emit('previous')"
   >
     <template #title>
@@ -12,8 +13,14 @@
         <div class="main__text">
           {{ $t('Insert wallet address for reward') }}
         </div>
-        <with-loader :active="fetchState === 'PENDING'" :withBackground="true">
-          <master-input :label="'Wallet address'" :value="address" @change-value="handleAddress" />
+        <with-loader :active="fetchState === 'PENDING' || checkAddressState === 'PENDING'" :withBackground="true">
+          <master-input
+            :label="'Wallet address'"
+            :value="address"
+            :errors="errors"
+            :success="isValid === true"
+            @change-value="handleAddress"
+          />
         </with-loader>
       </div>
     </template>
@@ -28,18 +35,46 @@ export default {
   components: {
     MasterLayout
   },
-  props: {
-
+  data () {
+    return {
+    }
   },
   computed: {
     ...mapGetters({
       fetchState: 'masterStore/fetchState',
-      address: 'masterStore/address'
+      address: 'masterStore/address',
+      checkAddressState: 'checkStore/fetchState',
+      isValid: 'checkStore/isValid',
+      errors: 'checkStore/errors'
     })
   },
   methods: {
     handleAddress (value) {
       this.$store.commit('masterStore/UPDATE_ADDRESS', value)
+      this.checkAddressValidity(value)
+    },
+    checkAddressValidity (value) {
+      this.$store.dispatch('checkStore/checkAddress', value)
+      // Promise.resolve().then(
+      //   (res) => {
+      //     if (res) {
+      //       this.addressValid = true
+      //     } else {
+      //       this.addressValid = false
+      //       this.errors = ['Address invalid']
+      //     }
+      //   }
+      // )
+    },
+    nextStep () {
+      if (this.address.trim()) {
+        if (this.addressValid) {
+          this.$emit('next')
+        }
+      } else {
+        this.checkAddressValidity(this.address)
+        // this.errors = ["Address can't be empty"]
+      }
     }
   }
 

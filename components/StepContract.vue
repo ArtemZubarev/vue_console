@@ -22,7 +22,7 @@
               :class="['contracts__item', { picked: contract.id === picked, disabled: contract.used }]"
               @click="pickContract(contract)"
             >
-              {{ `Contract ${contract.type}` }}
+              {{ `${$t('Contract')} ${contract.type}` }}
             </div>
           </div>
           <div class="main__info-box">
@@ -114,6 +114,11 @@ export default {
   &__list {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+
+    +mediaTablet() {
+      flex-wrap: unset;
+    }
   }
 
   &__item {
@@ -121,6 +126,8 @@ export default {
     padding: 8px;
     border: 2px solid $colorBg;
     color: $colorFontBase;
+    min-width: 90px;
+    text-align: center;
 
     &:first-of-type {
       border-radius: 4px 0px 0px 4px;

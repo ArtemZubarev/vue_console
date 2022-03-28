@@ -57,10 +57,7 @@ export const mutations = {
       s.userChoice.contract = contract.id
     }
 
-    s.userChoice.token = data.token
-  },
-  SET_ERRORS (s, errors) {
-
+    // s.userChoice.token = data.token
   },
   CLEAR (s) {
     Object.assign(s, initState)

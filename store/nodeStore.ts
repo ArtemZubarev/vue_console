@@ -2,7 +2,7 @@ import {
   FULFILLED, INIT, PENDING, REJECTED
 } from '../utils/constants'
 
-const inProgress = node => node.status !== '5' && node.status !== '6'
+const inProgress = node => node.status !== 5 && node.status !== 6 && node.status !== 7
 
 const initState = {
   data: {},

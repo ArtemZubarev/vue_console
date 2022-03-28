@@ -57,25 +57,14 @@ export default {
       if (Number(this.currentStep) === this.steps.length - 1) {
         Promise.resolve(this.$store.dispatch('masterStore/createNode')).then((res) => {
           if (res) {
-            console.log(res)
             this.$store.commit('masterStore/SET_STEP', nextOne)
             this.$store.dispatch('nodesStore/fetch')
-            // this.timeout = setInterval(() => {
-            //   Promise.resolve([this.$store.dispatch('masterStore/checkStatus', res)]).then((res) => {
-            //     this.currentStatus = res
-            //     if (res === '3') {
-            //       this.$emit('done')
-            //       clearInterval(this.timeout)
-            //       this.$store.dispatch('nodesStore/fetch')
-            //       this.$store.commit('modalStore/closeModal')
-            //     }
-            //   })
-            // }, 10000)
           }
         })
       } else if (Number(this.currentStep) === this.steps.length) {
         this.$store.commit('modalStore/closeModal')
         this.$store.commit('masterStore/SET_STEP', 1)
+        this.$store.commit('checkStore/CLEAR')
       } else {
         this.$store.commit('masterStore/SET_STEP', nextOne)
       }

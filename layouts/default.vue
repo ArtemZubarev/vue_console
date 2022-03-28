@@ -108,7 +108,8 @@ export default {
       return [
         {
           code: 'ru'
-        }, {
+        },
+        {
           code: 'en'
         },
         {

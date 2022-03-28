@@ -1,9 +1,10 @@
 export default {
   0: 'Node creation',
-  1: 'Installing node',
-  2: 'Uploading node',
+  1: 'Downloading software',
+  2: 'Installing node',
   3: 'Starting node',
-  4: 'Inserting node in blockchain',
+  4: 'Node registration in the blockchain',
   5: 'Node in work!',
-  6: 'Noded offline'
+  6: 'Node offline',
+  7: 'Installation error'
 }

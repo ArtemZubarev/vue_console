@@ -90,8 +90,13 @@
           <span class="node__block-name">
             {{ $t('Status') }}
           </span>
-          <span :class="['node__block-value', {danger: node.status === 6, success: node.status === '5'} ]">
-            {{ statuses[node.status] }}
+          <span
+            :class="['node__block-value', {
+              danger: node.status === 6 || node.status === 7,
+              success: node.status === 5
+            } ]"
+          >
+            {{ $t(statuses[node.status]) }}
           </span>
         </div>
       </div>
@@ -115,7 +120,7 @@ dayjs.extend(duration)
 dayjs.extend(relativeTime)
 
 const inProgress = (node) => {
-  return node.status !== 5 && node.status !== 6
+  return node.status !== 5 && node.status !== 6 && node.status !== 7
 }
 
 export default {

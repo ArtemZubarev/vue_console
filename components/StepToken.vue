@@ -1,7 +1,7 @@
 <template>
   <master-layout
     :nextText="'Next'"
-    @next="$emit('next')"
+    @next="nextStep"
     @previous="$emit('previous')"
   >
     <template #title>
@@ -13,7 +13,7 @@
           {{ $t('Insert Digital Ocean token') }}
         </div>
         <with-loader :active="fetchState === 'PENDING'" :withBackground="true">
-          <master-input :label="'Digital Ocean token'" :value="token" @change-value="handleToken" />
+          <master-input :label="$t('Digital Ocean token')" :value="token" :errors="errors" @change-value="handleToken" />
         </with-loader>
       </div>
     </template>
@@ -32,6 +32,11 @@ export default {
     MasterInput,
     WithLoader
   },
+  data () {
+    return {
+      errors: []
+    }
+  },
   computed: {
     ...mapGetters({
       fetchState: 'masterStore/fetchState',
@@ -44,6 +49,14 @@ export default {
   methods: {
     handleToken (value) {
       this.$store.commit('masterStore/UPDATE_TOKEN', value)
+      this.errors = []
+    },
+    nextStep () {
+      if (this.token.trim()) {
+        this.$emit('next')
+      } else {
+        this.errors = ["Token can't be empty"]
+      }
     }
   }
 }

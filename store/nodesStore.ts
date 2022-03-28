@@ -3,7 +3,8 @@ import {
   FULFILLED, INIT, PENDING, REJECTED
 } from '../utils/constants'
 
-const hasInProgress = list => any((item: any) => item.status !== '5' && item.status !== '6')(list)
+const hasInProgress = list =>
+  any((item: any) => item.status !== 5 && item.status !== 6 && item.status !== 7)(list)
 
 const initState = {
   data: [],

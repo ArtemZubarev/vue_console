@@ -45,9 +45,9 @@
         <node-info-item :title="'Version'" :value="node.version" :size="'sm'" />
         <node-info-item
           :title="'Status'"
-          :value="statuses[node.status]"
+          :value="$t(statuses[node.status])"
           :size="'sm'"
-          :valueStatus="node.status === '6' ? '' : 'ok'"
+          :valueStatus="node.status === 6 ? '' : 'ok'"
         />
       </div>
     </div>
@@ -129,7 +129,7 @@ export default {
       return dayjs.duration(this.node.uptime).humanize()
     },
     nodeInProgress () {
-      return this.node.status !== 5 || this.node.status !== 6
+      return this.node.status !== 5 && this.node.status !== 6 && this.node.status !== 7
     },
     nodeName: {
       get () {

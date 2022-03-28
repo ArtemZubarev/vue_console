@@ -3,7 +3,7 @@ Log in via OTON,Вход через OTON,Log in via OTON,,Oton üzerinden giriş
 Login,Вход,Login,,Giriş
 Only for oton.org users.,Только для пользователей oton.org,Only for oton.org users.,,Sadece oton kullanıcıları için
 Log in via OTON,Вход через OTON,Log in via OTON,,Oton üzerinden giriş
-months,месяцев,months,,Ay
+months,месяцев,months,,Aylar
 Contract,Контракт,Contract,,Sözleşme
 month,месяц,month,,Ay
 Sum,Сумма,Sum,,Total
@@ -43,3 +43,13 @@ Terms of use,Правила использования,Terms of use,,Kullanım �
 Cookies policy,Политика обработки cookie,Cookies policy,,Çerez politikası
 Privacy notice,Политика конфиденциальности,Privacy notice,,Gizlilik Politikası
 Log out,Выход,Log out,,Çıkış
+Wallet,Кошелек,Wallet,,Cüzdan
+Node creation,Создание ноды,Node creation,,Nod Oluştur
+Downloading software,Загрузка ПО,Downloading software,,Programı indir
+Installing node,Установка ноды,Installing node,,Nodu kur
+Starting node,Старт ноды,Starting node,,Nodu Başlat
+Node registration in the blockchain,Регистрация ноды в блокчейн,Node registration in the blockchain,,Nodu block zincirine kaydet
+Node in work!,В работе!,Node in work!,,Nod işlemde!
+Node offline,Выключена,Node offline,,Nod Çevirimdışı
+Installation error,Ошибка установки,Installation error,,Kurulum hatası
+Perpetual,Бессрочный,Perpetual,,Süresiz

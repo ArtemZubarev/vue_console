@@ -1,7 +1,21 @@
 <template>
-  <div class="input">
+  <div :class="['input', {success: success}]">
     <label class="input__label" for="">{{ label }}</label>
-    <input v-model="inputModel" type="text" class="input__element">
+    <input
+      v-model="inputModel"
+      type="text"
+      :class="['input__element', {danger: errors && errors.length, success: success}]"
+    >
+    <div v-if="errors && errors.length" class="input__errors">
+      <div
+        v-for="error in errors"
+        :key="error"
+        class="errors__item"
+      >
+        {{ $t(error) }}
+      </div>
+    </div>
+    <!-- <span v-if="success" class="input__correct">;</span> -->
   </div>
 </template>
 <script>
@@ -15,6 +29,16 @@ export default {
     value: {
       type: [String, Number],
       required: true
+    },
+    errors: {
+      type: Array,
+      required: false,
+      default: () => []
+    },
+    success: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   computed: {
@@ -33,6 +57,8 @@ export default {
 .input {
   display: flex;
   flex-direction: column;
+  position: relative;
+
   &__label {
     color: $colorFontBase;
     opacity: 0.4;
@@ -47,6 +73,28 @@ export default {
     padding: 11px 8px;
     width: 100%;
     box-sizing: border-box;
+
+    &.danger {
+      border-color: $colorDanger;
+    }
+    &.success {
+      border-color: $colorSuccess;
+    }
+  }
+
+  &.success {
+      &:after {
+        content: '\2713'  ;
+        position: absolute;
+        right: 10px;
+        top: 28px;
+        color: $colorSuccess;
+      }
+    }
+
+  &__errors {
+    font-size: 12px;
+    color: $colorDanger;
   }
 }
 </style>
