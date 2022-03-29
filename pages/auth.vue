@@ -33,7 +33,7 @@ export default {
       this.$store.dispatch('userStore/auth', query.token).then((res) => {
         if (res) {
           Cookies.set('auth', res.auth, { expires: 30 })
-          this.$router.push(this.localePath('index'))
+          this.$router.push(this.localePath('/'))
         }
       })
     }

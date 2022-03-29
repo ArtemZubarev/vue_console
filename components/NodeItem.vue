@@ -24,7 +24,7 @@
         <span class="node__title">{{ node.name }}</span>
 
         <div class="node__switcher">
-          <switcher :enabled="status" @switch="status = !status" />
+          <!-- <switcher :enabled="status" @switch="status = !status" /> -->
         </div>
       </div>
       <div class="node__content">
@@ -112,7 +112,7 @@ import duration from 'dayjs/plugin/duration'
 import relativeTime from 'dayjs/plugin/relativeTime'
 // import localizedFormat from 'dayjs/plugin/localizedFormat'
 import * as dayjs from 'dayjs'
-import Switcher from '@/components/Switcher.vue'
+// import Switcher from '@/components/Switcher.vue'
 import CommonLoader from '@/components/CommonLoader.vue'
 import nodeStatuses from '@/utils/nodeStatuses'
 
@@ -125,7 +125,7 @@ const inProgress = (node) => {
 
 export default {
   components: {
-    Switcher,
+    // Switcher,
     CommonLoader
   },
   props: {
@@ -158,6 +158,7 @@ export default {
       const isSwitcher = classNames.includes('switcher')
       if (this.nodeInProgress) {
         e.preventDefault()
+        return
       }
       if (isSwitcher || this.pending) {
         this.pending = true

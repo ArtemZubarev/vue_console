@@ -2,7 +2,7 @@
   <div class="node">
     <div class="node__head">
       <div class="node__title">
-        <input v-if="editName" v-model="nodeName" class="node__input" type="text">
+        <input v-if="editName" v-model="nodeName" class="node__input" type="text" :maxlength="40">
         <span v-else>
           {{ nodeName }}
         </span>
@@ -13,7 +13,7 @@
       </div>
 
       <div class="node__switcher">
-        <switcher :enabled="status" @switch="switchStatus" />
+        <!-- <switcher :enabled="status" @switch="switchStatus" /> -->
       </div>
     </div>
     <div class="node__content">
@@ -80,7 +80,7 @@ import { mapGetters } from 'vuex'
 import duration from 'dayjs/plugin/duration'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import * as dayjs from 'dayjs'
-import Switcher from '@/components/Switcher.vue'
+// import Switcher from '@/components/Switcher.vue'
 import CommonLoader from '@/components/CommonLoader.vue'
 import NodeInfoItem from '@/components/NodeInfoItem.vue'
 import CopyWallet from '~/components/CopyWallet.vue'
@@ -93,7 +93,7 @@ dayjs.extend(relativeTime)
 export default {
   name: 'NodePage',
   components: {
-    Switcher,
+    // Switcher,
     CommonLoader,
     NodeInfoItem,
     CopyWallet,

@@ -1,7 +1,7 @@
 <template>
   <master-layout
     :nextText="'Next'"
-    @next="$emit('next')"
+    @next="nextStep"
     @previous="$emit('previous')"
   >
     <template #title>
@@ -13,7 +13,13 @@
           {{ $t('Name the node') }}
         </div>
         <with-loader :active="fetchState === 'PENDING'" :withBackground="true">
-          <master-input :label="$t('Node name')" :value="name" :maxlength="40" @change-value="handleName" />
+          <master-input
+            :label="$t('Node name')"
+            :value="name"
+            :maxlength="40"
+            :errors="errors"
+            @change-value="handleName"
+          />
         </with-loader>
       </div>
     </template>
@@ -28,8 +34,10 @@ export default {
   components: {
     MasterLayout
   },
-  props: {
-
+  data () {
+    return {
+      errors: []
+    }
   },
   computed: {
     ...mapGetters({
@@ -40,6 +48,13 @@ export default {
   methods: {
     handleName (value) {
       this.$store.commit('masterStore/UPDATE_NAME', value)
+    },
+    nextStep () {
+      if (this.name.trim()) {
+        this.$emit('next')
+      } else {
+        this.errors = ["Name can't be empty"]
+      }
     }
   }
 

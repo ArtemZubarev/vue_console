@@ -49,18 +49,26 @@ export default {
 .info {
   display: flex;
   flex-direction: column;
+  width: 100%;
 
   &__title {
     color: $colorFontBase;
     opacity: 0.4;
     font-size: 12px;
     font-weight: bold;
+    text-transform: uppercase;
+
+    +mediaTablet() {
+      width: 100%!important;
+    }
   }
   &__value {
     font-size: 24px;
     font-weight: bold;
     margin-top: 4px;
     color: $colorFontBase;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     &.danger {
       color: #EC5D6B;
@@ -79,7 +87,8 @@ export default {
       &__title {
         font-size: 14px;
         font-weight: normal;
-        width: 90px;
+        text-transform: unset;
+        // width: 90px;
       }
 
       &__value {

@@ -10,7 +10,8 @@ export default function ({ $axios, $toast }: any, inject: any) {
       (data: any) => {
         const payload = {
           ...(data ? JSON.parse(data) : {}),
-          auth: Cookies.get('auth')
+          auth: Cookies.get('auth'),
+          lang: Cookies.get('i18n_redirected') || 'en'
         }
 
         return JSON.stringify(payload)

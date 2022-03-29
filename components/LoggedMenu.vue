@@ -52,7 +52,11 @@ export default {
       this.emailIsHidden = !this.emailIsHidden
     },
     logout () {
-      this.$store.dispatch('userStore/logout')
+      Promise.resolve(this.$store.dispatch('userStore/logout')).then((res) => {
+        if (res) {
+          this.$router.push(this.localePath('/auth'))
+        }
+      })
     }
   }
 }

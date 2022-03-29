@@ -12,8 +12,8 @@ const initState = {
 export const state = () => initState
 
 export const getters = {
-  isAuth () {
-    return this.$cookie.get('auth')
+  isAuth (s) {
+    return s.isAuth
   },
   email (s) {
     return s.data.email
@@ -78,6 +78,7 @@ export const actions = {
       if (response.code === 0) {
         commit('UPDATE_DATA', response.data)
         commit('SET_STATE', FULFILLED)
+        commit('SET_AUTH_STATUS', true)
         return response.data
       } else {
         return undefined
@@ -92,6 +93,6 @@ export const actions = {
   logout ({ commit, state }) {
     Cookies.remove('auth')
     commit('CLEAR')
-    window.location.reload()
+    return true
   }
 }

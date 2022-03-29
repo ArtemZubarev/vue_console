@@ -13,7 +13,12 @@
           {{ $t('Insert Digital Ocean token') }}
         </div>
         <with-loader :active="fetchState === 'PENDING'" :withBackground="true">
-          <master-input :label="$t('Digital Ocean token')" :value="token" :errors="errors" @change-value="handleToken" />
+          <master-input
+            :label="$t('Digital Ocean token')"
+            :value="token"
+            :errors="errors"
+            @change-value="handleToken"
+          />
         </with-loader>
       </div>
     </template>

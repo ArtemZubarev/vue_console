@@ -98,7 +98,7 @@ export default {
   },
   computed: {
     availableLangs () {
-      return [
+      const langs = [
         {
           code: 'ru'
         },
@@ -109,6 +109,8 @@ export default {
           code: 'tr'
         }
       ]
+
+      return langs.filter(lang => lang.code !== this.$i18n.locale)
     }
   }
 }

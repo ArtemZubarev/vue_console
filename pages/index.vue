@@ -55,11 +55,6 @@ export default {
   },
   mounted () {
     this.$store.dispatch('nodesStore/fetch')
-
-    // this.$store.commit('masterStore/SET_STEP', '3')
-    // this.startMaster()
-
-    // this.$store.dispatch('installingStore/fetch')
   },
   methods: {
     startMaster () {
