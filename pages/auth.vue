@@ -33,7 +33,8 @@ export default {
       this.$store.dispatch('userStore/auth', query.token).then((res) => {
         if (res) {
           Cookies.set('auth', res.auth, { expires: 30 })
-          this.$router.push(`${this.$i18n.locale ? `/${this.$i18n.locale}` : ''}/`)
+          const lang = Cookies.get('i18n_redirected')
+          this.$router.push(`${lang ? `/${lang}/` : '/'}`)
         }
       })
     }
