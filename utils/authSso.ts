@@ -1,4 +1,4 @@
-const authSso = () => {
+const authSso = (lang?: any) => {
   const domain = process.env.ssoUrl
   const hash = process.env.ssoHash
 
@@ -9,7 +9,7 @@ const authSso = () => {
   left = left > 0 ? left / 2 : 0
 
   window.open(
-    `${domain}/?app=${hash}`,
+    `${domain}/?app=${hash}${lang ? `&lang=${lang}` : ''}`,
     'targetWindow',
     `toolbar=no,
     location=no,

@@ -33,15 +33,17 @@ export default {
       this.$store.dispatch('userStore/auth', query.token).then((res) => {
         if (res) {
           Cookies.set('auth', res.auth, { expires: 30 })
-          const lang = Cookies.get('i18n_redirected')
-          this.$router.push(`${lang ? `/${lang}/` : '/'}`)
+          const { query } = this.$route
+          const lang = query && query.lang ? query.lang : ''
+          this.$router.push(`${lang && lang !== 'en' ? `/${lang}/` : '/'}`)
         }
       })
     }
   },
   methods: {
     auth () {
-      authSso()
+      const lang = Cookies.get('i18n_redirected')
+      authSso(lang && lang !== 'en' ? lang : undefined)
     }
   }
 }
