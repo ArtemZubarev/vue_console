@@ -27,6 +27,7 @@ export const mutations = {
     s.data = data
   },
   CLEAR (s) {
+    clearInterval(s.interval)
     Object.assign(s, initState)
   },
   SET_STATE (s, fetchState) {
@@ -56,7 +57,7 @@ export const actions = {
         commit('UPDATE_DATA', response.data)
         commit('SET_STATE', FULFILLED)
         if (inProgress(response.data)) {
-          this.interval = setInterval(() => {
+          state.interval = setInterval(() => {
             dispatch('silentFetch', id)
           }, 10000)
         }
@@ -82,7 +83,7 @@ export const actions = {
         commit('UPDATE_COUNTER')
 
         if (!inProgress(response.data) || state.counter >= 180) {
-          clearInterval(this.interval)
+          clearInterval(state.interval)
         }
       } else {
         return undefined

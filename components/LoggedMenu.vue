@@ -54,6 +54,8 @@ export default {
     logout () {
       Promise.resolve(this.$store.dispatch('userStore/logout')).then((res) => {
         if (res) {
+          this.$store.commit('nodeStore/CLEAR')
+          this.$store.commit('nodesStore/CLEAR')
           this.$router.push(this.localePath('/auth'))
         }
       })
