@@ -32,7 +32,7 @@
         </div>
       </div>
       <contract-info v-if="contractData" :contract="contractData" />
-      <div class="node__block">
+      <div class="node__block wallet">
         <copy-wallet :address="nodeAddress || ''" />
         <svg-icon v-if="!editAddress" class="node__edit" name="common/edit" @click="editAddress = !editAddress" />
       </div>
@@ -151,6 +151,9 @@ export default {
   mounted () {
     const { id } = this.$route.params
     this.$store.dispatch('nodeStore/fetch', id)
+  },
+  beforeDestroy () {
+    this.$store.commit('nodeStore/CLEAR_INTERVAL')
   },
   methods: {
     switchStatus () {
@@ -318,6 +321,12 @@ export default {
     width: 25%;
     margin-bottom: 16px;
     display: flex;
+
+    &.wallet {
+      width: 100%;
+      border-bottom: 2px solid $colorBg;
+      padding-bottom: 10px;
+    }
 
     &.full {
       width: 100%;

@@ -56,6 +56,9 @@ export default {
   mounted () {
     this.$store.dispatch('nodesStore/fetch')
   },
+  beforeDestroy () {
+    this.$store.commit('nodesStore/CLEAR_INTERVAL')
+  },
   methods: {
     startMaster () {
       this.$store.commit('modalStore/changeCurrentModal', 'MasterModal')

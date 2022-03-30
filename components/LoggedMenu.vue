@@ -91,7 +91,8 @@ export default {
     padding: 10px 0;
     position: relative;
     left: 1px;
-    top: 0.5px;
+    // top: 0.5px;
+    top: 10px;
   }
 
   +mediaDesktop() {

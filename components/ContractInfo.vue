@@ -55,6 +55,7 @@ export default {
   border-radius: 4px;
   padding: 8px 12px 12px 12px;
   margin-bottom: 12px;
+  box-sizing: border-box;
 
   &__name {
     margin: 0;

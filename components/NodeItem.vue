@@ -29,80 +29,80 @@
       </div>
       <div class="node__content">
         <div class="node__block">
-          <span class="node__block-name">
+          <div class="node__block-name">
             {{ $t('Earned in total') }}
-          </span>
-          <span class="node__block-value">
+          </div>
+          <div class="node__block-value">
             {{ node.earned }}
-          </span>
+          </div>
         </div>
         <div class="node__block">
-          <span class="node__block-name">
+          <div class="node__block-name">
             {{ $t('Last block') }}
-          </span>
-          <span class="node__block-value">
+          </div>
+          <div class="node__block-value">
             {{ node.blocks }}
-          </span>
+          </div>
         </div>
         <div class="node__block">
-          <span class="node__block-name">
+          <div class="node__block-name">
             {{ $t('Connected nodes') }}
-          </span>
-          <span class="node__block-value">
+          </div>
+          <div class="node__block-value">
             {{ node.connected }}
-          </span>
+          </div>
         </div>
         <div class="node__block">
-          <span class="node__block-name">
+          <div class="node__block-name">
             {{ $t('Votings') }}
-          </span>
-          <span class="node__block-value">
+          </div>
+          <div class="node__block-value">
             {{ node.votings }}
-          </span>
+          </div>
         </div>
       </div>
       <div class="node__footer">
         <div class="node__block small">
-          <span class="node__block-name">
+          <div class="node__block-name">
             {{ $t('IP') }}
-          </span>
-          <span class="node__block-value">
+          </div>
+          <div class="node__block-value">
             {{ node.ip }}
-          </span>
+          </div>
         </div>
         <div class="node__block small">
-          <span class="node__block-name">
+          <div class="node__block-name">
             {{ $t('Uptime') }}
-          </span>
-          <span class="node__block-value">
+          </div>
+          <div class="node__block-value">
             {{ uptime }}
-          </span>
+          </div>
         </div>
         <div class="node__block small">
-          <span class="node__block-name">
+          <div class="node__block-name">
             {{ $t('Version') }}
-          </span>
-          <span class="node__block-value">
+          </div>
+          <div class="node__block-value">
             {{ node.version }}
-          </span>
+          </div>
         </div>
         <div class="node__block small">
-          <span class="node__block-name">
+          <div class="node__block-name">
             {{ $t('Status') }}
-          </span>
-          <span
+          </div>
+          <div
             :class="['node__block-value', {
               danger: node.status === 6 || node.status === 7,
               success: node.status === 5
             } ]"
           >
             {{ $t(statuses[node.status]) }}
-          </span>
+          </div>
         </div>
       </div>
-      <div v-if="pending" class="loader-box">
+      <!-- <div v-if="pending" class="loader-box">
         <common-loader :active="pending" />
-      </div>
+      </div> -->
     </template>
   </nuxt-link>
 </template>
@@ -113,7 +113,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 // import localizedFormat from 'dayjs/plugin/localizedFormat'
 import * as dayjs from 'dayjs'
 // import Switcher from '@/components/Switcher.vue'
-import CommonLoader from '@/components/CommonLoader.vue'
+// import CommonLoader from '@/components/CommonLoader.vue'
 import nodeStatuses from '@/utils/nodeStatuses'
 
 dayjs.extend(duration)
@@ -126,7 +126,7 @@ const inProgress = (node) => {
 export default {
   components: {
     // Switcher,
-    CommonLoader
+    // CommonLoader
   },
   props: {
     node: {
@@ -217,6 +217,9 @@ export default {
     font-size: 24px;
     font-weight: bold;
     margin-top: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
 
     &.danger {
       color: #EC5D6B;
@@ -233,6 +236,7 @@ export default {
     display: flex;
     flex-direction: column;
     margin-bottom: 12px;
+    box-sizing: border-box;
 
     &.small {
       margin-bottom: 4px;

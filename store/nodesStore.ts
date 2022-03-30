@@ -30,8 +30,10 @@ export const mutations = {
   },
   CLEAR (s) {
     clearInterval(this.interval)
-    console.log(this.interval)
     Object.assign(s, initState)
+  },
+  CLEAR_INTERVAL () {
+    clearInterval(this.interval)
   },
   SET_STATE (s, fetchState) {
     s.fetchState = fetchState
