@@ -1,6 +1,7 @@
 <template>
   <master-layout
     :nextText="'Next'"
+    :pending="fetchState === 'PENDING'"
     @next="nextStep"
     @previous="$emit('previous')"
   >

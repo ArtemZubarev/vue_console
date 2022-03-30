@@ -43,7 +43,7 @@ export default {
   width: 100%;
   max-width: 600px;
   border: 2px dashed #ffffff;
-  padding: 50px 0;
+  padding: 50px 15px;
   border-radius: 8px;
   box-sizing: border-box;
 
@@ -54,6 +54,7 @@ export default {
 
   &__text {
     font-size: 18px;
+    text-align: center;
   }
 
   &__buttons {

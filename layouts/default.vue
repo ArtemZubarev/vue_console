@@ -74,12 +74,14 @@
         </template>
       </oton-footer>
     </div>
+    <aside-menu :active="mobileMenu" @close="mobileMenu = !mobileMenu" />
   </div>
 </template>
 <script>
 import { OtonHeader, HeaderLocalePicker, HeaderMenu, OtonFooter } from 'oton-vue-components'
 import OtonLogo from '@/components/OtonLogo.vue'
 import LoggedMenu from '~/components/LoggedMenu.vue'
+import AsideMenu from '~/components/AsideMenu.vue'
 
 export default {
   name: 'DefaultLayout',
@@ -89,7 +91,8 @@ export default {
     OtonLogo,
     HeaderMenu,
     OtonFooter,
-    LoggedMenu
+    LoggedMenu,
+    AsideMenu
   },
   data () {
     return {
@@ -177,7 +180,7 @@ export default {
   position: absolute;
   top: 8px;
   right: 4px;
-  z-index: 4;
+  z-index: 5;
   display: block;
   padding: 10px;
   width: 20px;
