@@ -34,7 +34,7 @@
       <contract-info v-if="contractData" :contract="contractData" />
       <div class="node__block wallet">
         <copy-wallet :address="nodeAddress || ''" />
-        <svg-icon v-if="!editAddress" class="node__edit" name="common/edit" @click="editAddress = !editAddress" />
+        <!-- <svg-icon v-if="!editAddress" class="node__edit" name="common/edit" @click="editAddress = !editAddress" /> -->
       </div>
       <div class="node__block full">
         <node-info-item :title="'IP'" :value="node.ip" :size="'sm'" />
@@ -58,7 +58,7 @@
         </button>
       </div>
       <div>
-        <button class="node__button filled" @click="deleteNode">
+        <button class="node__button filled" @click="confirm">
           {{ $t('Delete this node') }}
         </button>
       </div>
@@ -69,6 +69,7 @@
     >
       <common-loader :active="fetchState === 'PENDING' || contractsFetch === 'PENDING' || pending" />
     </div>
+    <confirm-modal @confirm="deleteNode" @done="showDone = true" />
   </div>
 </template>
 
@@ -83,6 +84,7 @@ import NodeInfoItem from '@/components/NodeInfoItem.vue'
 import CopyWallet from '~/components/CopyWallet.vue'
 import nodeStatuses from '@/utils/nodeStatuses'
 import ContractInfo from '~/components/ContractInfo.vue'
+import ConfirmModal from '~/components/ConfirmModal.vue'
 
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
@@ -94,7 +96,8 @@ export default {
     CommonLoader,
     NodeInfoItem,
     CopyWallet,
-    ContractInfo
+    ContractInfo,
+    ConfirmModal
   },
   middleware: 'isAuth',
   data () {
@@ -123,6 +126,7 @@ export default {
       return ''
     },
     uptime () {
+      // eslint-disable-next-line
       return dayjs.duration(this.node.uptime).humanize()
     },
     nodeInProgress () {
@@ -185,6 +189,9 @@ export default {
           this.$router.push('/')
         }
       })
+    },
+    confirm () {
+      this.$store.commit('modalStore/changeCurrentModal', 'ConfirmModal')
     },
     restartNode () {
       const { id } = this.$route.params

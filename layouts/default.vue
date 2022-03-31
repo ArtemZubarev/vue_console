@@ -53,7 +53,9 @@
           </button>
         </template>
         <template #userMenu>
-          <logged-menu />
+          <div class="user-menu">
+            <logged-menu />
+          </div>
         </template>
       </oton-header>
       <!-- <HeaderSearch /> -->
@@ -250,5 +252,8 @@ export default {
   +mediaTablet()  {
     display: block;
   }
+}
+.user-menu {
+  margin-top: -19px;
 }
 </style>

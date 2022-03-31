@@ -10,7 +10,7 @@
             :key="lang.code"
             :class="['aside__lang', {active: lang.code === $i18n.locale}]"
             :to="switchLocalePath(lang.code)"
-            @click.prevent="$emit('close')"
+            @click.native="$emit('close')"
           >
             {{ lang.code }}
           </nuxt-link>

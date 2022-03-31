@@ -23,7 +23,12 @@
           </header-menu>
         </template>
         <template #secondaryMenu>
-          <header-locale-picker :locale="$i18n.locale" :availableLangs="availableLangs">
+          <header-locale-picker
+            :menu="langMenu"
+            :locale="$i18n.locale"
+            :availableLangs="availableLangs"
+            @toggle-lang="langMenu = !langMenu"
+          >
             <template #icon>
               <svg-icon name="common/lang-picker" class="langPickerIcon" />
             </template>
@@ -33,7 +38,7 @@
                 :key="lang.code"
                 class="popupListItem"
                 :to="switchLocalePath(lang.code)"
-                @click.prevent="menu = false"
+                @click.native="langMenu = false"
               >
                 {{ lang.code }}
               </nuxt-link>
@@ -74,6 +79,7 @@ export default {
   },
   data () {
     return {
+      langMenu: false,
       menuLinks: [
         {
           text: 'Home',
