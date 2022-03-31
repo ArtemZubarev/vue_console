@@ -2,7 +2,7 @@
   <div class="node">
     <div class="node__head">
       <div class="node__title">
-        <input v-if="editName" v-model="nodeName" class="node__input" type="text" :maxlength="40">
+        <input v-if="editName" v-model="nodeName" class="node__input" type="text" :maxlength="30">
         <span v-else>
           {{ nodeName }}
         </span>

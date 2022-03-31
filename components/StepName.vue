@@ -17,7 +17,7 @@
           <master-input
             :label="$t('Node name')"
             :value="name"
-            :maxlength="40"
+            :maxlength="30"
             :errors="errors"
             @change-value="handleName"
           />
