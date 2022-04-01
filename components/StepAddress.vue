@@ -15,7 +15,7 @@
         </div>
         <with-loader :active="fetchState === 'PENDING' || checkAddressState === 'PENDING'" :withBackground="true">
           <master-input
-            :label="'Wallet address'"
+            :label="$t('Wallet address')"
             :value="address"
             :errors="errors"
             :success="isValid === true"

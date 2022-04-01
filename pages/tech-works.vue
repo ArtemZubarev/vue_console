@@ -27,6 +27,7 @@ export default {
     }
   },
   mounted () {
+    console.log('tech works page')
     if (!techWorks) {
       this.$router.push(this.localePath('/'))
     }

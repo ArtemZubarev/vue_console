@@ -16,7 +16,7 @@
         />
       </div>
       <p class="step__status">
-        {{ statusText ? statusText : 'Preparing...' }}
+        {{ statusText ? $t(statusText) : 'Preparing...' }}
       </p>
     </template>
     <template v-else>
