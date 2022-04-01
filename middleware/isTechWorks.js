@@ -1,5 +1,5 @@
 export default function ({ redirect, app }) {
-  const techWorks = false
+  const techWorks = true
 
   const isTester = app.$cookies.get('forTests') === 'tester'
   const isTechWorksPage = app.router.currentRoute.path.includes('/tech-works')
