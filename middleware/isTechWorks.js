@@ -1,4 +1,4 @@
-export const techWorks = false
+export const techWorks = true
 
 export default function ({ redirect, app }) {
   const isTester = app.$cookies.get('forTests') === 'tester'
