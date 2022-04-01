@@ -10,19 +10,22 @@
 import Cookies from 'js-cookie'
 import OtonAuth from '@/components/OtonAuth.vue'
 import authSso from '@/utils/authSso'
+import techWorks from '@/utils/techWorks'
 
 export default {
   components: {
     OtonAuth
   },
   layout: 'darkLayout',
-  middleware: ['isTechWorks'],
   data () {
     return {
 
     }
   },
   mounted () {
+    if (techWorks && this.$cookies.get('forTests') !== 'tester') {
+      this.$router.push(this.localePath('/tech-works'))
+    }
     const { query } = this.$route
     const hasCookie = this.$cookies.get('auth')
     if (hasCookie) {

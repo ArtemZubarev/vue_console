@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { techWorks } from '@/middleware/isTechWorks'
+import techWorks from '@/utils/techWorks'
 
 export default {
   layout: 'maintainer',

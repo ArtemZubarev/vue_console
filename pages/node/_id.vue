@@ -74,10 +74,12 @@
 </template>
 
 <script>
+
 import { mapGetters } from 'vuex'
 import duration from 'dayjs/plugin/duration'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import * as dayjs from 'dayjs'
+import techWorks from '@/utils/techWorks'
 // import Switcher from '@/components/Switcher.vue'
 import CommonLoader from '@/components/CommonLoader.vue'
 import NodeInfoItem from '@/components/NodeInfoItem.vue'
@@ -99,7 +101,7 @@ export default {
     ContractInfo,
     ConfirmModal
   },
-  middleware: ['isTechWorks', 'isAuth'],
+  middleware: 'isAuth',
   data () {
     return {
       status: false,
@@ -153,6 +155,9 @@ export default {
     }
   },
   mounted () {
+    if (techWorks && this.$cookies.get('forTests') !== 'tester') {
+      this.$router.push(this.localePath('/tech-works'))
+    }
     const { id } = this.$route.params
     this.$store.dispatch('nodeStore/fetch', id)
   },

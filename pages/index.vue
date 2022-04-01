@@ -26,6 +26,7 @@ import NodeItem from '@/components/NodeItem.vue'
 import MasterModal from '~/components/MasterModal.vue'
 import WithLoader from '@/components/WithLoader.vue'
 import MasterDone from '@/components/MasterDone.vue'
+import techWorks from '@/utils/techWorks'
 
 export default {
   name: 'IndexPage',
@@ -37,7 +38,7 @@ export default {
     MasterDone
   },
   layout: 'default',
-  middleware: ['isTechWorks', 'isAuth'],
+  middleware: 'isAuth',
   data () {
     return {
       emptyState: true,
@@ -54,6 +55,10 @@ export default {
     })
   },
   mounted () {
+    if (techWorks && this.$cookies.get('forTests') !== 'tester') {
+      this.$router.push(this.localePath('/tech-works'))
+    }
+
     this.$store.dispatch('nodesStore/fetch')
   },
   beforeDestroy () {
