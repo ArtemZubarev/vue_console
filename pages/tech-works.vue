@@ -16,7 +16,6 @@ import { techWorks } from '@/middleware/isTechWorks'
 
 export default {
   layout: 'maintainer',
-  middleware: ['isTechWorks'],
   data () {
     return {
       phrases: [
