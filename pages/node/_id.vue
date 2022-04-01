@@ -77,6 +77,8 @@
 
 import { mapGetters } from 'vuex'
 import duration from 'dayjs/plugin/duration'
+import * as tr from 'dayjs/locale/tr'
+import * as ru from 'dayjs/locale/ru'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import * as dayjs from 'dayjs'
 import techWorks from '@/utils/techWorks'
@@ -128,8 +130,15 @@ export default {
       return ''
     },
     uptime () {
+      dayjs.locale(this.$i18n.locale)
       // eslint-disable-next-line
-      return dayjs.duration(this.node.uptime).humanize()
+      const dur = dayjs.duration(this.node.uptime)
+
+      return dur.format('M[m] D[d] H[h] m[m] s[s]')
+        .replace(/\b0y\b/, '')
+        .replace(/\b0m\b/, '')
+        .replace(/\b0d\b/, '')
+        .replace(/\b0h\b/, '')
     },
     nodeInProgress () {
       return this.node.status !== 5 && this.node.status !== 6 && this.node.status !== 7
