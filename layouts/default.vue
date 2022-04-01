@@ -18,6 +18,7 @@
                 class="layoutHeaderMenu__link"
               >
                 {{ link.text }}
+                <svg-icon v-if="link.text === 'Manual'" class="manual" name="common/link" />
               </nuxt-link>
             </template>
           </header-menu>
@@ -103,6 +104,10 @@ export default {
         {
           text: 'Home',
           href: 'index'
+        },
+        {
+          text: 'Manual',
+          href: '#'
         }
       ],
       footerLinks: [
@@ -255,5 +260,16 @@ export default {
 }
 .user-menu {
   margin-top: -19px;
+}
+
+.manual {
+  width: 17px;
+  height: 17px;
+  position: absolute;
+  right: -19px;
+  top: -2.5px;
+}
+.layoutHeaderMenu__link {
+  position: relative;
 }
 </style>

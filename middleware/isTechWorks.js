@@ -3,14 +3,13 @@ export default function ({ redirect, app }) {
 
   const isTester = app.$cookies.get('forTests') === 'tester'
   const isTechWorksPage = app.router.currentRoute.path.includes('/tech-works')
-  if (techWorks) {
-    if (!isTester) {
+
+  if (!isTester) {
+    if (techWorks && !isTechWorksPage) {
       return redirect(app.localePath('/tech-works'))
     }
-    if (isTechWorksPage) {
+    if (!techWorks && isTechWorksPage) {
       return redirect(app.localePath('/'))
     }
-  } else if (isTechWorksPage) {
-    return redirect(app.localePath('/'))
   }
 }
