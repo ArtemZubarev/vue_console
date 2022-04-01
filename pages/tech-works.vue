@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { techWorks } from '@/middleware/isTechWorks'
+
 export default {
   layout: 'maintainer',
   middleware: ['isTechWorks'],
@@ -23,6 +25,12 @@ export default {
         'Technische Arbeiten. Später wiederkommen',
         'Teknik işler. Daha sonra gel'
       ]
+    }
+  },
+  mounted () {
+    console.log(techWorks)
+    if (!techWorks) {
+      this.$router.push(this.localePath('/'))
     }
   }
 }
