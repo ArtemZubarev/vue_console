@@ -28,7 +28,6 @@ export default {
     }
   },
   mounted () {
-    console.log(techWorks)
     if (!techWorks) {
       this.$router.push(this.localePath('/'))
     }

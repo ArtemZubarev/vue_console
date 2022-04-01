@@ -5,6 +5,7 @@ export default function ({ redirect, app }) {
 
   if (!isTester) {
     if (techWorks) {
+      console.log(23)
       return redirect(app.localePath('/tech-works'))
     }
     // if (!techWorks && isTechWorksPage) {
