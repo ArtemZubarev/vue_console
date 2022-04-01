@@ -16,6 +16,7 @@ export default {
     OtonAuth
   },
   layout: 'darkLayout',
+  middleware: ['isTechWorks'],
   data () {
     return {
 

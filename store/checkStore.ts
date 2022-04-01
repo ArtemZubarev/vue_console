@@ -14,10 +14,21 @@ export const getters = {
     return s.fetchState
   },
   isValid (s) {
-    return s.data
+    return s.data === 0
   },
   errors (s) {
-    return s.data === false ? ['Address invalid'] : []
+    switch (s.data) {
+      case 0:
+        return []
+      case 1:
+        return ['Address can not be empty']
+      case 3:
+        return ['Address already in use']
+      case 4:
+        return ['Address invalid']
+      default:
+        return []
+    }
   }
 }
 

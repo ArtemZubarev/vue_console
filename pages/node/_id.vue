@@ -99,7 +99,7 @@ export default {
     ContractInfo,
     ConfirmModal
   },
-  middleware: 'isAuth',
+  middleware: ['isAuth', 'isTechWorks'],
   data () {
     return {
       status: false,
