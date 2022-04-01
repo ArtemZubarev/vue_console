@@ -22,9 +22,9 @@ export const getters = {
         return []
       case 1:
         return ['Address can not be empty']
-      case 3:
+      case 2:
         return ['Address already in use']
-      case 4:
+      case 3:
         return ['Address invalid']
       default:
         return []
