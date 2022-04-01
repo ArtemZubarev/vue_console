@@ -37,7 +37,7 @@ export default {
     MasterDone
   },
   layout: 'default',
-  middleware: ['isAuth', 'isTechWorks'],
+  middleware: ['isTechWorks', 'isAuth'],
   data () {
     return {
       emptyState: true,
