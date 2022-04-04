@@ -28,6 +28,7 @@
                   v-else
                   :to="localePath(link.href)"
                   class="layoutHeaderMenu__link"
+                  :exact="true"
                 >
                   {{ $t(link.text) }}
                   <svg-icon v-if="link.text === 'Manual'" class="manual" name="common/link" />
