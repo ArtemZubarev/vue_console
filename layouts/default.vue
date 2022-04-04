@@ -153,7 +153,7 @@ export default {
         },
         {
           text: 'Manual',
-          href: `/NC_OTON_instruction-${this.$i18n.locale === 'en' ? 'ru' : this.$i18n.locale}.pdf`,
+          href: `/NC_OTON_instruction-${this.$i18n.locale}.pdf`,
           out: true
         }
       ]
@@ -287,5 +287,6 @@ export default {
 }
 .layoutHeaderMenu__link {
   position: relative;
+  color: $colorFontBase;
 }
 </style>
