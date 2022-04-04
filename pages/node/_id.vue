@@ -77,18 +77,16 @@
 
 import { mapGetters } from 'vuex'
 import duration from 'dayjs/plugin/duration'
-import * as tr from 'dayjs/locale/tr'
-import * as ru from 'dayjs/locale/ru'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import * as dayjs from 'dayjs'
 import techWorks from '@/utils/techWorks'
-// import Switcher from '@/components/Switcher.vue'
 import CommonLoader from '@/components/CommonLoader.vue'
 import NodeInfoItem from '@/components/NodeInfoItem.vue'
 import CopyWallet from '~/components/CopyWallet.vue'
 import nodeStatuses from '@/utils/nodeStatuses'
 import ContractInfo from '~/components/ContractInfo.vue'
 import ConfirmModal from '~/components/ConfirmModal.vue'
+import locales from '@/utils/uptimeLocales'
 
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
@@ -133,12 +131,21 @@ export default {
       dayjs.locale(this.$i18n.locale)
       // eslint-disable-next-line
       const dur = dayjs.duration(this.node.uptime)
+      const l = this.$i18n.locale
+      const loc = locales
 
-      return dur.format('M[m] D[d] H[h] m[m] s[s]')
+      return dur.format('Y[y] M[m] D[d] H[h] m[min] s[s]')
         .replace(/\b0y\b/, '')
         .replace(/\b0m\b/, '')
         .replace(/\b0d\b/, '')
         .replace(/\b0h\b/, '')
+        .replace(/\b0min\b/, '')
+        .replace(/y\b/, loc[l].y)
+        .replace(/m\b/, loc[l].m)
+        .replace(/d\b/, loc[l].d)
+        .replace(/h\b/, loc[l].h)
+        .replace(/min\b/, loc[l].min)
+        .replace(/s\b/, loc[l].s)
     },
     nodeInProgress () {
       return this.node.status !== 5 && this.node.status !== 6 && this.node.status !== 7
