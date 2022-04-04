@@ -11,15 +11,28 @@
         <template #mainMenu>
           <header-menu>
             <template #list>
-              <nuxt-link
+              <div
                 v-for="link in menuLinks"
                 :key="link.text"
-                :to="localePath(link.href)"
-                class="layoutHeaderMenu__link"
               >
-                {{ $t(link.text) }}
-                <svg-icon v-if="link.text === 'Manual'" class="manual" name="common/link" />
-              </nuxt-link>
+                <a
+                  v-if="link.out"
+                  :href="link.href"
+                  class="layoutHeaderMenu__link"
+                  target="_blank"
+                >
+                  {{ $t(link.text) }}
+                  <svg-icon v-if="link.text === 'Manual'" class="manual" name="common/link" />
+                </a>
+                <nuxt-link
+                  v-else
+                  :to="localePath(link.href)"
+                  class="layoutHeaderMenu__link"
+                >
+                  {{ $t(link.text) }}
+                  <svg-icon v-if="link.text === 'Manual'" class="manual" name="common/link" />
+                </nuxt-link>
+              </div>
             </template>
           </header-menu>
         </template>
@@ -100,16 +113,6 @@ export default {
   data () {
     return {
       mobileMenu: false,
-      menuLinks: [
-        {
-          text: 'Home',
-          href: 'index'
-        },
-        {
-          text: 'Manual',
-          href: '#'
-        }
-      ],
       footerLinks: [
         {
           text: 'Terms of use',
@@ -141,6 +144,19 @@ export default {
       ]
 
       return langs.filter(lang => lang.code !== this.$i18n.locale)
+    },
+    menuLinks () {
+      return [
+        {
+          text: 'Home',
+          href: 'index'
+        },
+        {
+          text: 'Manual',
+          href: `/NC_OTON_instruction-${this.$i18n.locale === 'en' ? 'ru' : this.$i18n.locale}.pdf`,
+          out: true
+        }
+      ]
     }
   },
   mounted () {
