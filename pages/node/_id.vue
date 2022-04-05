@@ -129,8 +129,10 @@ export default {
     },
     uptime () {
       dayjs.locale(this.$i18n.locale)
+      const now = dayjs()
+      const uptime = dayjs.unix(this.node.uptime ? this.node.uptime : now)
       // eslint-disable-next-line
-      const dur = dayjs.duration(this.node.uptime)
+      const dur = dayjs.duration(now.diff(uptime))
       const l = this.$i18n.locale
       const loc = locales
 
