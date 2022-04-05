@@ -31,7 +31,6 @@
                   :exact="true"
                 >
                   {{ $t(link.text) }}
-                  <svg-icon v-if="link.text === 'Manual'" class="manual" name="common/link" />
                 </nuxt-link>
               </div>
             </template>
