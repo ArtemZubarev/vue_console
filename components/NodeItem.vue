@@ -110,11 +110,9 @@
 <script>
 import duration from 'dayjs/plugin/duration'
 import relativeTime from 'dayjs/plugin/relativeTime'
-// import localizedFormat from 'dayjs/plugin/localizedFormat'
 import * as dayjs from 'dayjs'
-// import Switcher from '@/components/Switcher.vue'
-// import CommonLoader from '@/components/CommonLoader.vue'
 import nodeStatuses from '@/utils/nodeStatuses'
+import locales from '@/utils/uptimeLocales'
 
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
@@ -143,7 +141,26 @@ export default {
   },
   computed: {
     uptime () {
-      return dayjs.duration(this.node.uptime).humanize()
+      dayjs.locale(this.$i18n.locale)
+      const now = dayjs()
+      const uptime = dayjs.unix(this.node.uptime ? this.node.uptime : now)
+      // eslint-disable-next-line
+      const dur = dayjs.duration(now.diff(uptime))
+      const l = this.$i18n.locale
+      const loc = locales
+
+      return dur.format('Y[y] M[m] D[d] H[h] m[min] s[s]')
+        .replace(/\b0y\b/, '')
+        .replace(/\b0m\b/, '')
+        .replace(/\b0d\b/, '')
+        .replace(/\b0h\b/, '')
+        .replace(/\b0min\b/, '')
+        .replace(/y\b/, loc[l].y)
+        .replace(/m\b/, loc[l].m)
+        .replace(/d\b/, loc[l].d)
+        .replace(/h\b/, loc[l].h)
+        .replace(/min\b/, loc[l].min)
+        .replace(/s\b/, loc[l].s)
     },
     nodeInProgress () {
       return inProgress(this.node)
