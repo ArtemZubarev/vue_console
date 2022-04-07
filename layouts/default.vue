@@ -148,7 +148,7 @@ export default {
     menuLinks () {
       return [
         {
-          text: 'Home',
+          text: 'Nodes',
           href: 'index'
         },
         {
