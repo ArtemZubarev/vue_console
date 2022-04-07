@@ -1,2 +1,2 @@
-const techWorks = true
+const techWorks = false
 export default techWorks
