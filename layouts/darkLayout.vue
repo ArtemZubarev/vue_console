@@ -67,6 +67,7 @@
 <script>
 import { OtonHeader, HeaderLocalePicker, HeaderMenu, OtonFooter } from 'oton-vue-components'
 import OtonLogo from '@/components/OtonLogo.vue'
+import { langsObjects } from '@/utils/availableLangs'
 
 export default {
   name: 'DarkLayout',
@@ -104,17 +105,7 @@ export default {
   },
   computed: {
     availableLangs () {
-      const langs = [
-        {
-          code: 'ru'
-        },
-        {
-          code: 'en'
-        },
-        {
-          code: 'tr'
-        }
-      ]
+      const langs = langsObjects
 
       return langs.filter(lang => lang.code !== this.$i18n.locale)
     }

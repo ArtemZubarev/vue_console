@@ -38,7 +38,7 @@ export default {
     MasterDone
   },
   layout: 'default',
-  middleware: 'isAuth',
+  middleware: ['isAuth', 'localeRedirect'],
   data () {
     return {
       emptyState: true,

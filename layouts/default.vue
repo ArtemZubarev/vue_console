@@ -98,6 +98,7 @@ import { OtonHeader, HeaderLocalePicker, HeaderMenu, OtonFooter } from 'oton-vue
 import OtonLogo from '@/components/OtonLogo.vue'
 import LoggedMenu from '~/components/LoggedMenu.vue'
 import AsideMenu from '~/components/AsideMenu.vue'
+import { langsObjects } from '@/utils/availableLangs'
 
 export default {
   name: 'DefaultLayout',
@@ -131,17 +132,7 @@ export default {
   },
   computed: {
     availableLangs () {
-      const langs = [
-        {
-          code: 'ru'
-        },
-        {
-          code: 'en'
-        },
-        {
-          code: 'tr'
-        }
-      ]
+      const langs = langsObjects
 
       return langs.filter(lang => lang.code !== this.$i18n.locale)
     },
