@@ -50,10 +50,10 @@
     </div>
     <div class="node__footer">
       <div>
-        <button class="node__button" :disabled="nodeInProgress" @click="restartNode">
+        <button class="node__button" :disabled="true" @click="restartNode">
           {{ $t('Restart server') }}
         </button>
-        <button class="node__button" :disabled="nodeInProgress" @click="updateNode">
+        <button class="node__button" :disabled="true" @click="updateNode">
           {{ $t('Update software') }}
         </button>
       </div>

@@ -4,7 +4,20 @@
       <div class="info__title">
         {{ $t(title) }}
       </div>
-      <div class="info__value" :class="{success: valueStatus === 'ok', danger: valueStatus === 'no_ok'}">
+      <a
+        v-if="linkValue"
+        :href="linkValue"
+        target="_blank"
+        class="info__value linked"
+        :class="{success: valueStatus === 'ok', danger: valueStatus === 'no_ok'}"
+      >
+        {{ value }}
+      </a>
+      <div
+        v-else
+        class="info__value"
+        :class="{success: valueStatus === 'ok', danger: valueStatus === 'no_ok'}"
+      >
         {{ value }}
       </div>
     </div>
@@ -34,6 +47,11 @@ export default {
       default: false
     },
     valueStatus: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    linkValue: {
       type: String,
       required: false,
       default: ''
@@ -95,6 +113,12 @@ export default {
         font-size: 14px;
         font-weight: normal;
         margin-top: 0px;
+
+        &.linked {
+          &:hover {
+            opacity: 0.8;
+          }
+        }
       }
     }
   }

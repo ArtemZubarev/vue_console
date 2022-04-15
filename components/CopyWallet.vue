@@ -1,6 +1,6 @@
 <template>
   <div class="copy">
-    <node-info-item :title="'Wallet'" :value="address" :size="'sm'" />
+    <node-info-item :title="'Wallet'" :value="address" :size="'sm'" :linkValue="link" />
     <slot />
     <button class="copy__button" @click="copy">
       <svg-icon
@@ -28,6 +28,11 @@ export default {
   data () {
     return {
       copied: false
+    }
+  },
+  computed: {
+    link () {
+      return `${process.env.explorerUrl}/${this.$i18n.locale}/address/${this.address}`
     }
   },
   methods: {
