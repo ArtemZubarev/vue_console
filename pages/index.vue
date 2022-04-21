@@ -2,7 +2,7 @@
   <div class="page">
     <with-loader :active="fetchState === 'PENDING'">
       <div v-if="fetchState === 'FULFILLED' && nodesList.length === 0" class="empty">
-        <CreateNode @create="startMaster" />
+        <CreateNode :limits="nodesLimits" @create="startMaster" />
       </div>
       <div class="nodes">
         <div class="nodes__list">
