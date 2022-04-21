@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+import { pathOr } from 'rambda'
 import {
   FULFILLED, INIT, PENDING, REJECTED
 } from '../utils/constants'
@@ -17,6 +18,9 @@ export const getters = {
   },
   email (s) {
     return s.data.email
+  },
+  nodesLimits (s) {
+    return pathOr({}, ['data', 'nodes'], s)
   }
 
 }

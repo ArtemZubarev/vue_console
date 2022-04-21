@@ -6,8 +6,17 @@
       </div>
       <div class="nodes">
         <div class="nodes__list">
-          <NodeItem v-for="node in nodesList" :key="`node-list-${node.id}`" :node="node" />
-          <CreateNode v-if="fetchState === 'FULFILLED' && nodesList.length !== 0" :inList="true" @create="startMaster" />
+          <NodeItem
+            v-for="node in nodesList"
+            :key="`node-list-${node.id}`"
+            :node="node"
+          />
+          <CreateNode
+            v-if="fetchState === 'FULFILLED' && nodesList.length !== 0"
+            :inList="true"
+            :limits="nodesLimits"
+            @create="startMaster"
+          />
           <div class="nodes__hidden" />
         </div>
       </div>
@@ -51,7 +60,8 @@ export default {
     ...mapGetters({
       nodesList: 'nodesStore/nodesList',
       fetchState: 'nodesStore/fetchState',
-      nodesInProgress: 'installingStore/nodes'
+      nodesInProgress: 'installingStore/nodes',
+      nodesLimits: 'userStore/nodesLimits'
     })
   },
   mounted () {

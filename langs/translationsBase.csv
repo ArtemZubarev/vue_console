@@ -1,66 +1,70 @@
-Key,RU,EN,DE,TR
-Log in via OTON,Вход через OTON,Log in via OTON,,Oton üzerinden giriş
-Login,Вход,Login,,Giriş
-Only for oton.org users.,Только для пользователей oton.org,Only for oton.org users.,,Sadece oton kullanıcıları için
-Log in via OTON,Вход через OTON,Log in via OTON,,Oton üzerinden giriş
-months,месяцев,months,,Aylar
-Contract,Контракт,Contract,,Sözleşme
-month,месяц,month,,Ay
-Sum,Сумма,Sum,,Total
-Approximate calculation based on,Ориентировочный расчет на основе,Approximate calculation based on,,Tahmini hesaplama
-the table,таблицы,the table,,Grafik
-Create a new node and enjoy it.,Создайте новую ноду и получайте доход,Create a new node and enjoy it.,,Yeni Nod oluşturarak kazanmaya başlayın
-Create your first node and enjoy it,Создайте свою первую ноду и получайте доход,Create your first node and enjoy it,,İlk Nodunuzu oluşturun ve kazanmaya başlayın
-Create,Создать,Create,,Oluştur
-Node is created!,Нода создана,Node is created!,,Nod oluşturuldu
-Back,Назад,Back,,Geri
-Next,Далее,Next,,Devam
-Earned in total,Заработано всего,Earned in total,,Toplam kazanç
-Last block,Последний блок,Last block,,Sonuncu Blök
-Connected nodes,Подключенные ноды,Connected nodes,,Bağlanmış Nodlar
-Votings,Голосований,Votings,,Oylama
-IP,IP,IP,IP,IP
-Uptime,Время работы,Uptime,,çalışma süresi
-Version,Версия,Version,,Sürüm
-Status,Статус,Status,,Durum
-Step,Шаг,Step,,Adım
-Insert wallet address for reward,Укажите адрес кошелька для зачисления дохода,Insert wallet address for reward,,Kazançlarınızı almak icin cüzdanınızı ekleyin
-Wallet address,Адрес кошелька ,Wallet address,,Cüzdan adresi
-Select a contract,Выберите контракт,Select a contract,,Sözleşmelerden birini seçin
-No available contracts,Нет доступных контрактов,No available contracts,,Mevcut sözleşme yok
-Congratulations!,Поздравляем!,Congratulations!,,Tebrikler!
-Node will be created in a few minutes.,Нода будет создана через несколько минут.,Node will be created in a few minutes.,,Nod birkaç dakika içinde oluşturulacaktır.
-Ok,Ok,Ok,Ok,Ok
-Name the node,Укажите имя ноды,Name the node,,Nod ismini belirtin
-Node name,Имя ноды,Node name,,Nod adı
-Insert Digital Ocean token,Укажите DigitalOcean token,Insert DigitalOcean token,,DigitalOcean tokeni ekle
-Digital Ocean token,DigitalOcean token,DigitalOcean token,DigitalOcean token,DigitalOcean token
-Save,Сохранить,Save,,Kaydet
-Delete this node,Удалить ноду,Delete this node,,Nodu kaldır
-Update software,Обновить ПО,Update software,,Programı güncelle
-Restart server,Перезапустить сервер,Restart server,,Sunucuyu yeniden başlat
-Terms of use,Правила использования,Terms of use,,Kullanım şartları
-Cookies policy,Политика обработки cookie,Cookies policy,,Çerez politikası
-Privacy notice,Политика конфиденциальности,Privacy notice,,Gizlilik Politikası
-Log out,Выход,Log out,,Çıkış
-Wallet,Кошелек,Wallet,,Cüzdan
-Node creation,Создание ноды,Node creation,,Nod Oluştur
-Downloading software,Загрузка ПО,Downloading software,,Programı indir
-Installing node,Установка ноды,Installing node,,Nodu kur
-Starting node,Старт ноды,Starting node,,Nodu Başlat
-Node registration in the blockchain,Регистрация ноды в блокчейн,Node registration in the blockchain,,Nodu block zincirine kaydet
-Node in work!,В работе!,Node in work!,,Nod işlemde!
-Node offline,Выключена,Node offline,,Nod Çevirimdışı
-Installation error,Ошибка установки,Installation error,,Kurulum hatası
-Perpetual,Бессрочный,Perpetual,,Süresiz
-Wallet adress,Адрес кошелька ,Wallet adress,,Cüzdan hesabı
-Home,Главная,Home,,Ana Sayfa
-Address can not be empty,Адрес не может быть пустым,Address can not be empty,,Cüzdan boş olamaz
-Address already in use,Адрес уже используется,Address already in use,,Hesap daha önce kullanılmış
-Address invalid,Неправильный адрес,Address invalid,,Geçersiz hesap
-Name can't be empty,Имя не может быть пустым,Name can't be empty,,İsim boş olamaz
-Are you sure?,Вы уверены?,Are you sure?,,Eminmisiniz?
-No,Нет,No,,Hayır
-Confirm,Подтвердить,Confirm,,Onayla
-Manual,Инструкция,Manual,,Talimat
-Nodes,Ноды,Nodes,,Nodes
+Key,RU,EN,DE,TR,ES
+Log in via OTON,Вход через OTON,Log in via OTON,,Oton üzerinden giriş,Entrada a través de OTON
+Login,Вход,Login,,Giriş,Entrada
+Only for oton.org users.,Только для пользователей oton.org,Only for oton.org users.,,Sadece oton kullanıcıları için,Solo para usuarios oton.org
+Log in via OTON,Вход через OTON,Log in via OTON,,Oton üzerinden giriş,Entrada a través de OTON
+months,месяцев,months,,Aylar,meses
+Contract,Контракт,Contract,,Sözleşme,Contrato
+month,месяц,month,,Ay,mes
+Sum,Сумма,Sum,,Total,Suma
+Approximate calculation based on,Ориентировочный расчет на основе,Approximate calculation based on,,Tahmini hesaplama,Cálculo aproximado basado en
+the table,таблицы,the table,,Grafik,tablas
+Create a new node and enjoy it.,Создайте новую ноду и получайте доход,Create a new node and enjoy it.,,Yeni Nod oluşturarak kazanmaya başlayın,Crear un nuevo nodo y obtener ingresos
+Create your first node and enjoy it,Создайте свою первую ноду и получайте доход,Create your first node and enjoy it,,İlk Nodunuzu oluşturun ve kazanmaya başlayın,Cree su primer nodo y obtenga ingresos
+Create,Создать,Create,,Oluştur,Crear
+Node is created!,Нода создана,Node is created!,,Nod oluşturuldu,Nodo creado
+Back,Назад,Back,,Geri,Atrás
+Next,Далее,Next,,Devam,Siguiente
+Earned in total,Заработано всего,Earned in total,,Toplam kazanç,Total ganado
+Last block,Последний блок,Last block,,Sonuncu Blök,Último bloque
+Connected nodes,Подключенные ноды,Connected nodes,,Bağlanmış Nodlar,Nodos conectados
+Votings,Голосований,Votings,,Oylama,Votación
+IP,IP,IP,IP,IP,IP
+Uptime,Время работы,Uptime,,çalışma süresi,Tiempo de trabajo
+Version,Версия,Version,,Sürüm,Versión
+Status,Статус,Status,,Durum,Estatus
+Step,Шаг,Step,,Adım,Paso
+Insert wallet address for reward,Укажите адрес кошелька для зачисления дохода,Insert wallet address for reward,,Kazançlarınızı almak icin cüzdanınızı ekleyin,Proporcione la dirección de la billetera para acreditar los ingresos
+Wallet address,Адрес кошелька ,Wallet address,,Cüzdan adresi,Dirección de la billetera
+Select a contract,Выберите контракт,Select a contract,,Sözleşmelerden birini seçin,Seleccione contrato
+No available contracts,Нет доступных контрактов,No available contracts,,Mevcut sözleşme yok,No hay contratos disponibles
+Congratulations!,Поздравляем!,Congratulations!,,Tebrikler!,¡Felicidades!
+Node will be created in a few minutes.,Нода будет создана через несколько минут.,Node will be created in a few minutes.,,Nod birkaç dakika içinde oluşturulacaktır.,El nodo se creará en unos minutos.
+Ok,Ok,Ok,Ok,Ok,Ok
+Name the node,Укажите имя ноды,Name the node,,Nod ismini belirtin,Especifique el nombre del nodo
+Node name,Имя ноды,Node name,,Nod adı,Nombre del Nodo
+Insert Digital Ocean token,Укажите DigitalOcean token,Insert DigitalOcean token,,DigitalOcean tokeni ekle,Especifique el token DigitalOcean
+Digital Ocean token,DigitalOcean token,DigitalOcean token,DigitalOcean token,DigitalOcean token,DigitalOcean token
+Save,Сохранить,Save,,Kaydet,Guardar
+Delete this node,Удалить ноду,Delete this node,,Nodu kaldır,Eliminar nodo
+Update software,Обновить ПО,Update software,,Programı güncelle,Actualizar software
+Restart server,Перезапустить сервер,Restart server,,Sunucuyu yeniden başlat,Reiniciar el servidor
+Terms of use,Правила использования,Terms of use,,Kullanım şartları,Condiciones de uso
+Cookies policy,Политика обработки cookie,Cookies policy,,Çerez politikası,Política de cookies
+Privacy notice,Политика конфиденциальности,Privacy notice,,Gizlilik Politikası,Política de privacidad
+Log out,Выход,Log out,,Çıkış,Salida
+Wallet,Кошелек,Wallet,,Cüzdan,Billetera
+Node creation,Создание ноды,Node creation,,Nod Oluştur,Creación de un nodo
+Downloading software,Загрузка ПО,Downloading software,,Programı indir,Descargar software
+Installing node,Установка ноды,Installing node,,Nodu kur,Instalación del nodo
+Starting node,Старт ноды,Starting node,,Nodu Başlat,Inicio del nodo
+Node registration in the blockchain,Регистрация ноды в блокчейн,Node registration in the blockchain,,Nodu block zincirine kaydet,Registro de nodos en blockchain
+Node in work!,В работе!,Node in work!,,Nod işlemde!,¡Nodo en el trabajo!
+Node offline,Выключена,Node offline,,Nod Çevirimdışı,Nodo apagado
+Installation error,Ошибка установки,Installation error,,Kurulum hatası,Error de instalación
+Perpetual,Бессрочный,Perpetual,,Süresiz,Perpetuo
+Wallet adress,Адрес кошелька ,Wallet adress,,Cüzdan hesabı,Dirección de billetera
+Home,Главная,Home,,Ana Sayfa,Inicio
+Address can not be empty,Адрес не может быть пустым,Address can not be empty,,Cüzdan boş olamaz,La dirección no puede estar vacía
+Address already in use,Адрес уже используется,Address already in use,,Hesap daha önce kullanılmış,La dirección ya está en uso
+Address invalid,Неправильный адрес,Address invalid,,Geçersiz hesap,Dirección incorrecta
+Name can't be empty,Имя не может быть пустым,Name can't be empty,,İsim boş olamaz,El nombre no puede estar vacío
+Are you sure?,Вы уверены?,Are you sure?,,Eminmisiniz?,¿Estás seguro?
+No,Нет,No,,Hayır,No
+Confirm,Подтвердить,Confirm,,Onayla,Confirmar
+Manual,Инструкция,Manual,,Talimat,Instrucciones
+Nodes,Ноды,Nodes,,Nodes,Nodos
+Creation of new nodes is temporary limited,Создание новых нод временно ограничено,Creation of new nodes is temporary limited,,Geçici olarak yeni Nod oluşturulmayor.,La creación de nuevos nodos está temporalmente limitada
+The limit is needed for debugging the system during alpha testing.,Ограничение нужно для отладки системы в процессе альфа-тестирования.,The limit is needed for debugging the system during alpha testing.,,"Kısıtlama,alfa test sırasında sistemde oluşan hataları düzeltmek için gereklidir",La restricción es necesaria para depurar el sistema durante las pruebas alfa.
+The limit will be increased in a few days.,Лимит будет увеличен через несколько дней.,The limit will be increased in a few days.,,Limit bir kaç gün içersinde yükseltilecektir.,El límite se incrementará en unos días.
+Temporary limit on number of nodes.,Временный лимит на количество нод.,Temporary limit on number of nodes.,,Nod sayısında geçici limit,Límite de tiempo en el número de nodos.
