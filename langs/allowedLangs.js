@@ -1,1 +1,1 @@
-module.exports = ['ru', 'en', 'de', 'tr'];
+module.exports = ['ru', 'en', 'de', 'tr', 'es']
