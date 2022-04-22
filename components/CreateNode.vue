@@ -27,7 +27,7 @@
           :style="{width: `${(100 / limits.limit ) * limits.current}%`}"
         />
       </div>
-      <div v-if="limits.current < limits.limit" class="card__text card__bottomText">
+      <div v-if="limits.current >= limits.limit" class="card__text card__bottomText">
         {{ $t('The limit will be increased in a few days.') }}
       </div>
       <div v-else class="card__text card__bottomText">
