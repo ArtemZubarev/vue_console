@@ -22,6 +22,14 @@ const locales = {
     h: 's',
     min: 'd',
     s: 's'
+  },
+  es: {
+    y: 'a',
+    m: 'm',
+    d: 'd',
+    h: 'h',
+    min: 'm',
+    s: 's'
   }
 }
 
