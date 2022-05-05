@@ -118,7 +118,6 @@ export default {
   width: 100%;
   min-height: 100vh;
   display: flex;
-  // background-color: $colorBg;
   background: transparent linear-gradient(180deg, $colorBg 0%, #0A4A5E 100%) 0% 0% no-repeat padding-box;
 }
 

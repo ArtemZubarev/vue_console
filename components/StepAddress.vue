@@ -55,16 +55,6 @@ export default {
     },
     checkAddressValidity (value) {
       this.$store.dispatch('checkStore/checkAddress', value)
-      // Promise.resolve().then(
-      //   (res) => {
-      //     if (res) {
-      //       this.addressValid = true
-      //     } else {
-      //       this.addressValid = false
-      //       this.errors = ['Address invalid']
-      //     }
-      //   }
-      // )
     },
     nextStep () {
       if (this.address.trim()) {
@@ -73,7 +63,6 @@ export default {
         }
       } else {
         this.checkAddressValidity(this.address)
-        // this.errors = ["Address can't be empty"]
       }
     }
   }

@@ -113,6 +113,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import * as dayjs from 'dayjs'
 import nodeStatuses from '@/utils/nodeStatuses'
 import locales from '@/utils/uptimeLocales'
+import formatUptime from '@/utils/formatUptime'
 
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
@@ -122,10 +123,6 @@ const inProgress = (node) => {
 }
 
 export default {
-  components: {
-    // Switcher,
-    // CommonLoader
-  },
   props: {
     node: {
       type: Object,
@@ -149,18 +146,7 @@ export default {
       const l = this.$i18n.locale
       const loc = locales
 
-      return dur.format('Y[y] M[m] D[d] H[h] m[min] s[s]')
-        .replace(/\b0y\b/, '')
-        .replace(/\b0m\b/, '')
-        .replace(/\b0d\b/, '')
-        .replace(/\b0h\b/, '')
-        .replace(/\b0min\b/, '')
-        .replace(/y\b/, loc[l].y)
-        .replace(/m\b/, loc[l].m)
-        .replace(/d\b/, loc[l].d)
-        .replace(/h\b/, loc[l].h)
-        .replace(/min\b/, loc[l].min)
-        .replace(/s\b/, loc[l].s)
+      return formatUptime(dur, loc[l])
     },
     nodeInProgress () {
       return inProgress(this.node)
@@ -307,6 +293,7 @@ export default {
   background: #fff 0% 0% no-repeat padding-box;
   height: 16px;
   border-radius: 4px;
+  margin-top: 10px;
 
   &__line {
     position: absolute;

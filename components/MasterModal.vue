@@ -10,7 +10,6 @@
     <step-address v-if="currentStep == '3'" @next="nextStep" @previous="previousStep" />
     <step-name v-if="currentStep == '4'" @next="nextStep" @previous="previousStep" />
     <step-done v-if="currentStep == '5'" @next="nextStep" />
-    <!-- <step-progress v-if="currentStep == '5'" :status="currentStatus" @next="nextStep" /> -->
   </common-modal>
 </template>
 
@@ -21,7 +20,6 @@ import StepToken from '~/components/StepToken.vue'
 import StepAddress from '~/components/StepAddress.vue'
 import StepName from '~/components/StepName.vue'
 import StepDone from '~/components/StepDone.vue'
-// import StepProgress from '~/components/StepProgress.vue'
 
 export default {
   components: {
@@ -29,7 +27,6 @@ export default {
     StepToken,
     StepAddress,
     StepName,
-    // StepProgress,
     StepDone
   },
   data () {

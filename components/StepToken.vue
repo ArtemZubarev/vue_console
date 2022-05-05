@@ -48,9 +48,6 @@ export default {
       token: 'masterStore/token'
     })
   },
-  mounted () {
-    // this.$store.dispatch('masterStore/checkToken')
-  },
   methods: {
     handleToken (value) {
       this.$store.commit('masterStore/UPDATE_TOKEN', value)

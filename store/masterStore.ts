@@ -56,8 +56,6 @@ export const mutations = {
     if (contract) {
       s.userChoice.contract = contract.id
     }
-
-    // s.userChoice.token = data.token
   },
   CLEAR (s) {
     Object.assign(s, initState)

@@ -32,7 +32,17 @@ export default {
   },
   computed: {
     link () {
-      return `${process.env.explorerUrl}${this.$i18n.locale !== 'en' ? `/${this.$i18n.locale}` : ''}/address/${this.address}`
+      const url = process.env.explorerUrl
+      const localePrefix = () => {
+        const locale = this.$i18n.locale
+        if (locale === 'en' || locale === 'es') {
+          return ''
+        } else {
+          return `/${locale}`
+        }
+      }
+
+      return `${url}${localePrefix()}/address/${this.address}`
     }
   },
   methods: {

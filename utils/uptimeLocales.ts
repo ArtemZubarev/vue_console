@@ -1,4 +1,20 @@
-const locales = {
+export interface ILocaleReductions {
+  y: string;
+    m: string,
+    d: string,
+    h: string,
+    min: string,
+    s: string
+}
+
+export interface ILocales {
+  en: ILocaleReductions;
+  ru: ILocaleReductions;
+  tr: ILocaleReductions;
+  es: ILocaleReductions;
+}
+
+const locales: ILocales = {
   en: {
     y: 'y',
     m: 'm',

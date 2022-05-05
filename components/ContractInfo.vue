@@ -27,7 +27,8 @@
     <div class="contract__footnote">
       <sup>*</sup>{{ $t('Approximate calculation based on') }}{{ ' ' }}
       <a
-        href=""
+        class="link"
+        :href="chartHref"
         target="_blank"
       >{{ $t('the table') }}</a>.
     </div>
@@ -40,6 +41,20 @@ export default {
     contract: {
       required: true,
       type: Object
+    }
+  },
+  computed: {
+    chartHref () {
+      const url = 'https://www.dropbox.com/sh/8gl6xp4h490el0j/AAAahBgs4F2XpA7Zlqesj03Xa?dl=0'
+      const urlParamsFromLocale = {
+        de: '&preview=Berechnung+durch+Knoten+DE.xlsx',
+        ru: '&preview=Расчёт+по+нодам+v_2-13.xlsx',
+        en: '&preview=Calculation+by+nodes+EN.xlsx',
+        es: '&preview=Calculation+by+nodes+EN.xlsx',
+        tr: '&preview=Düğümlere+göre+hesaplama+TR.xlsx'
+      }
+      const currentLocale = this.$i18n.locale
+      return `${url}${urlParamsFromLocale[currentLocale]}`
     }
   }
 }
@@ -109,6 +124,14 @@ export default {
   &__footnote {
     margin-top: 10px;
     font-size: 14px;
+
+    .link {
+      color: $colorLink;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
   }
 
   sup {

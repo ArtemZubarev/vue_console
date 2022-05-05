@@ -87,6 +87,7 @@ import nodeStatuses from '@/utils/nodeStatuses'
 import ContractInfo from '~/components/ContractInfo.vue'
 import ConfirmModal from '~/components/ConfirmModal.vue'
 import locales from '@/utils/uptimeLocales'
+import formatUptime from '@/utils/formatUptime'
 
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
@@ -94,7 +95,6 @@ dayjs.extend(relativeTime)
 export default {
   name: 'NodePage',
   components: {
-    // Switcher,
     CommonLoader,
     NodeInfoItem,
     CopyWallet,
@@ -136,18 +136,7 @@ export default {
       const l = this.$i18n.locale
       const loc = locales
 
-      return dur.format('Y[y] M[m] D[d] H[h] m[min] s[s]')
-        .replace(/\b0y\b/, '')
-        .replace(/\b0m\b/, '')
-        .replace(/\b0d\b/, '')
-        .replace(/\b0h\b/, '')
-        .replace(/\b0min\b/, '')
-        .replace(/y\b/, loc[l].y)
-        .replace(/m\b/, loc[l].m)
-        .replace(/d\b/, loc[l].d)
-        .replace(/h\b/, loc[l].h)
-        .replace(/min\b/, loc[l].min)
-        .replace(/s\b/, loc[l].s)
+      return formatUptime(dur, loc[l])
     },
     nodeInProgress () {
       return this.node.status !== 5 && this.node.status !== 6 && this.node.status !== 7
@@ -206,7 +195,6 @@ export default {
     },
     deleteNode () {
       const { id } = this.$route.params
-      // this.$store.commit('modalStore/changeCurrentModal', 'ConfirmModal')
       Promise.resolve(this.$store.dispatch('nodeStore/deleteNode', id)).then((res) => {
         if (res) {
           this.$router.push('/')
@@ -375,10 +363,6 @@ export default {
           width: 50%;
           flex-wrap: wrap;
         }
-
-        // +mediaTablet() {
-        //   width: 160px;
-        // }
       }
     }
   }

@@ -106,7 +106,6 @@ export default {
         font-size: 14px;
         font-weight: normal;
         text-transform: unset;
-        // width: 90px;
       }
 
       &__value {

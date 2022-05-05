@@ -26,7 +26,6 @@
   </div>
 </template>
 <script>
-// import Vue from 'vue'
 import 'oton-vue-components'
 import 'oton-vue-components/dist/oton-vue-lib.css'
 import { mapGetters } from 'vuex'
@@ -77,8 +76,6 @@ export default {
   methods: {
     startMaster () {
       this.$store.commit('modalStore/changeCurrentModal', 'MasterModal')
-      // console.log(this.$vfm)
-      // this.$vfm.show('Step1')
     },
     nextStep () {
       this.$store.dispatch('masterStore/createNode')
