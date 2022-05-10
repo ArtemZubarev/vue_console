@@ -9,14 +9,17 @@
       <div class="node__head">
         <span class="node__title">{{ node.name }}</span>
       </div>
+      <div class="node__installing">
+        {{ $t('Installing a Node. It will take some time.') }}
+      </div>
       <div class="progressbar">
         <div
           :class="['progressbar__line']"
-          :style="{width: `${(100 / 12) * (node.status ? Number(node.status) + 2 : 1)}%`}"
+          :style="{width: `${(100 / blocks) * (blocksMain)}%`}"
         />
       </div>
       <p class="step__status">
-        {{ statusText ? $t(statusText) : 'Preparing...' }}
+        {{ blocks ? blocks : 0 }} {{ $t('packages installed') }}
       </p>
     </template>
     <template v-else>
@@ -153,6 +156,12 @@ export default {
     },
     statusText () {
       return this.statuses[`${this.node.status}`]
+    },
+    blocks () {
+      return this.node.blocks ?? 0
+    },
+    blocksMain () {
+      return this.node.blocksMain ?? 0
     }
   },
   methods: {
@@ -196,6 +205,11 @@ export default {
 
   &:hover {
     cursor: pointer;
+  }
+
+  &__installing {
+    font-size: 14px;
+    margin-top: 60px;
   }
 
   &__content {
@@ -298,7 +312,7 @@ export default {
   &__line {
     position: absolute;
     background: transparent linear-gradient(180deg, #7DC475 0%, #4E9A45 100%) 0% 0% no-repeat padding-box;
-    transition: 3s;
+    transition: 4s;
     height: 100%;
   }
 }
