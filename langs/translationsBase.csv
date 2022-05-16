@@ -64,7 +64,9 @@ No,Нет,No,,Hayır,No
 Confirm,Подтвердить,Confirm,,Onayla,Confirmar
 Manual,Инструкция,Manual,,Talimat,Instrucciones
 Nodes,Ноды,Nodes,,Nodes,Nodos
-Creation of new nodes is temporary limited,Создание новых нод временно ограничено,Creation of new nodes is temporary limited,,Geçici olarak yeni Nod oluşturulmayor.,La creación de nuevos nodos está temporalmente limitada
+Creation of new nodes is temporary limited,Создание новых нод временно ограничено,Creation of new nodes is temporary limited,,Geçici olarak yeni Nod oluşturulamıyor.,La creación de nuevos nodos está temporalmente limitada
 The limit is needed for debugging the system during alpha testing.,Ограничение нужно для отладки системы в процессе альфа-тестирования.,The limit is needed for debugging the system during alpha testing.,,"Kısıtlama,alfa test sırasında sistemde oluşan hataları düzeltmek için gereklidir",La restricción es necesaria para depurar el sistema durante las pruebas alfa.
 The limit will be increased in a few days.,Лимит будет увеличен через несколько дней.,The limit will be increased in a few days.,,Limit bir kaç gün içersinde yükseltilecektir.,El límite se incrementará en unos días.
 Temporary limit on number of nodes.,Временный лимит на количество нод.,Temporary limit on number of nodes.,,Nod sayısında geçici limit,Límite de tiempo en el número de nodos.
+Installing a Node. It will take some time.,Установка ноды. Это может занять какое-то время.,Installing a Node. It will take some time.,,Nod kurulumu.Kurulum için belirli süre gerekebilir,Instalación del nodo. Esto puede tomar un tiempo.
+packages installed,пакетов установлено,packages installed,,dosyeler kuruldu,paquetes instalados

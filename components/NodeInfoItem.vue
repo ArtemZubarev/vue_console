@@ -9,14 +9,14 @@
         :href="linkValue"
         target="_blank"
         class="info__value linked"
-        :class="{success: valueStatus === 'ok', danger: valueStatus === 'no_ok'}"
+        :class="{success: valueStatus === 'ok', danger: valueStatus === 'not_ok'}"
       >
         {{ value }}
       </a>
       <div
         v-else
         class="info__value"
-        :class="{success: valueStatus === 'ok', danger: valueStatus === 'no_ok'}"
+        :class="{success: valueStatus === 'ok', danger: valueStatus === 'not_ok'}"
       >
         {{ value }}
       </div>

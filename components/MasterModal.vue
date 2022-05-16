@@ -56,6 +56,9 @@ export default {
           if (res) {
             this.$store.commit('masterStore/SET_STEP', nextOne)
             this.$store.dispatch('nodesStore/fetch')
+            const token = this.$cookies.get('auth')
+            this.$store.dispatch('userStore/fetchUser', token)
+            this.$store.commit('masterStore/CLEAR')
           }
         })
       } else if (Number(this.currentStep) === this.steps.length) {

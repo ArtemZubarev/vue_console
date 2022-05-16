@@ -44,7 +44,7 @@
           :title="'Status'"
           :value="$t(statuses[node.status])"
           :size="'sm'"
-          :valueStatus="node.status === 5 ? 'ok' : ''"
+          :valueStatus="node.status === 5 ? 'ok' : 'not_ok'"
         />
       </div>
     </div>
