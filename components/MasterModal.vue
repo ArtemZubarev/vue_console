@@ -58,7 +58,7 @@ export default {
             this.$store.dispatch('nodesStore/fetch')
             const token = this.$cookies.get('auth')
             this.$store.dispatch('userStore/fetchUser', token)
-            this.$store.commit('masterStore/CLEAR')
+            this.$store.commit('masterStore/CLEAR_WITHOUT_STEP_CHANGING')
           }
         })
       } else if (Number(this.currentStep) === this.steps.length) {

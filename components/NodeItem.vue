@@ -15,11 +15,16 @@
       <div class="progressbar">
         <div
           :class="['progressbar__line']"
-          :style="{width: `${(100 / blocks) * (blocksMain)}%`}"
+          :style="{width: `${(blocks / blocksMain) * (100)}%`}"
         />
       </div>
       <p class="step__status">
         {{ blocks ? blocks : 0 }} {{ $t('packages installed') }}
+        <br>
+        <!-- {{ $t('Status') }}: {{ $t(statusText) }} -->
+      </p>
+      <p class="node__setup-notice">
+        {{ $t('Installing may take a long time, you can close the browser window and reopen it later') }}
       </p>
     </template>
     <template v-else>
@@ -289,6 +294,11 @@ export default {
   &__switcher {
 
   }
+
+  &__setup-notice {
+    font-size: 14px;
+    opacity: 0.6;
+  }
 }
 .loader-box {
   position: absolute;
@@ -321,7 +331,7 @@ export default {
     opacity: 0.4;
     font-size: 14px;
     margin: 4px 0 0 0;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
   }
 }
 </style>

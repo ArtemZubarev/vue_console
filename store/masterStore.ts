@@ -60,6 +60,10 @@ export const mutations = {
   CLEAR (s) {
     Object.assign(s, initState)
   },
+  CLEAR_WITHOUT_STEP_CHANGING (s) {
+    const currentStep = s.step
+    Object.assign(s, { ...initState, step: currentStep })
+  },
   SET_STATE (s, fetchState) {
     s.fetchState = fetchState
   },

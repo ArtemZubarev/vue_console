@@ -1,4 +1,5 @@
 import { any } from 'rambda'
+import Cookies from 'js-cookie'
 import {
   FULFILLED, INIT, PENDING, REJECTED
 } from '../utils/constants'
@@ -72,7 +73,7 @@ export const actions = {
     }
   },
 
-  async silentFetch ({ commit, state }) {
+  async silentFetch ({ commit, state, dispatch }) {
     try {
       const response = await this.$api.$post('/node/all')
 
@@ -81,7 +82,9 @@ export const actions = {
         commit('UPDATE_COUNTER')
 
         if (!hasInProgress(response.data) || state.counter >= 80) {
+          const token = Cookies.get('auth')
           clearInterval(this.interval)
+          dispatch('userStore/fetchUser', token, { root: true })
         }
         commit('UPDATE_DATA', response.data)
       } else {

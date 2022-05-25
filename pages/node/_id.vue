@@ -195,9 +195,10 @@ export default {
     },
     deleteNode () {
       const { id } = this.$route.params
+      this.$store.commit('modalStore/closeModal')
       Promise.resolve(this.$store.dispatch('nodeStore/deleteNode', id)).then((res) => {
         if (res) {
-          this.$router.push('/')
+          this.$router.push(this.localePath('/'))
         }
       })
     },
