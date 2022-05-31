@@ -1,24 +1,22 @@
 <template>
   <master-layout
     :nextText="'Next'"
+    :pending="fetchState === 'PENDING' || fetchScript === 'PENDING'"
+    :nextDisabled="!didScript"
     @next="nextStep"
     @previous="$emit('previous')"
   >
     <template #title>
-      {{ $t('Step') }} 5
+      {{ $t('Step') }} 6
     </template>
     <template #main>
       <div class="main">
         <div class="main__text">
-          {{ $t('Insert Digital Ocean token') }}
+          {{ $t('Copy the script and run it in the terminal of your VPS. Wait for the script to execute') }}
         </div>
-        <with-loader :active="fetchState === 'PENDING'" :withBackground="true">
-          <master-input
-            :label="$t('Digital Ocean token')"
-            :value="token"
-            :errors="errors"
-            @change-value="handleToken"
-          />
+        <with-loader :active="fetchState === 'PENDING' || fetchScript === 'PENDING'" :withBackground="true">
+          <master-script :value="script" :label="$t('Script')" />
+          <common-checkbox :value="didScript" :name="$t('I did it')" @change-value="didIt" />
         </with-loader>
       </div>
     </template>
@@ -28,39 +26,40 @@
 <script>
 import { mapGetters } from 'vuex'
 import MasterLayout from './MasterLayout.vue'
-import MasterInput from './MasterInput.vue'
-import WithLoader from './WithLoader.vue'
 
 export default {
   components: {
-    MasterLayout,
-    MasterInput,
-    WithLoader
+    MasterLayout
   },
   data () {
     return {
-      errors: []
+      errors: [],
+      didScript: false
     }
   },
   computed: {
     ...mapGetters({
       fetchState: 'masterStore/fetchState',
-      token: 'masterStore/token'
+      fetchScript: 'getScript/fetchState',
+      script: 'getScript/script'
+
     })
   },
+  mounted () {
+    this.$store.dispatch('getScript/getScript', this.ip)
+  },
   methods: {
-    handleToken (value) {
-      this.$store.commit('masterStore/UPDATE_TOKEN', value)
-      this.errors = []
-    },
     nextStep () {
-      if (this.token.trim()) {
+      if (this.didScript) {
         this.$emit('next')
-      } else {
-        this.errors = ["Token can't be empty"]
       }
+    },
+    didIt (value) {
+      this.didScript = value
     }
+
   }
+
 }
 </script>
 
@@ -70,24 +69,16 @@ export default {
   display: inline-block;
   margin: 0 auto;
   width: 100%;
-  max-width: 353px;
+  max-width: 480px;
 
   &__text {
     text-align: center;
     margin-bottom: 8px;
     color: $colorFontBase;
+    max-width: 336px;
+    margin: 0 auto;
+    font-size: 14px;
   }
-}
-.loader-box {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(255, 255, 255, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .button {
   margin: 0 auto;

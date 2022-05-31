@@ -45,11 +45,11 @@ export const mutations = {
 }
 
 export const actions = {
-  async checkAddress ({ commit }, address) {
+  async checkIp ({ commit }, ip) {
     commit('SET_STATE', PENDING)
     try {
-      const response = await this.$api.$post('/node/validAddress', {
-        address
+      const response = await this.$api.$post('/node/checkIp', {
+        ip
       })
 
       if (response.code === 0) {

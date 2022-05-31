@@ -13,7 +13,10 @@ const initState = {
     token: '',
     address: '',
     name: '',
-    contract: null
+    contract: null,
+    provider: 'other', // DO || other
+    ip: '',
+    script: false
   },
   step: '1',
   fetchState: INIT,
@@ -46,6 +49,12 @@ export const getters = {
   },
   contracts (s) {
     return pathOr('', ['data', 'contracts'], s)
+  },
+  provider (s) {
+    return pathOr('', ['userChoice', 'provider'], s)
+  },
+  ip (s) {
+    return pathOr('', ['userChoice', 'ip'], s)
   }
 }
 
@@ -81,6 +90,12 @@ export const mutations = {
   },
   SET_STEP (s, value) {
     s.step = value
+  },
+  UPDATE_PROVIDER (s, value) {
+    s.userChoice.provider = value
+  },
+  UPDATE_IP (s, value) {
+    s.userChoice.ip = value
   }
 
 }
@@ -132,28 +147,6 @@ export const actions = {
       console.error(err)
       return undefined
     }
-  },
-
-  async checkStatus ({ commit, state }, id) {
-    if (state.fetchState === PENDING) {
-      return
-    }
-
-    commit('SET_STATE', PENDING)
-    try {
-      const response = await this.$api.$post('/node/getStatus', { id })
-
-      if (response.code === 0) {
-        commit('SET_STATE', FULFILLED)
-        return response.data
-      } else {
-        commit('SET_STATE', REJECTED)
-        return undefined
-      }
-    } catch (err) {
-      commit('SET_STATE', REJECTED)
-      console.error(err)
-      return undefined
-    }
   }
+
 }

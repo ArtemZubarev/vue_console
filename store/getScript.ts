@@ -13,8 +13,8 @@ export const getters = {
   fetchState (s) {
     return s.fetchState
   },
-  isValid (s) {
-    return s.data === 0
+  script (s) {
+    return s.data
   },
   errors (s) {
     switch (s.data) {
@@ -45,11 +45,11 @@ export const mutations = {
 }
 
 export const actions = {
-  async checkAddress ({ commit }, address) {
+  async getScript ({ commit }, ip) {
     commit('SET_STATE', PENDING)
     try {
-      const response = await this.$api.$post('/node/validAddress', {
-        address
+      const response = await this.$api.$post('/node/getInstallScript', {
+        ip
       })
 
       if (response.code === 0) {
