@@ -69,8 +69,6 @@ export default {
     }
 
     this.$store.dispatch('nodesStore/fetch')
-    //
-    this.startMaster()
   },
   beforeDestroy () {
     this.$store.commit('nodesStore/CLEAR_INTERVAL')
