@@ -14,7 +14,7 @@ const initState = {
     address: '',
     name: '',
     contract: null,
-    provider: 'other', // DO || other
+    provider: 'DO', // DO || other
     ip: '',
     script: false
   },

@@ -14,6 +14,7 @@
       <textarea
         class="script__text"
         rows="7"
+        readonly
         :value="value"
       />
     </div>
