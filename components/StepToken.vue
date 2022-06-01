@@ -1,6 +1,6 @@
 <template>
   <master-layout
-    :nextText="'Next'"
+    :nextText="'Create a node'"
     @next="nextStep"
     @previous="$emit('previous')"
   >

@@ -1,7 +1,7 @@
 <template>
   <master-layout
-    :nextText="'Next'"
-    :pending="fetchState === 'PENDING'"
+    :nextText="'Create a node'"
+    :pending="fetchState === 'PENDING' || fetchIp === 'PENDING'"
     @next="nextStep"
     @previous="$emit('previous')"
   >
@@ -13,7 +13,7 @@
         <div class="main__text">
           {{ $t('Insert your VPS IP address') }}
         </div>
-        <with-loader :active="fetchState === 'PENDING'" :withBackground="true">
+        <with-loader :active="fetchState === 'PENDING' || fetchIp === 'PENDING'" :withBackground="true">
           <master-input
             :label="$t('IP')"
             :value="ip"
@@ -43,15 +43,33 @@ export default {
   computed: {
     ...mapGetters({
       fetchState: 'masterStore/fetchState',
+      fetchIp: 'checkIp/fetchState',
       ip: 'masterStore/ip'
     })
   },
   methods: {
     handleIP (value) {
+      if (this.errors.length) {
+        this.errors = []
+      }
       this.$store.commit('masterStore/UPDATE_IP', value)
     },
     nextStep () {
-      this.$emit('next')
+      // this.$emit('next')
+      if (this.ip.trim()) {
+        this.checkIp()
+      } else {
+        this.errors = ['IP address cannot be empty']
+      }
+    },
+    checkIp () {
+      Promise.resolve(this.$store.dispatch('checkIp/checkIp', this.ip)).then((res) => {
+        if (res) {
+          this.$emit('next')
+        } else {
+          this.errors = ['No access to this IP address']
+        }
+      })
     }
   }
 

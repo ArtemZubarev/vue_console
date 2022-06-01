@@ -147,6 +147,31 @@ export const actions = {
       console.error(err)
       return undefined
     }
+  },
+
+  async createNodeCustom ({ commit, state }) {
+    if (state.fetchState === INIT) {
+      return
+    }
+
+    commit('SET_STATE', PENDING)
+    try {
+      const payload = { ...state.userChoice }
+
+      const response = await this.$api.$post('/node/customBuy', { ...payload })
+
+      if (response.code === 0) {
+        commit('SET_STATE', FULFILLED)
+        return response.data
+      } else {
+        commit('SET_STATE', REJECTED)
+        return undefined
+      }
+    } catch (err) {
+      commit('SET_STATE', REJECTED)
+      console.error(err)
+      return undefined
+    }
   }
 
 }

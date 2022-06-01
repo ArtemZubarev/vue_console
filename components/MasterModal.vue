@@ -10,10 +10,11 @@
     <step-address v-if="currentStep == '3'" @next="nextStep" @previous="previousStep" />
     <step-provider v-if="currentStep == '4'" @next="nextStep" @previous="previousStep" />
 
+    <step-token v-if="currentStep == '105'" @next="nextStep" @previous="previousStep" />
+
     <step-script v-if="currentStep == '205'" @next="nextStep" @previous="previousStep" />
     <step-ip-address v-if="currentStep == '206'" @next="nextStep" @previous="previousStep" />
 
-    <step-token v-if="currentStep == '105'" @next="nextStep" @previous="previousStep" />
     <step-done v-if="currentStep == '106' || currentStep == '207'" @next="nextStep" />
   </common-modal>
 </template>
@@ -74,8 +75,18 @@ export default {
       if (this.currentStep === 4 && this.provider === 'DO') {
         nextOne = nextOne + 100
       }
-      if (Number(this.currentStep) === 105 || Number(this.currentStep) === 206) {
+      if (Number(this.currentStep) === 105) {
         Promise.resolve(this.$store.dispatch('masterStore/createNode')).then((res) => {
+          if (res) {
+            this.$store.commit('masterStore/SET_STEP', nextOne)
+            this.$store.dispatch('nodesStore/fetch')
+            const token = this.$cookies.get('auth')
+            this.$store.dispatch('userStore/fetchUser', token)
+            this.$store.commit('masterStore/CLEAR_WITHOUT_STEP_CHANGING')
+          }
+        })
+      } else if (Number(this.currentStep) === 206) {
+        Promise.resolve(this.$store.dispatch('masterStore/createNodeCustom')).then((res) => {
           if (res) {
             this.$store.commit('masterStore/SET_STEP', nextOne)
             this.$store.dispatch('nodesStore/fetch')
