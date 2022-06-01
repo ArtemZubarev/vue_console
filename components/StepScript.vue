@@ -7,7 +7,7 @@
     @previous="$emit('previous')"
   >
     <template #title>
-      {{ $t('Step') }} 6
+      {{ $t('Step') }} 5
     </template>
     <template #main>
       <div class="main">
