@@ -15,7 +15,7 @@
         class="button"
         :filled="true"
         :text="$t(nextText)"
-        :disabled="pending"
+        :disabled="pending || nextDisabled"
         @click="$emit('next')"
       />
       <common-button
@@ -61,6 +61,11 @@ export default {
       type: Boolean,
       required: false,
       default: () => false
+    },
+    nextDisabled: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   }
 

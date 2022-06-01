@@ -13,7 +13,10 @@ const initState = {
     token: '',
     address: '',
     name: '',
-    contract: null
+    contract: null,
+    provider: 'other', // DO || other
+    ip: '',
+    script: false
   },
   step: '1',
   fetchState: INIT,
@@ -46,6 +49,12 @@ export const getters = {
   },
   contracts (s) {
     return pathOr('', ['data', 'contracts'], s)
+  },
+  provider (s) {
+    return pathOr('', ['userChoice', 'provider'], s)
+  },
+  ip (s) {
+    return pathOr('', ['userChoice', 'ip'], s)
   }
 }
 
@@ -81,6 +90,12 @@ export const mutations = {
   },
   SET_STEP (s, value) {
     s.step = value
+  },
+  UPDATE_PROVIDER (s, value) {
+    s.userChoice.provider = value
+  },
+  UPDATE_IP (s, value) {
+    s.userChoice.ip = value
   }
 
 }
@@ -134,14 +149,16 @@ export const actions = {
     }
   },
 
-  async checkStatus ({ commit, state }, id) {
-    if (state.fetchState === PENDING) {
+  async createNodeCustom ({ commit, state }) {
+    if (state.fetchState === INIT) {
       return
     }
 
     commit('SET_STATE', PENDING)
     try {
-      const response = await this.$api.$post('/node/getStatus', { id })
+      const payload = { ...state.userChoice }
+
+      const response = await this.$api.$post('/node/customBuy', { ...payload })
 
       if (response.code === 0) {
         commit('SET_STATE', FULFILLED)
@@ -156,4 +173,5 @@ export const actions = {
       return undefined
     }
   }
+
 }

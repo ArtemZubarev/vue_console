@@ -48,5 +48,9 @@ export default {
     color: #fff;
     border-color: #317B92;
   }
+  &:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+  }
 }
 </style>

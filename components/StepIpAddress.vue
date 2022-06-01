@@ -1,6 +1,7 @@
 <template>
   <master-layout
     :nextText="'Create a node'"
+    :pending="fetchState === 'PENDING' || fetchIp === 'PENDING'"
     @next="nextStep"
     @previous="$emit('previous')"
   >
@@ -10,14 +11,15 @@
     <template #main>
       <div class="main">
         <div class="main__text">
-          {{ $t('Insert Digital Ocean token') }}
+          {{ $t('Insert your VPS IP address') }}
         </div>
-        <with-loader :active="fetchState === 'PENDING'" :withBackground="true">
+        <with-loader :active="fetchState === 'PENDING' || fetchIp === 'PENDING'" :withBackground="true">
           <master-input
-            :label="$t('Digital Ocean token')"
-            :value="token"
+            :label="$t('IP')"
+            :value="ip"
+            :maxlength="30"
             :errors="errors"
-            @change-value="handleToken"
+            @change-value="handleIP"
           />
         </with-loader>
       </div>
@@ -28,14 +30,10 @@
 <script>
 import { mapGetters } from 'vuex'
 import MasterLayout from './MasterLayout.vue'
-import MasterInput from './MasterInput.vue'
-import WithLoader from './WithLoader.vue'
 
 export default {
   components: {
-    MasterLayout,
-    MasterInput,
-    WithLoader
+    MasterLayout
   },
   data () {
     return {
@@ -45,22 +43,36 @@ export default {
   computed: {
     ...mapGetters({
       fetchState: 'masterStore/fetchState',
-      token: 'masterStore/token'
+      fetchIp: 'checkIp/fetchState',
+      ip: 'masterStore/ip'
     })
   },
   methods: {
-    handleToken (value) {
-      this.$store.commit('masterStore/UPDATE_TOKEN', value)
-      this.errors = []
+    handleIP (value) {
+      if (this.errors.length) {
+        this.errors = []
+      }
+      this.$store.commit('masterStore/UPDATE_IP', value)
     },
     nextStep () {
-      if (this.token.trim()) {
-        this.$emit('next')
+      // this.$emit('next')
+      if (this.ip.trim()) {
+        this.checkIp()
       } else {
-        this.errors = ["Token can't be empty"]
+        this.errors = ['IP address cannot be empty']
       }
+    },
+    checkIp () {
+      Promise.resolve(this.$store.dispatch('checkIp/checkIp', this.ip)).then((res) => {
+        if (res) {
+          this.$emit('next')
+        } else {
+          this.errors = ['No access to this IP address']
+        }
+      })
     }
   }
+
 }
 </script>
 
@@ -77,17 +89,6 @@ export default {
     margin-bottom: 8px;
     color: $colorFontBase;
   }
-}
-.loader-box {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(255, 255, 255, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .button {
   margin: 0 auto;

@@ -6,15 +6,23 @@
   >
     <div class="progress" :style="{width: progressWidth}" />
     <step-contract v-if="currentStep == '1'" @next="nextStep" />
-    <step-token v-if="currentStep == '2'" @next="nextStep" @previous="previousStep" />
+    <step-name v-if="currentStep == '2'" @next="nextStep" @previous="previousStep" />
     <step-address v-if="currentStep == '3'" @next="nextStep" @previous="previousStep" />
-    <step-name v-if="currentStep == '4'" @next="nextStep" @previous="previousStep" />
-    <step-done v-if="currentStep == '5'" @next="nextStep" />
+    <step-provider v-if="currentStep == '4'" @next="nextStep" @previous="previousStep" />
+
+    <step-token v-if="currentStep == '105'" @next="nextStep" @previous="previousStep" />
+
+    <step-script v-if="currentStep == '205'" @next="nextStep" @previous="previousStep" />
+    <step-ip-address v-if="currentStep == '206'" @next="nextStep" @previous="previousStep" />
+
+    <step-done v-if="currentStep == '106' || currentStep == '207'" @next="nextStep" />
   </common-modal>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import StepScript from './StepScript.vue'
+import StepIpAddress from '~/components/StepIpAddress.vue'
 import CommonModal from '@/components/CommonModal.vue'
 import StepToken from '~/components/StepToken.vue'
 import StepAddress from '~/components/StepAddress.vue'
@@ -27,19 +35,22 @@ export default {
     StepToken,
     StepAddress,
     StepName,
-    StepDone
+    StepDone,
+    StepIpAddress,
+    StepScript
   },
   data () {
     return {
       name: 'MasterModal',
-      steps: [1, 2, 3, 4, 5],
+      steps: [1, 2, 3, 4, 105, 106, 205, 206],
       timeout: null,
       currentStatus: null
     }
   },
   computed: {
     ...mapGetters({
-      currentStep: 'masterStore/step'
+      currentStep: 'masterStore/step',
+      provider: 'masterStore/provider'
     }),
     progressWidth () {
       return `${100 / this.steps.length * this.currentStep}%`
@@ -47,11 +58,24 @@ export default {
   },
   methods: {
     previousStep () {
-      this.$store.commit('masterStore/SET_STEP', Number(this.currentStep) - 1)
+      let prevOne = Number(this.currentStep) - 1
+      if (this.currentStep === 105) {
+        prevOne = prevOne - 100
+      }
+      if (this.currentStep === 205) {
+        prevOne = prevOne - 200
+      }
+      this.$store.commit('masterStore/SET_STEP', prevOne)
     },
     nextStep () {
-      const nextOne = Number(this.currentStep) + 1
-      if (Number(this.currentStep) === this.steps.length - 1) {
+      let nextOne = Number(this.currentStep) + 1
+      if (this.currentStep === 4 && this.provider === 'other') {
+        nextOne = nextOne + 200
+      }
+      if (this.currentStep === 4 && this.provider === 'DO') {
+        nextOne = nextOne + 100
+      }
+      if (Number(this.currentStep) === 105) {
         Promise.resolve(this.$store.dispatch('masterStore/createNode')).then((res) => {
           if (res) {
             this.$store.commit('masterStore/SET_STEP', nextOne)
@@ -61,7 +85,17 @@ export default {
             this.$store.commit('masterStore/CLEAR_WITHOUT_STEP_CHANGING')
           }
         })
-      } else if (Number(this.currentStep) === this.steps.length) {
+      } else if (Number(this.currentStep) === 206) {
+        Promise.resolve(this.$store.dispatch('masterStore/createNodeCustom')).then((res) => {
+          if (res) {
+            this.$store.commit('masterStore/SET_STEP', nextOne)
+            this.$store.dispatch('nodesStore/fetch')
+            const token = this.$cookies.get('auth')
+            this.$store.dispatch('userStore/fetchUser', token)
+            this.$store.commit('masterStore/CLEAR_WITHOUT_STEP_CHANGING')
+          }
+        })
+      } else if (Number(this.currentStep) === 106 || Number(this.currentStep) === 207) {
         this.$store.commit('modalStore/closeModal')
         this.$store.commit('masterStore/SET_STEP', 1)
         this.$store.commit('checkStore/CLEAR')
