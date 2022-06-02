@@ -71,3 +71,17 @@ Temporary limit on number of nodes.,Временный лимит на коли�
 Installing a Node. It will take some time.,Установка ноды. Это может занять какое-то время.,Installing a Node. It will take some time.,,Nod kurulumu.Kurulum için belirli süre gerekebilir,Instalación del nodo. Esto puede tomar un tiempo.
 packages installed,пакетов установлено,packages installed,,dosyeler kuruldu,paquetes instalados
 "Installing may take a long time, you can close the browser window and reopen it later","Установка может занять продолжительное время, вы можете закрыть окно браузера и вернуться позже","Installing may take a long time, you can close the browser window and reopen it later",,"Kurulum süresi belirli bir zaman alabilir,tarayıcı penceresini kapatıp,daha sonra yeniden açabilirsiniz","La instalación puede llevar mucho tiempo, usted puede cerrar la ventana del navegador y volver más tarde"
+Select a VPS provider,Выберите VPS провайдер,Select a VPS provider,,VPS sağlayıcı seçin,Seleccione un proveedor de VPS
+Minimum specifications,Минимальные требования,Minimum specifications,,en düşük özellik,Especificaciones mínimas
+This option requires expertise.,Этот вариант требует специальных знаний и опыта,This option requires expertise.,,Uzmanlık gerektiren seçenek,Esta opción requiere experiencia.
+DigitalOcean,DigitalOcean,DigitalOcean,,DigitalOcean,DigitalOcean
+Unlimited,Безлимитный,Unlimited,,Безлимитный,Ilimitado
+Insert your VPS IP address,Добавьте IP адрес VPS сервера,Insert your VPS IP address,,VPS IP adresinizi girin,Inserte su dirección IP de VPS
+Copy the script and run it in the terminal of your VPS. Wait for the script to execute,Скопируйте скрипт и запустите в терминале на вашем VPS. Дождитесь выполнения скрипта,Copy the script and run it in the terminal of your VPS. Wait for the script to execute,,Komut dosyasını kopyalayın ve VPS'nizin terminalinde çalıştırın. Komut dosyasının yürütülmesini bekleyin,Copie el script y ejecútelo en el  terminal de su VPS. Espere a que se ejecute el script
+Script,Скрипт,Script,,Senaryo,Script
+I did it,Я сделал это,I did it,,Yapıldı,Lo hice
+No access to this IP address,Нет доступа к IP адресу,No access to this IP address,,Bu IP adresine erişim yapılamıyor,Sin acceso a esta dirección IP
+IP address cannot be empty,IP адрес не может быть пустым,IP address cannot be empty,,IP adres boş ,La dirección IP no puede estar vacía
+Create a node,Создать ноду,Create a node,,Nod oluştur,Crear un nodo
+Copy,Скопировать,Copy,,Kopyalayın,Copie
+Copied,Скопировано,Copy,,Kopyalanmış,Copiado
