@@ -198,6 +198,8 @@ export default {
       this.$store.commit('modalStore/closeModal')
       Promise.resolve(this.$store.dispatch('nodeStore/deleteNode', id)).then((res) => {
         if (res) {
+          const token = this.$cookies.get('auth')
+          this.$store.dispatch('userStore/fetchUser', token)
           this.$router.push(this.localePath('/'))
         }
       })

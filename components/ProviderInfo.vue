@@ -1,6 +1,7 @@
 <template>
   <div class="spec">
     <div class="spec__expertise">
+      <svg-icon name="common/info" class="spec__icon" />
       {{ $t('This option requires expertise.') }}
     </div>
     <div class="spec__title">
@@ -68,6 +69,7 @@ export default {
     color: $colorFontBase;
     opacity: 0.4;
     margin-top: 12px;
+    font-size: 14px;
 
   }
   &__table {
@@ -84,13 +86,23 @@ export default {
     border-radius: 4px;
     padding: 4px;
     color: $colorFontBase;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
   }
   &__name {
     color: $colorFontBase;
+    font-size: 14px;
   }
   &__value {
     font-weight: 700;
     color: $colorFontBase;
+    font-size: 14px;
+  }
+  &__icon {
+    width: 13.3px;
+    height: 13.3px;
+    margin-right: 5px;
   }
 }
 </style>

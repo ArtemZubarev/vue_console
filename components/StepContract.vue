@@ -97,6 +97,7 @@ export default {
     text-align: center;
     margin-bottom: 30px;
     color: $colorFontBase;
+    font-size: 14px;
   }
 }
 .loader-box {

@@ -74,6 +74,7 @@ export default {
     text-align: center;
     margin-bottom: 8px;
     color: $colorFontBase;
+    font-size: 14px;
   }
 }
 .button {

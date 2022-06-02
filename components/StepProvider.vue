@@ -21,6 +21,7 @@
               :class="['contracts__item', { picked: provider.value === selectedProvider}]"
               @click="pickProvider(provider.value)"
             >
+              <svg-icon v-if="provider.value === 'DO'" name="common/do" class="contracts__icon" />
               {{ $t(provider.name) }}
             </div>
           </div>
@@ -85,6 +86,7 @@ export default {
     text-align: center;
     margin-bottom: 30px;
     color: $colorFontBase;
+    font-size: 14px;
   }
 }
 .loader-box {
@@ -116,12 +118,15 @@ export default {
     color: $colorFontBase;
     min-width: 90px;
     text-align: center;
+    width: 50%;
 
     &:first-of-type {
       border-radius: 4px 0px 0px 4px;
     }
     &:last-of-type {
-      border-radius:  0px 4px 4px 0px ;
+      border-radius:  0px 4px 4px 0px;
+      display: flex;
+      align-items: center;
     }
     &:not(:disabled) {
       cursor: pointer;
@@ -144,6 +149,12 @@ export default {
     text-align: center;
     margin-top: 10px;
     color: $colorDanger;
+  }
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 2px;
   }
 }
 
