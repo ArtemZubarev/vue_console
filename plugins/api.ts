@@ -24,9 +24,6 @@ export default function ({ $axios, $toast }: any, inject: any) {
           if (!process.server && res.message && res.message.text) {
             $toast.error(res.message.text)
           }
-          if (!process.server && (!res.message || !res.message.text)) {
-            $toast.error('Unknown error')
-          }
           if (res.code === 4) {
             Cookies.remove('auth')
             window.location.reload()
