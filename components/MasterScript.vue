@@ -2,10 +2,10 @@
   <div :class="['script']">
     <div class="script__box flexed">
       <label class="script__label" for="">{{ label }}</label>
-      <span v-if="copied" class="script__copy copied">
+      <span v-if="copied" :key="'copied'" class="script__copy copied">
         {{ $t('Copied') }}
       </span>
-      <span v-else class="script__copy" @click="copy">
+      <span v-else :key="'copy'" class="script__copy" @click="copy">
         {{ $t('Copy') }}
       </span>
     </div>
