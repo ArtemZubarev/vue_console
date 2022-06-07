@@ -128,6 +128,9 @@ export default {
       return ''
     },
     uptime () {
+      if (!this.node.uptime) {
+        return '-'
+      }
       dayjs.locale(this.$i18n.locale)
       const now = dayjs()
       const uptime = dayjs.unix(this.node.uptime ? this.node.uptime : now)

@@ -19,9 +19,15 @@
         />
       </div>
       <p class="step__status">
-        {{ blocks ? blocks : 0 }} {{ $t('packages installed') }}
+        <span>
+
+          {{ blocks ? blocks : 0 }} {{ $t('packages installed') }}
+        </span>
         <br>
-        <!-- {{ $t('Status') }}: {{ $t(statusText) }} -->
+        <b>
+
+          {{ $t(statusText) }}
+        </b>
       </p>
       <p class="node__setup-notice">
         {{ $t('Installing may take a long time, you can close the browser window and reopen it later') }}
@@ -214,7 +220,9 @@ export default {
 
   &__installing {
     font-size: 14px;
-    margin-top: 60px;
+    margin-top: 50px;
+    text-align: center;
+
   }
 
   &__content {
@@ -296,8 +304,16 @@ export default {
   }
 
   &__setup-notice {
-    font-size: 14px;
+    position: absolute;
+    font-size: 13px;
     opacity: 0.6;
+    width: 100%;
+    background: #fff;
+    bottom: 0;
+    left: 0;
+    padding: 8px 24px;
+    margin: 0;
+    box-sizing: border-box;
   }
 }
 .loader-box {
@@ -317,7 +333,7 @@ export default {
   background: #fff 0% 0% no-repeat padding-box;
   height: 16px;
   border-radius: 4px;
-  margin-top: 10px;
+  margin-top: 20px;
 
   &__line {
     position: absolute;
@@ -329,9 +345,11 @@ export default {
 .step {
   &__status {
     opacity: 0.4;
-    font-size: 14px;
+    font-size: 13px;
     margin: 4px 0 0 0;
-    margin-bottom: 50px;
+    margin-bottom: 80px;
+    display: flex;
+    justify-content: space-between;
   }
 }
 </style>

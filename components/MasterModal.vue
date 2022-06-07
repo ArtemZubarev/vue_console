@@ -1,7 +1,7 @@
 <template>
   <common-modal
     :name="name"
-    :clickToClose="currentStep !== '5' ? true : false"
+    :clickToClose="currentStep == '106' || currentStep == '207' ? false : true"
     @next="nextStep"
   >
     <div class="progress" :style="{width: progressWidth}" />
@@ -53,7 +53,15 @@ export default {
       provider: 'masterStore/provider'
     }),
     progressWidth () {
-      return `${100 / this.steps.length * this.currentStep}%`
+      let step = Number(this.currentStep)
+      const length = 6
+      if (step > 100 && step < 200) {
+        step = step - 100
+      } else if (step > 200) {
+        step = step - 200
+      }
+
+      return `${100 / length * step}%`
     }
   },
   methods: {
