@@ -25,11 +25,11 @@
               {{ `${$t('Contract')} ${contract.type}` }}
             </div>
           </div>
-          <div class="main__info-box">
-            <contract-info v-if="contractData" :contract="contractData" />
-          </div>
           <div v-if="noAvailableContracts && fetchState !== 'PENDING'" class="contracts__availability">
             {{ $t('No available contracts') }}
+          </div>
+          <div v-else class="main__info-box">
+            <contract-info v-if="contractData" :contract="contractData" />
           </div>
         </with-loader>
       </div>
