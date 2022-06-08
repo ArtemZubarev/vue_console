@@ -42,7 +42,7 @@ export default {
   data () {
     return {
       name: 'MasterModal',
-      steps: [1, 2, 3, 4, 105, 106, 205, 206],
+      steps: [1, 2, 3, 4, 105, 205, 206],
       timeout: null,
       currentStatus: null
     }
@@ -54,9 +54,10 @@ export default {
     }),
     progressWidth () {
       let step = Number(this.currentStep)
-      const length = 6
+      let length = 6
       if (step > 100 && step < 200) {
         step = step - 100
+        length = 5
       } else if (step > 200) {
         step = step - 200
       }
