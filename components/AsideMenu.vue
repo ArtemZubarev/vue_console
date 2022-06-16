@@ -22,6 +22,8 @@
 
 <script>
 import LoggedMenu from './LoggedMenu.vue'
+import { langsObjects } from '@/utils/availableLangs'
+
 export default {
   components: { LoggedMenu },
   props: {
@@ -32,17 +34,13 @@ export default {
   },
   data () {
     return {
-      langs: [
-        {
-          code: 'ru'
-        },
-        {
-          code: 'en'
-        },
-        {
-          code: 'tr'
-        }
-      ]
+    }
+  },
+  computed: {
+    langs () {
+      const langs = langsObjects
+
+      return langs.filter(lang => lang.code !== this.$i18n.locale)
     }
   }
 }

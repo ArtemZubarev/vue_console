@@ -45,16 +45,8 @@ export default {
   },
   computed: {
     chartHref () {
-      const url = 'https://www.dropbox.com/sh/8gl6xp4h490el0j/AAAahBgs4F2XpA7Zlqesj03Xa?dl=0'
-      const urlParamsFromLocale = {
-        de: '&preview=Berechnung+durch+Knoten+DE.xlsx',
-        ru: '&preview=Расчёт+по+нодам+v_2-13.xlsx',
-        en: '&preview=Calculation+by+nodes+EN.xlsx',
-        es: '&preview=Calculation+by+nodes+EN.xlsx',
-        tr: '&preview=Düğümlere+göre+hesaplama+TR.xlsx'
-      }
-      const currentLocale = this.$i18n.locale
-      return `${url}${urlParamsFromLocale[currentLocale]}`
+      const locale = this.$i18n.currentLocale === 'ru' ? '' : 'en/'
+      return `http://oton-technology.108dev.ru/${locale}calc/`
     }
   }
 }

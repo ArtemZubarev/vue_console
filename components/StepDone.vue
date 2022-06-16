@@ -13,7 +13,7 @@
     <template #main>
       <div class="main">
         <div class="main__text">
-          {{ $t('Node will be created in a few minutes.') }}
+          {{ $t('Node will be created in a while.') }}
         </div>
         <common-button class="button" :filled="false" :text="$t('Ok')" @click="$emit('next')" />
         <!-- <with-loader :active="fetchState === 'PENDING'" :withBackground="true">
