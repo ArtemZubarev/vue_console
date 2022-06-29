@@ -7,6 +7,7 @@
           <nuxt-link :to="localePath('index')">
             <oton-logo />
           </nuxt-link>
+          <a :href="technologyLink">{{ $t('Buy node') }}</a>
         </template>
         <template #mainMenu>
           <header-menu>
@@ -131,6 +132,12 @@ export default {
     }
   },
   computed: {
+    technologyLink () {
+      const link = 'https://contracts.oton.technology'
+      const lang = this.$i18n.locale === 'ru' ? '/ru' : ''
+
+      return link + lang
+    },
     availableLangs () {
       const langs = langsObjects
 
