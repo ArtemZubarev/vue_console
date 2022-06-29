@@ -41,7 +41,7 @@
         <div class="node__block">
           <node-info-item
             :title="'Votings'"
-            :value="votings !== 'failed' && votings !== 'pending' ? votings : ''"
+            :value="votings !== 'failed' && votings !== 'pending' ? votings : 0"
           >
             <common-loader
               v-if="votings === 'pending'"

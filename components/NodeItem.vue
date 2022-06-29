@@ -54,7 +54,7 @@
               :spinnerSize="20"
               :centered="false"
             />
-            <span v-else-if="reward === 'failed'">{{ $t('Loading error') }}</span>
+            <span v-else-if="reward === 'failed'">0</span>
             <span v-else>{{ reward }}</span>
           </div>
         </div>
