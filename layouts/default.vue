@@ -7,7 +7,6 @@
           <nuxt-link :to="localePath('index')">
             <oton-logo />
           </nuxt-link>
-          <a :href="technologyLink">{{ $t('Buy node') }}</a>
         </template>
         <template #mainMenu>
           <header-menu>
@@ -18,9 +17,9 @@
               >
                 <a
                   v-if="link.out"
+                  target="_blank"
                   :href="link.href"
                   class="layoutHeaderMenu__link"
-                  target="_blank"
                 >
                   {{ $t(link.text) }}
                   <svg-icon v-if="link.text === 'Manual'" class="manual" name="common/link" />
@@ -148,6 +147,11 @@ export default {
         {
           text: 'Nodes',
           href: 'index'
+        },
+        {
+          text: 'Buy Node',
+          href: this.technologyLink,
+          out: true
         },
         {
           text: 'Manual',

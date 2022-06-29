@@ -1,5 +1,6 @@
 <template>
   <div class="page">
+    <technology-banner />
     <with-loader :active="fetchState === 'PENDING'">
       <div v-if="fetchState === 'FULFILLED' && nodesList.length === 0" class="empty">
         <CreateNode :limits="nodesLimits" @create="startMaster" />
@@ -35,6 +36,7 @@ import MasterModal from '~/components/MasterModal.vue'
 import WithLoader from '@/components/WithLoader.vue'
 import MasterDone from '@/components/MasterDone.vue'
 import techWorks from '@/utils/techWorks'
+import TechnologyBanner from '@/components/TechnologyBanner.vue'
 
 export default {
   name: 'IndexPage',
@@ -43,7 +45,8 @@ export default {
     NodeItem,
     MasterModal,
     WithLoader,
-    MasterDone
+    MasterDone,
+    TechnologyBanner
   },
   layout: 'default',
   middleware: ['isAuth', 'localeRedirect'],
