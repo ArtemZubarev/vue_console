@@ -54,13 +54,15 @@ export default {
     justify-content: center;
     align-items: center;
     padding: 25px 10px;
+    text-align: center;
   }
   &__link {
     color: #fff;
     font-size: 25px;
     font-weight: bold;
     top: -4px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
   }
 }
 </style>
