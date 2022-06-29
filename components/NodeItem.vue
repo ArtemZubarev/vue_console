@@ -47,7 +47,15 @@
             {{ $t('Earned in total') }}
           </div>
           <div class="node__block-value">
-            {{ node.earned }}
+            <common-loader
+              v-if="reward === 'pending'"
+              class="loader"
+              :active="true"
+              :spinnerSize="20"
+              :centered="false"
+            />
+            <span v-else-if="reward === 'failed'">{{ $t('Loading error') }}</span>
+            <span v-else>{{ reward }}</span>
           </div>
         </div>
         <div class="node__block">
@@ -71,7 +79,15 @@
             {{ $t('Votings') }}
           </div>
           <div class="node__block-value">
-            {{ node.votings }}
+            <common-loader
+              v-if="votings === 'pending'"
+              class="loader"
+              :active="true"
+              :spinnerSize="20"
+              :centered="false"
+            />
+            <span v-else-if="votings === 'failed'">{{ $t('Loading error') }}</span>
+            <span v-else>{{ votings }}</span>
           </div>
         </div>
       </div>
@@ -122,6 +138,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import duration from 'dayjs/plugin/duration'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import * as dayjs from 'dayjs'
@@ -151,6 +168,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      rewards: 'rewardsStore/rewards'
+    }),
     uptime () {
       dayjs.locale(this.$i18n.locale)
       const now = dayjs()
@@ -173,6 +193,32 @@ export default {
     },
     blocksMain () {
       return this.node.blocksMain ?? 0
+    },
+    reward () {
+      const reward = this.rewards[this.node.address]
+      if (reward) {
+        if (reward.status === 'fetched') {
+          return reward.data.oton.amount
+        } else if (reward.status === 'failed') {
+          return 'failed'
+        }
+        return 'failed'
+      } else {
+        return 'pending'
+      }
+    },
+    votings () {
+      const reward = this.rewards[this.node.address]
+      if (reward) {
+        if (reward.status === 'fetched') {
+          return reward.data.oton.transactions
+        } else if (reward.status === 'failed') {
+          return 'failed'
+        }
+        return 'failed'
+      } else {
+        return 'pending'
+      }
     }
   },
   methods: {
@@ -244,12 +290,14 @@ export default {
   }
 
   &__block-value {
+    position: relative;
     font-size: 24px;
     font-weight: bold;
     margin-top: 4px;
     overflow: hidden;
     text-overflow: ellipsis;
     word-wrap: break-word;
+    height: 100%;
 
     &.danger {
       color: #EC5D6B;

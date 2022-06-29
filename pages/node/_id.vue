@@ -19,13 +19,39 @@
     <div class="node__content">
       <div class="node__info">
         <div class="node__block">
-          <node-info-item :title="'Earned in total'" :value="node.earned" />
+          <node-info-item
+            :title="'Earned in total'"
+            :value="reward !== 'failed' && reward !== 'pending' ? reward : ''"
+          >
+            <common-loader
+              v-if="reward === 'pending'"
+              :key="'reward'"
+              class="loader"
+              :active="true"
+              :spinnerSize="22"
+              :centered="false"
+            />
+            <!-- <span v-else-if="reward === 'failed'">{{ $t('Loading error') }}</span>
+            <span v-else>{{ reward }}</span> -->
+          </node-info-item>
         </div>
         <div class="node__block">
           <node-info-item :title="'Connected nodes'" :value="node.connected" />
         </div>
         <div class="node__block">
-          <node-info-item :title="'Votings'" :value="node.votings" />
+          <node-info-item
+            :title="'Votings'"
+            :value="votings !== 'failed' && votings !== 'pending' ? votings : ''"
+          >
+            <common-loader
+              v-if="votings === 'pending'"
+              :key="'votings'"
+              class="loader"
+              :active="true"
+              :spinnerSize="22"
+              :centered="false"
+            />
+          </node-info-item>
         </div>
         <div class="node__block">
           <node-info-item :title="'Last block'" :value="node.blocks" />
@@ -116,7 +142,8 @@ export default {
       node: 'nodeStore/node',
       fetchState: 'nodeStore/fetchState',
       contractsFetch: 'masterStore/fetchState',
-      contracts: 'masterStore/contracts'
+      contracts: 'masterStore/contracts',
+      rewards: 'rewardsStore/rewards'
     }),
     started () {
       if (this.node.uptime) {
@@ -162,6 +189,32 @@ export default {
     },
     contractData () {
       return this.node.contract
+    },
+    reward () {
+      const reward = this.rewards[this.node.address]
+      if (reward) {
+        if (reward.status === 'fetched') {
+          return reward.data.oton.amount
+        } else if (reward.status === 'failed') {
+          return 'failed'
+        }
+        return 'failed'
+      } else {
+        return 'pending'
+      }
+    },
+    votings () {
+      const reward = this.rewards[this.node.address]
+      if (reward) {
+        if (reward.status === 'fetched') {
+          return reward.data.oton.transactions
+        } else if (reward.status === 'failed') {
+          return 'failed'
+        }
+        return 'failed'
+      } else {
+        return 'pending'
+      }
     }
   },
   mounted () {

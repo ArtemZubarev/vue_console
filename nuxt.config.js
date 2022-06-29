@@ -102,6 +102,7 @@ export default {
     baseUrl: process.env.API_URL,
     ssoUrl: process.env.SSO_URL,
     ssoHash: process.env.SSO_HASH,
-    explorerUrl: process.env.EXPLORER_URL
+    explorerUrl: process.env.EXPLORER_URL,
+    explorerApi: process.env.EXPLORER_API
   }
 }
