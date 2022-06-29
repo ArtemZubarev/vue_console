@@ -21,7 +21,6 @@
         <div class="node__block">
           <node-info-item
             :title="'Earned in total'"
-            :value="reward !== 'failed' && reward !== 'pending' ? reward : 0"
           >
             <common-loader
               v-if="reward === 'pending'"
@@ -31,6 +30,7 @@
               :spinnerSize="22"
               :centered="false"
             />
+            <span v-else>{{ reward !== 'failed' && reward !== 'pending' ? reward : 0 }}</span>
             <!-- <span v-else-if="reward === 'failed'">{{ $t('Loading error') }}</span>
             <span v-else>{{ reward }}</span> -->
           </node-info-item>
@@ -41,7 +41,6 @@
         <div class="node__block">
           <node-info-item
             :title="'Votings'"
-            :value="votings !== 'failed' && votings !== 'pending' ? votings : 0"
           >
             <common-loader
               v-if="votings === 'pending'"
@@ -51,6 +50,7 @@
               :spinnerSize="22"
               :centered="false"
             />
+            <span v-else>{{ rvotings !== 'failed' && votings !== 'pending' ? votings : 0 }}</span>
           </node-info-item>
         </div>
         <div class="node__block">
