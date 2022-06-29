@@ -59,6 +59,11 @@ export const actions = {
       if (response.code === 0) {
         commit('UPDATE_DATA', response.data)
         commit('SET_STATE', FULFILLED)
+
+        if (response.data.address) {
+          dispatch('rewardsStore/fetch', response.data.address, { root: true })
+        }
+
         if (inProgress(response.data)) {
           this.interval = setInterval(() => {
             dispatch('silentFetch', id)

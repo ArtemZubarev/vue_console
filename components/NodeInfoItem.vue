@@ -19,9 +19,10 @@
         :class="{success: valueStatus === 'ok', danger: valueStatus === 'not_ok'}"
       >
         {{ value }}
+        <slot />
       </div>
     </div>
-    <slot />
+    <!-- <slot /> -->
   </div>
 </template>
 <script>

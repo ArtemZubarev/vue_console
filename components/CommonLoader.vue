@@ -1,9 +1,9 @@
 <template>
   <div
     v-if="state === 'PENDING' || state === 'INIT' || active"
-    :class="['commonLoader', { placeholder: isPlaceholder, top }]"
+    :class="['commonLoader', { placeholder: isPlaceholder, top, centered }]"
   >
-    <div class="spinnerBox">
+    <div class="spinnerBox" :style="{height: `${spinnerSize}px`, width: `${spinnerSize}px`}">
       <CommonSpinner />
     </div>
   </div>
@@ -31,6 +31,14 @@ export default {
     top: {
       type: Boolean,
       required: false
+    },
+    spinnerSize: {
+      type: Number,
+      default: 60
+    },
+    centered: {
+      type: Boolean,
+      default: true
     }
   }
 }
@@ -40,9 +48,12 @@ export default {
 .commonLoader {
   width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
   margin: auto;
+
+  &.centered {
+    justify-content: center;
+  }
 
   &.placeholder {
     position: absolute;
@@ -59,8 +70,4 @@ export default {
   }
 }
 
-.spinnerBox {
-  width: 60px;
-  height: 60px;
-}
 </style>
