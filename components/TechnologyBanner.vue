@@ -55,6 +55,7 @@ export default {
     align-items: center;
     padding: 25px 10px;
     text-align: center;
+    box-sizing: border-box;
   }
   &__link {
     color: #fff;
