@@ -50,7 +50,7 @@
               :spinnerSize="22"
               :centered="false"
             />
-            <span v-else>{{ rvotings !== 'failed' && votings !== 'pending' ? votings : 0 }}</span>
+            <span v-else>{{ votings !== 'failed' && votings !== 'pending' ? votings : 0 }}</span>
           </node-info-item>
         </div>
         <div class="node__block">
