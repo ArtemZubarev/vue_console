@@ -21,7 +21,7 @@
         <div class="node__block">
           <node-info-item
             :title="'Earned in total'"
-            :value="reward !== 'failed' && reward !== 'pending' ? reward : ''"
+            :value="reward !== 'failed' && reward !== 'pending' ? reward : 0"
           >
             <common-loader
               v-if="reward === 'pending'"
