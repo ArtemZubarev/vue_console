@@ -117,31 +117,33 @@ export default {
       footerLinks: [
         {
           text: 'Terms of use',
-          docName: 'https://oton.technology/OtonTechnology_TermsAndConditions.pdf'
+          docName: 'https://contracts.oton.technology/OtonTechnology_TermsAndConditions.pdf'
         },
         {
           text: 'Cookies policy',
-          docName: 'https://oton.technology/OtonTechnology_CookiesPolicy.pdf'
+          docName: 'https://contracts.oton.technology/OtonTechnology_CookiesPolicy.pdf'
         },
         {
           text: 'Privacy notice',
-          docName: 'https://oton.technology/OtonTechnology_PrivacyPolicy.pdf'
+          docName: 'https://contracts.oton.technology/OtonTechnology_PrivacyPolicy.pdf'
         }
       ]
     }
   },
   computed: {
-    technologyLink () {
-      const link = 'https://contracts.oton.technology'
-      const lang = this.$i18n.locale === 'ru' ? '/ru' : ''
 
-      return link + lang
-    },
     availableLangs () {
       const langs = langsObjects
 
       return langs.filter(lang => lang.code !== this.$i18n.locale)
     },
+    technologyLink () {
+      const link = process.env.contractsUrl
+      const lang = this.$i18n.locale === 'ru' ? '/ru' : ''
+
+      return link + lang
+    },
+
     menuLinks () {
       return [
         {
@@ -149,7 +151,7 @@ export default {
           href: 'index'
         },
         {
-          text: 'Buy Node',
+          text: 'Buy node',
           href: this.technologyLink,
           out: true
         },

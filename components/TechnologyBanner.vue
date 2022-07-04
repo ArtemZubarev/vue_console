@@ -14,7 +14,7 @@
 export default {
   computed: {
     technologyLink () {
-      const link = 'https://contracts.oton.technology'
+      const link = process.env.contractsUrl
       const lang = this.$i18n.locale === 'ru' ? '/ru' : ''
 
       return link + lang
