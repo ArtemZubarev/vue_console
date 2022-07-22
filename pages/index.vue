@@ -1,27 +1,30 @@
 <template>
   <div class="page">
     <technology-banner />
-    <with-loader :active="fetchState === 'PENDING'">
-      <div v-if="fetchState === 'FULFILLED' && nodesList.length === 0" class="empty">
-        <CreateNode :limits="nodesLimits" @create="startMaster" />
-      </div>
-      <div class="nodes">
-        <div class="nodes__list">
-          <NodeItem
-            v-for="node in nodesList"
-            :key="`node-list-${node.id}`"
-            :node="node"
-          />
-          <CreateNode
-            v-if="fetchState === 'FULFILLED' && nodesList.length !== 0"
-            :inList="true"
-            :limits="nodesLimits"
-            @create="startMaster"
-          />
-          <div class="nodes__hidden" />
+    <div class="page-block">
+      <with-loader :active="fetchState === 'PENDING'">
+        <div v-if="fetchState === 'FULFILLED' && nodesList.length === 0" class="empty">
+          <CreateNode :limits="nodesLimits" @create="startMaster" />
         </div>
-      </div>
-    </with-loader>
+        <div class="nodes">
+          <div class="nodes__list">
+            <NodeItem
+              v-for="node in nodesList"
+              :key="`node-list-${node.id}`"
+              :node="node"
+            />
+            <CreateNode
+              v-if="fetchState === 'FULFILLED' && nodesList.length !== 0"
+              :inList="true"
+              :limits="nodesLimits"
+              @create="startMaster"
+            />
+            <div class="nodes__hidden" />
+          </div>
+        </div>
+      </with-loader>
+    </div>
+
     <master-modal @next="nextStep" @done="showDone = true" />
     <master-done v-if="showDone" :active="showDone" @close="showDone = false" />
   </div>
@@ -89,6 +92,9 @@ export default {
 
 <style lang="stylus" scoped>
 .page {
+  position: relative;
+}
+.page-block {
   position: relative;
 }
 .empty {

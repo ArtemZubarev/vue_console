@@ -125,7 +125,7 @@ export const actions = {
   },
 
   async createNode ({ commit, state }) {
-    if (state.fetchState === INIT) {
+    if (state.fetchState === INIT || state.fetchState === PENDING) {
       return
     }
 

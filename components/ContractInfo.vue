@@ -45,7 +45,7 @@ export default {
   },
   computed: {
     chartHref () {
-      const locale = this.$i18n.currentLocale === 'ru' ? '' : 'en/'
+      const locale = this.$i18n.currentLocale === 'ru' ? 'ru/' : ''
       return `http://oton-technology.108dev.ru/${locale}calc/`
     }
   }
