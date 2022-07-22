@@ -150,7 +150,7 @@ export const actions = {
   },
 
   async createNodeCustom ({ commit, state }) {
-    if (state.fetchState === INIT) {
+    if (state.fetchState === INIT || state.fetchState === PENDING) {
       return
     }
 
