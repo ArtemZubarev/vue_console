@@ -101,7 +101,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 140px;
+  padding-top: 20px;
+
+  +mediaTablet() {
+    padding-top: 60px;
+  }
 }
 .nodes {
   transition: 0.4s;
