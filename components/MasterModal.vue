@@ -76,6 +76,15 @@ export default {
       }
       this.$store.commit('masterStore/SET_STEP', prevOne)
     },
+    finishMaster (nextOne) {
+      console.info('DEV - finish func')
+      this.$store.commit('masterStore/SET_STEP', nextOne)
+      this.$store.dispatch('nodesStore/fetch')
+      const token = this.$cookies.get('auth')
+      this.$store.dispatch('userStore/fetchUser', token)
+      this.$store.commit('masterStore/CLEAR_WITHOUT_STEP_CHANGING')
+      console.info('DEV - should be cleared')
+    },
     nextStep () {
       let nextOne = Number(this.currentStep) + 1
       if (this.currentStep === 4 && this.provider === 'other') {
@@ -87,21 +96,15 @@ export default {
       if (Number(this.currentStep) === 105) {
         Promise.resolve(this.$store.dispatch('masterStore/createNode')).then((res) => {
           if (res) {
-            this.$store.commit('masterStore/SET_STEP', nextOne)
-            this.$store.dispatch('nodesStore/fetch')
-            const token = this.$cookies.get('auth')
-            this.$store.dispatch('userStore/fetchUser', token)
-            this.$store.commit('masterStore/CLEAR_WITHOUT_STEP_CHANGING')
+            console.log(res)
+            this.finishMaster(nextOne)
           }
         })
       } else if (Number(this.currentStep) === 206) {
         Promise.resolve(this.$store.dispatch('masterStore/createNodeCustom')).then((res) => {
           if (res) {
-            this.$store.commit('masterStore/SET_STEP', nextOne)
-            this.$store.dispatch('nodesStore/fetch')
-            const token = this.$cookies.get('auth')
-            this.$store.dispatch('userStore/fetchUser', token)
-            this.$store.commit('masterStore/CLEAR_WITHOUT_STEP_CHANGING')
+            console.log(res)
+            this.finishMaster(nextOne)
           }
         })
       } else if (Number(this.currentStep) === 106 || Number(this.currentStep) === 207) {

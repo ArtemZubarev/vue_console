@@ -49,3 +49,8 @@ ul {
   padding: 0;
   list-style: none;
 }
+.langPickerIcon {
+  max-width: 14px;
+  max-height: 14px;
+  color: #fff;
+}
