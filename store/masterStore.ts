@@ -1,4 +1,4 @@
-import { pathOr, find, propEq } from 'rambda'
+import { pathOr, find, propEq, clone } from 'rambda'
 import {
   FULFILLED, INIT, PENDING, REJECTED
 } from '../utils/constants'
@@ -23,7 +23,7 @@ const initState = {
   errors: []
 }
 
-export const state = () => initState
+export const state = () => clone(initState)
 
 export const getters = {
   node (s) {
@@ -67,11 +67,15 @@ export const mutations = {
     }
   },
   CLEAR (s) {
-    Object.assign(s, initState)
+    s = JSON.parse(JSON.stringify(initState))
   },
   CLEAR_WITHOUT_STEP_CHANGING (s) {
-    const state = { ...initState, step: s.step }
-    Object.assign(s, state)
+    const step = s.step
+    s.data = { ...initState.data }
+    s.step = step
+    s.fetchState = INIT
+    s.errors = []
+    s.userChoice = { ...initState.userChoice }
   },
   SET_STATE (s, fetchState) {
     s.fetchState = fetchState

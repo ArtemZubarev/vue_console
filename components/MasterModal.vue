@@ -78,6 +78,7 @@ export default {
     },
     finishMaster (nextOne) {
       console.info('DEV - finish func')
+      console.log(nextOne)
       this.$store.commit('masterStore/SET_STEP', nextOne)
       this.$store.dispatch('nodesStore/fetch')
       const token = this.$cookies.get('auth')
@@ -93,21 +94,23 @@ export default {
       if (this.currentStep === 4 && this.provider === 'DO') {
         nextOne = nextOne + 100
       }
+      console.log(this.currentStep)
       if (Number(this.currentStep) === 105) {
         Promise.resolve(this.$store.dispatch('masterStore/createNode')).then((res) => {
+          console.log(resizeBy)
           if (res) {
-            console.log(res)
+            console.log('got response')
             this.finishMaster(nextOne)
           }
         })
       } else if (Number(this.currentStep) === 206) {
         Promise.resolve(this.$store.dispatch('masterStore/createNodeCustom')).then((res) => {
           if (res) {
-            console.log(res)
             this.finishMaster(nextOne)
           }
         })
       } else if (Number(this.currentStep) === 106 || Number(this.currentStep) === 207) {
+        console.log('106 | 207')
         this.$store.commit('modalStore/closeModal')
         this.$store.commit('masterStore/SET_STEP', 1)
         this.$store.commit('checkStore/CLEAR')
